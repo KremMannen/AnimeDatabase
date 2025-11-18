@@ -10,5 +10,5 @@ import com.example.room.data.Car
 )
 
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun carDao() : CarDao
+    abstract fun carDao() : AnimeDao
 }

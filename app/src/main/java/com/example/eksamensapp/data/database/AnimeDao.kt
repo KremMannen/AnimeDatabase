@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.example.room.data.Car
 
 @Dao // Data Access OBject
-interface CarDao {
+interface AnimeDao {
     @Query("SELECT * FROM Car")
     suspend fun getCars(): List<Car>
 

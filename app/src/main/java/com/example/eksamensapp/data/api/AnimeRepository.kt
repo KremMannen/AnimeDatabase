@@ -1,11 +1,12 @@
 package com.example.eksamensapp.data.api
 
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.jvm.java
 
-object ApiHandler {
+object AnimeRepository {
 
     private val _httpClient = OkHttpClient.Builder()
         .addInterceptor(
@@ -18,9 +19,9 @@ object ApiHandler {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val _todoService = _retroFit.create(TodoService::class.java)
+    private val _todoService = _retroFit.create(AnimeService::class.java)
 
-    suspend fun getTodos(): List<Todo> {
+    suspend fun getTodos(): List<Anime> {
         try {
             val response = _todoService.getAllTodos()
             return if (response.isSuccessful){

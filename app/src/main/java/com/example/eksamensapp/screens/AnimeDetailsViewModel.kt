@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class CarDetailsViewModel : ViewModel() {
+class AnimeDetailsViewModel : ViewModel() {
     private val _car = MutableStateFlow<Car?>(null)
     val car = _car.asStateFlow()
 

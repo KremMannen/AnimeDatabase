@@ -2,7 +2,6 @@ package com.example.eksamensapp.data.database
 
 import android.content.Context
 import androidx.room.Room
-import com.example.room.data.Car
 import java.lang.Exception
 import android.util.Log
 import kotlin.jvm.java

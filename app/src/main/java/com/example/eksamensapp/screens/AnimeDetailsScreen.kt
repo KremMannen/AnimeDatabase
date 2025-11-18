@@ -11,7 +11,7 @@ import kotlin.let
 
 @Composable
 fun CarDetailsScreen(
-    carDetailsViewModel: CarDetailsViewModel,
+    carDetailsViewModel: AnimeDetailsViewModel,
     navController: NavController,
     carId: Int
 ){
