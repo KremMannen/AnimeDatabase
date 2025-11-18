@@ -4,16 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.room.data.Car
 
-@Dao // Data Access OBject
+@Dao // Data Access Object
 interface AnimeDao {
-    @Query("SELECT * FROM Car")
-    suspend fun getCars(): List<Car>
+    @Query("SELECT * FROM Anime")
+    suspend fun getAnime(): List<Anime>
 
-    @Query("SELECT * FROM Car WHERE id = :id")
-    suspend fun getCarById(id: Int): Car
+    @Query("SELECT * FROM Anime WHERE id = :id")
+    suspend fun getAnimeById(id: Int): Anime
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCar(car: Car): Long
+    suspend fun insertAnime(car: Anime): Long
 }

@@ -1,14 +1,14 @@
 package com.example.eksamensapp.data.database
 
 import androidx.room.Database
-import com.example.room.data.Car
+import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Car::class],
-    version = 2,
+    entities = [Anime::class],
+    version = 1,
     exportSchema = false
 )
 
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun carDao() : AnimeDao
+    abstract fun animeDao() : AnimeDao
 }

@@ -6,8 +6,8 @@ import retrofit2.http.Path
 
 interface AnimeService {
 
-    @GET("todos")
-    suspend fun getAllTodos(): Response<AnimeList>
+    @GET("anime")
+    suspend fun getAllAnime(): Response<AnimeList>
 
     @GET("todos/user/{id}")
     suspend fun getFilteredTodos(

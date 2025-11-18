@@ -19,13 +19,13 @@ object AnimeRepository {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val _todoService = _retroFit.create(AnimeService::class.java)
+    private val _animeService = _retroFit.create(AnimeService::class.java)
 
-    suspend fun getTodos(): List<Anime> {
+    suspend fun getAnime(): List<Anime> {
         try {
-            val response = _todoService.getAllTodos()
+            val response = _animeService.getAllAnime()
             return if (response.isSuccessful){
-                response.body()?.todos ?: emptyList()
+                response.body()?.anime ?: emptyList()
             } else {
                 emptyList()
             }

@@ -7,40 +7,40 @@ import android.util.Log
 import kotlin.jvm.java
 
 
-object CarDbRepository {
+object AnimeDbRepository {
     private lateinit var _appDatabase: AppDatabase
-    private val _carDao by lazy { _appDatabase.carDao() }
+    private val _animeDao by lazy { _appDatabase.animeDao() }
 
     fun initializeDatabase(context: Context) {
         _appDatabase = Room.databaseBuilder(
             context = context,
             klass = AppDatabase::class.java,
-            name = "car-database"
+            name = "anime-database"
         )
             .build()
     }
 
-    suspend fun getCars(): List<Car> {
+    suspend fun getCars(): List<Anime> {
         return try {
-            _carDao.getCars()
+            _animeDao.getAnime()
         } catch (e: Exception) {
             emptyList()
         }
     }
 
-    suspend fun getCarById(id: Int): Car? {
+    suspend fun getAnimeById(id: Int): Anime? {
         return try {
-            _carDao.getCarById(id)
+            _animeDao.getAnimeById(id)
         } catch (e: Exception) {
             null
         }
     }
 
-    suspend fun insertCar(car: Car) : Long {
+    suspend fun insertAnime(anime: Anime) : Long {
         return try {
-            _carDao.insertCar(car)
+            _animeDao.insertAnime(anime)
         } catch (e: Exception) {
-            Log.e("CarDbRepository", "Error inserting car", e)
+            Log.e("AnimeDbRepository", "Error inserting anime", e)
             -1L
         }
     }
