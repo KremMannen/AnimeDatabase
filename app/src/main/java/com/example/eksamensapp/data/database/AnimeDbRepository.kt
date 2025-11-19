@@ -9,17 +9,10 @@ import kotlin.jvm.java
 
 
 object AnimeDbRepository {
-    private lateinit var _appDatabase: AppDatabase
-    private val _animeDao by lazy { _appDatabase.animeDao() }
 
-    fun initializeDatabase(context: Context) {
-        _appDatabase = Room.databaseBuilder(
-            context = context,
-            klass = AppDatabase::class.java,
-            name = "anime-database"
-        )
-            .build()
-    }
+    private val _animeDao by lazy { _appDatabase.animeDao() }
+    private lateinit var _appDatabase: AppDatabase
+
 
     suspend fun getAnime(): List<AnimeEntity> {
         return try {

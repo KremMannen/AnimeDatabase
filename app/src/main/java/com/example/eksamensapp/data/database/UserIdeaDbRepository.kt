@@ -1,6 +1,8 @@
 package com.example.eksamensapp.data.database
 
+import android.content.Context
 import android.util.Log
+import androidx.room.Room
 import java.lang.Exception
 import java.sql.SQLException
 
@@ -8,6 +10,16 @@ object UserIdeaDbRepository {
 
     private lateinit var _appDatabase: AppDatabase
     private val _userIdeaDao by lazy { _appDatabase.userIdeaDao() }
+
+
+    fun initializeDatabase(context: Context) {
+        _appDatabase = Room.databaseBuilder(
+            context = context,
+            klass = AppDatabase::class.java,
+            name = "anime-database"
+        )
+            .build()
+    }
 
     suspend fun getUserIdeas(): List<UserIdeaEntity> {
          try {

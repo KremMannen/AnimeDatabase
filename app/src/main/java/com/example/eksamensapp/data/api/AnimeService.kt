@@ -3,6 +3,7 @@ package com.example.eksamensapp.data.api
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface AnimeService {
 
@@ -14,8 +15,8 @@ interface AnimeService {
         @Path("id") id: Int
     ): Response<Anime>
 
-    @GET("anime?q={title}")
+    @GET("anime")
     suspend fun getAnimeByTitle(
-        @Path("title") title: String
-    ): Response<Anime>
+        @Query("q") title: String
+    ): Response<AnimeList>
 }
