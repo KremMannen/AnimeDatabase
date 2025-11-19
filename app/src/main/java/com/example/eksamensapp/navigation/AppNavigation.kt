@@ -25,8 +25,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsScreen
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
-import com.example.eksamensapp.screens.favorite.AnimeFavoriteScreen
-import com.example.eksamensapp.screens.favorite.AnimeFavoriteViewModel
+import com.example.eksamensapp.screens.watched.AnimeWatchedScreen
+import com.example.eksamensapp.screens.watched.AnimeWatchedViewModel
 import com.example.eksamensapp.screens.home.AnimeHomeScreen
 import com.example.eksamensapp.screens.home.AnimeHomeViewModel
 import com.example.eksamensapp.screens.search.AnimeSearchScreen
@@ -42,7 +42,7 @@ fun AppNavigation(
     animeDetailsViewModel: AnimeDetailsViewModel,
     animeSearchViewModel: AnimeSearchViewModel,
     animeUserIdeaViewModel: AnimeUserIdeaViewModel,
-    animeFavoriteViewModel: AnimeFavoriteViewModel
+    animeWatchedViewModel: AnimeWatchedViewModel
     ) {
 
     val navController = rememberNavController()
@@ -119,7 +119,7 @@ fun AppNavigation(
                     selected = selectedItemIndex == 4,
                     onClick = {
                         selectedItemIndex = 4
-                        navController.navigate(NavigationRoutes.Favorite)
+                        navController.navigate(NavigationRoutes.Watched)
                     },
                     icon = {
                         if( selectedItemIndex == 4){
@@ -131,7 +131,7 @@ fun AppNavigation(
                         }
                     },
                     label = {
-                        Text("Favorites")
+                        Text("Watched")
                     }
                 )
             }
@@ -165,8 +165,8 @@ fun AppNavigation(
                     AnimeUserIdeaScreen(animeUserIdeaViewModel)
                 }
 
-                composable <NavigationRoutes.Favorite> {
-                    AnimeFavoriteScreen(animeFavoriteViewModel)
+                composable <NavigationRoutes.Watched> {
+                    AnimeWatchedScreen(animeWatchedViewModel)
                 }
             }
         }

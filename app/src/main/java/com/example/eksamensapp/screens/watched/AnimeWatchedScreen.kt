@@ -1,13 +1,12 @@
-package com.example.eksamensapp.screens.favorite
+package com.example.eksamensapp.screens.watched
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
 
 @Composable
-fun AnimeFavoriteScreen(
-    animeFavoriteViewModel: AnimeFavoriteViewModel
+fun AnimeWatchedScreen(
+    animeWatchedViewModel: AnimeWatchedViewModel
 ){
     Column() {
         Text("Placeholder")

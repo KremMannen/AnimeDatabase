@@ -15,7 +15,7 @@ sealed class NavigationRoutes {
     object UserIdea : NavigationRoutes()
 
     @Serializable
-    object Favorite : NavigationRoutes()
+    object Watched : NavigationRoutes()
 
     @Serializable
     data class AnimeDetailsRoute(val id: Int) : NavigationRoutes()
