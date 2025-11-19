@@ -1,13 +1,9 @@
 package com.example.eksamensapp.data.api
 
-import com.example.eksamensapp.data.database.AnimeDao
+import android.util.Log
 import com.example.eksamensapp.data.database.AnimeEntity
 import com.example.eksamensapp.data.database.AppDatabase
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.jvm.java
+import java.sql.SQLException
 
 object AnimeRepository {
 
@@ -35,7 +31,7 @@ object AnimeRepository {
                         score = anime.score,
                         year = anime.year,
                         episodes = anime.episodes,
-                        genres = anime.genres.joinToString {", "},
+                        genres = anime.genres.joinToString (", ") {it.name},
                         haveWatched = false,
                         isFavorite = false
                     )
@@ -45,12 +41,16 @@ object AnimeRepository {
             }
             return null
         } catch (e: Exception) {
+            Log.d("GetAnimeByIdAndSaveCatch", e.toString())
+            return null
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
             return null
         }
     }
 
 
-    suspend fun searchAnimeByTitle(title: String): List<AnimeEntity> {
+    suspend fun searchAnimeByTitleAndSave(title: String): List<AnimeEntity> {
         return try {
             val localResults = _animeDao.getAnimeByTitle(title)
             if (localResults != null) {
@@ -59,7 +59,7 @@ object AnimeRepository {
 
             val response = _animeService.getAnimeByTitle(title)
             if (response.isSuccessful) {
-                response.body()?.let { animeList ->
+                response.body()?.data?.let { animeList ->
                     val animeEntities = animeList.map { anime ->
                         AnimeEntity(
                             id = anime.mal_id,
@@ -74,13 +74,17 @@ object AnimeRepository {
                             isFavorite = false
                         )
                     }
-                    animeDao.insertAnimes(animeEntities)
+                    _animeDao.insertAll(animeEntities)
                     return animeEntities
                 }
             }
             emptyList()
         } catch (e: Exception) {
+            Log.d("SearchAnimeByTitleAndSaveCatch", e.toString())
             emptyList()
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
+            return emptyList()
         }
     }
 }

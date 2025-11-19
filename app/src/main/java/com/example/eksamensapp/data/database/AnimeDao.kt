@@ -16,7 +16,7 @@ interface AnimeDao {
     suspend fun getAnimeById(id: Int): AnimeEntity?
 
     @Query("SELECT * FROM AnimeEntity WHERE title= :title")
-    suspend fun getAnimeByTitle(title: String) : AnimeEntity?
+    suspend fun getAnimeByTitle(title: String) : List<AnimeEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAnime(animeEntity: AnimeEntity): Long

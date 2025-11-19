@@ -12,19 +12,13 @@ data class Anime(
 )
 
 data class Images(
-    val jpg: ImageUrl,
-    val webp: ImageUrl?
+    val jpg: ImageUrl
 )
 
 data class ImageUrl(
     val image_url: String,
-    val small_image_url: String?,
-    val large_image_url: String?
 )
 
 data class Genre(
-    val mal_id: Int,
-    val type: String,
     val name: String,
-    val url: String
 )
