@@ -1,8 +1,8 @@
-package com.example.eksamensapp.data.api
+package com.example.eksamensapp.data.database
 
 import android.util.Log
-import com.example.eksamensapp.data.database.AnimeEntity
-import com.example.eksamensapp.data.database.AppDatabase
+import com.example.eksamensapp.data.api.Anime
+import com.example.eksamensapp.data.api.ApiModule
 import java.sql.SQLException
 
 object AnimeRepository {
