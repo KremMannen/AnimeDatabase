@@ -12,5 +12,10 @@ interface AnimeService {
     @GET("anime/{id}")
     suspend fun getAnimeByID(
         @Path("id") id: Int
-    ): Response<AnimeList>
+    ): Response<Anime>
+
+    @GET("anime?q={title}")
+    suspend fun getAnimeByTitle(
+        @Path("title") title: String
+    ): Response<Anime>
 }

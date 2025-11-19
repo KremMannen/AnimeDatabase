@@ -9,11 +9,11 @@ data class AnimeEntity (
     val id: Int = 0,
     val title: String,
     val imageUrl: String,
-    val synopsis: String?,
-    val score: Double?,
-    val year: Int?,
-    val episodes: Int?,
+    val synopsis: String,
+    val score: Double,
+    val year: Int,
+    val episodes: Int,
+    val genres: String,
     val haveWatched: Boolean = false,
     val isFavorite: Boolean = false,
-    val genres: List<String>
     )

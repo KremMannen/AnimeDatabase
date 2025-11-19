@@ -8,6 +8,6 @@ data class UserIdeaEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String,
-    val synopsis: String?,
-    val genres: List<String>,
+    val synopsis: String,
+    val genres: String,
 )

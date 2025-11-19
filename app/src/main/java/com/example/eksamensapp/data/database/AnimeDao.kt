@@ -11,6 +11,7 @@ import androidx.room.Update
 interface AnimeDao {
     @Query("SELECT * FROM AnimeEntity")
     suspend fun getAnime(): List<AnimeEntity>
+
     @Query("SELECT * FROM AnimeEntity WHERE id = :id")
     suspend fun getAnimeById(id: Int): AnimeEntity
 
