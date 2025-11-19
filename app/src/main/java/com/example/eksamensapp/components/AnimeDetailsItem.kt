@@ -4,15 +4,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.example.eksamensapp.data.database.Anime
+import com.example.eksamensapp.data.database.AnimeEntity
 
 @Composable
 fun AnimeDetailsItem(
-    anime: Anime,
+    animeEntity: AnimeEntity,
     goBack: ( () -> Unit )? = null
 )
 {
-    val (mal_id, title, imageUrl, synopsis, score, year, episodes) = anime
+    val (mal_id, title, imageUrl, synopsis, score, year, episodes) = animeEntity
 
     Column {
 

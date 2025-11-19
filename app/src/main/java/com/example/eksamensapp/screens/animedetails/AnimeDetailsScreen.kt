@@ -22,7 +22,7 @@ fun AnimeDetailsScreen(
     }
 
     Column {
-        Text("Anime details")
+        Text("AnimeEntity details")
 
         anime.value?.let {
             AnimeDetailsItem(

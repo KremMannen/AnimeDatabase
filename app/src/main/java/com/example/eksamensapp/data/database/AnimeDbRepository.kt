@@ -20,7 +20,7 @@ object AnimeDbRepository {
             .build()
     }
 
-    suspend fun getAnime(): List<Anime> {
+    suspend fun getAnime(): List<AnimeEntity> {
         return try {
             _animeDao.getAnime()
         } catch (e: Exception) {
@@ -28,7 +28,7 @@ object AnimeDbRepository {
         }
     }
 
-    suspend fun getAnimeById(id: Int): Anime? {
+    suspend fun getAnimeById(id: Int): AnimeEntity? {
         return try {
             _animeDao.getAnimeById(id)
         } catch (e: Exception) {
@@ -36,11 +36,11 @@ object AnimeDbRepository {
         }
     }
 
-    suspend fun insertAnime(anime: Anime) : Long {
+    suspend fun insertAnime(animeEntity: AnimeEntity) : Long {
         return try {
-            _animeDao.insertAnime(anime)
+            _animeDao.insertAnime(animeEntity)
         } catch (e: Exception) {
-            Log.e("AnimeDbRepository", "Error inserting anime", e)
+            Log.e("AnimeDbRepository", "Error inserting animeEntity", e)
             -1L
         }
     }
