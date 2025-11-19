@@ -2,6 +2,7 @@ package com.example.eksamensapp.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.eksamensapp.data.api.Anime
 
 @Database(
     entities = [Anime::class],
