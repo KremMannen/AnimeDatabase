@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import java.lang.Exception
 import android.util.Log
+import java.sql.SQLException
 import kotlin.jvm.java
 
 
@@ -24,7 +25,11 @@ object AnimeDbRepository {
         return try {
             _animeDao.getAnime()
         } catch (e: Exception) {
+            Log.d("getAnimeCatch", e.toString())
             emptyList()
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return emptyList()
         }
     }
 
@@ -32,16 +37,23 @@ object AnimeDbRepository {
         return try {
             _animeDao.getAnimeById(id)
         } catch (e: Exception) {
+            Log.d("getAnimeByIdCatch", e.toString())
             null
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return null
         }
     }
 
-    suspend fun insertAnime(animeEntity: AnimeEntity) : Long {
+    suspend fun getAnimeByTitle(title: String) : AnimeEntity? {
         return try {
-            _animeDao.insertAnime(animeEntity)
+            _animeDao.getAnimeByTitle(title)
         } catch (e: Exception) {
-            Log.e("AnimeDbRepository", "Error inserting animeEntity", e)
-            -1L
+            Log.d("getAnimeByTitleCatch", e.toString())
+            null
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return null
         }
     }
 }

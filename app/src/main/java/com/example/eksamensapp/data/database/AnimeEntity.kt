@@ -15,6 +15,5 @@ data class AnimeEntity (
     val episodes: Int?,
     val haveWatched: Boolean = false,
     val isFavorite: Boolean = false,
-    val isFromApi: Boolean = true,
-    val userModified: Boolean = false,
+    val genres: List<String>
     )

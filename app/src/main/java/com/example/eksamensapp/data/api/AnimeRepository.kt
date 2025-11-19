@@ -34,5 +34,4 @@ object AnimeRepository {
             return emptyList()
         }
     }
-
 }
