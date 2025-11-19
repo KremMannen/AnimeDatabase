@@ -1,4 +1,4 @@
-package com.example.eksamensapp.screens
+package com.example.eksamensapp.screens.animedetails
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -6,26 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavController
-import com.example.room.components.CarDetailsItem
+import com.example.eksamensapp.components.AnimeDetailsItem
 import kotlin.let
 
 @Composable
-fun CarDetailsScreen(
-    carDetailsViewModel: AnimeDetailsViewModel,
+fun AnimeDetailsScreen(
+    animeDetailsViewModel: AnimeDetailsViewModel,
     navController: NavController,
-    carId: Int
+    id: Int
 ){
-    val car = carDetailsViewModel.car.collectAsState()
+    val anime = animeDetailsViewModel.anime.collectAsState()
 
     LaunchedEffect(Unit) {
-        carDetailsViewModel.setCar(carId)
+        animeDetailsViewModel.setAnime(id)
     }
 
     Column {
-        Text("Car details")
+        Text("Anime details")
 
-        car.value?.let {
-            CarDetailsItem(
+        anime.value?.let {
+            AnimeDetailsItem(
                 it,
                 goBack = {
                     navController.popBackStack()

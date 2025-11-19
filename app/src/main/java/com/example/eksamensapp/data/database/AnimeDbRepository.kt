@@ -20,7 +20,7 @@ object AnimeDbRepository {
             .build()
     }
 
-    suspend fun getCars(): List<Anime> {
+    suspend fun getAnime(): List<Anime> {
         return try {
             _animeDao.getAnime()
         } catch (e: Exception) {

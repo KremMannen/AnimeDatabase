@@ -9,10 +9,16 @@ sealed class NavigationRoutes {
     object Home : NavigationRoutes()
 
     @Serializable
-    object Cars : NavigationRoutes()
+    object Search : NavigationRoutes()
 
     @Serializable
-    data class CarsDetailsRoute(val carId: Int) : NavigationRoutes()
+    object UserIdea : NavigationRoutes()
+
+    @Serializable
+    object Favorite : NavigationRoutes()
+
+    @Serializable
+    data class AnimeDetailsRoute(val id: Int) : NavigationRoutes()
 
 
 }

@@ -11,7 +11,6 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,23 +19,31 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.room.screens.cardetails.CarDetailsScreen
-import com.example.room.screens.cardetails.CarDetailsViewModel
-import com.example.room.screens.home.HomeScreen
-import com.example.room.screens.cars.CarScreen
-import com.example.room.screens.cars.CarViewModel
+import com.example.eksamensapp.screens.animedetails.AnimeDetailsScreen
+import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
+import com.example.eksamensapp.screens.favorite.AnimeFavoriteScreen
+import com.example.eksamensapp.screens.favorite.AnimeFavoriteViewModel
+import com.example.eksamensapp.screens.home.AnimeHomeScreen
+import com.example.eksamensapp.screens.home.AnimeHomeViewModel
+import com.example.eksamensapp.screens.search.AnimeSearchScreen
+import com.example.eksamensapp.screens.search.AnimeSearchViewModel
+import com.example.eksamensapp.screens.useridea.AnimeUserIdeaScreen
+import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
+
 
 
 @Composable
 fun AppNavigation(
-    carListViewModel: CarViewModel,
-    carDetailsViewModel: CarDetailsViewModel
-) {
+    animeHomeViewModel: AnimeHomeViewModel,
+    animeDetailsViewModel: AnimeDetailsViewModel,
+    animeSearchViewModel: AnimeSearchViewModel,
+    animeUserIdeaViewModel: AnimeUserIdeaViewModel,
+    animeFavoriteViewModel: AnimeFavoriteViewModel
+    ) {
 
     val navController = rememberNavController()
 
@@ -72,7 +79,7 @@ fun AppNavigation(
                     selected = selectedItemIndex == 2,
                     onClick = {
                         selectedItemIndex = 2
-                        navController.navigate(NavigationRoutes.Cars)
+                        navController.navigate(NavigationRoutes.Search)
                     },
                     icon = {
                         if( selectedItemIndex == 2){
@@ -84,7 +91,47 @@ fun AppNavigation(
                         }
                     },
                     label = {
-                        Text("Siste Kjøp")
+                        Text("Search")
+                    }
+                )
+
+                NavigationBarItem(
+                    selected = selectedItemIndex == 3,
+                    onClick = {
+                        selectedItemIndex = 3
+                        navController.navigate(NavigationRoutes.UserIdea)
+                    },
+                    icon = {
+                        if( selectedItemIndex == 3){
+                            Icon(imageVector = Icons.Filled.CheckCircle,
+                                contentDescription = null)
+                        }else{
+                            Icon(imageVector = Icons.Outlined.Check,
+                                contentDescription = null)
+                        }
+                    },
+                    label = {
+                        Text("Create idea")
+                    }
+                )
+
+                NavigationBarItem(
+                    selected = selectedItemIndex == 4,
+                    onClick = {
+                        selectedItemIndex = 4
+                        navController.navigate(NavigationRoutes.Favorite)
+                    },
+                    icon = {
+                        if( selectedItemIndex == 4){
+                            Icon(imageVector = Icons.Filled.CheckCircle,
+                                contentDescription = null)
+                        }else{
+                            Icon(imageVector = Icons.Outlined.Check,
+                                contentDescription = null)
+                        }
+                    },
+                    label = {
+                        Text("Favorites")
                     }
                 )
             }
@@ -98,18 +145,28 @@ fun AppNavigation(
                 startDestination = NavigationRoutes.Home
             ) {
                 composable <NavigationRoutes.Home> {
-                    HomeScreen()
+                    AnimeHomeScreen(animeHomeViewModel)
                 }
-                composable <NavigationRoutes.Cars> {
-                    CarScreen(carListViewModel, navController)
-                }
-                composable<NavigationRoutes.CarsDetailsRoute> {backStackEntry ->
-                    val args = backStackEntry.toRoute<NavigationRoutes.CarsDetailsRoute>()
-                    CarDetailsScreen(
-                        carDetailsViewModel,
+
+                composable<NavigationRoutes.AnimeDetailsRoute> {backStackEntry ->
+                    val args = backStackEntry.toRoute<NavigationRoutes.AnimeDetailsRoute>()
+                    AnimeDetailsScreen(
+                        animeDetailsViewModel,
                         navController,
-                        args.carId
+                        args.id
                     )
+                }
+
+                composable <NavigationRoutes.Search> {
+                    AnimeSearchScreen(animeSearchViewModel)
+                }
+
+                composable <NavigationRoutes.UserIdea> {
+                    AnimeUserIdeaScreen(animeUserIdeaViewModel)
+                }
+
+                composable <NavigationRoutes.Favorite> {
+                    AnimeFavoriteScreen(animeFavoriteViewModel)
                 }
             }
         }

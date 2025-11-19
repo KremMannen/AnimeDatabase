@@ -15,7 +15,7 @@ object AnimeRepository {
 
     private val _retroFit = Retrofit.Builder()
         .client(_httpClient)
-        .baseUrl("https://dummyjson.com/")
+        .baseUrl("https://api.jikan.moe/v4/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

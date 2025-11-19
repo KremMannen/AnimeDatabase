@@ -9,8 +9,8 @@ interface AnimeService {
     @GET("anime")
     suspend fun getAllAnime(): Response<AnimeList>
 
-    @GET("todos/user/{id}")
-    suspend fun getFilteredTodos(
+    @GET("anime/{id}")
+    suspend fun getAnimeByID(
         @Path("id") id: Int
     ): Response<AnimeList>
 }
