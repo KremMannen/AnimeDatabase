@@ -23,65 +23,29 @@ object ApiModule {
 
      val animeService: AnimeService = retroFit.create(AnimeService::class.java)
 
-    suspend fun searchAnimeById(id: Int): AnimeEntity? {
-        try {
+    suspend fun searchAnimeById(id: Int): Anime? {
+        return try {
             val response = animeService.getAnimeByID(id)
             if (response.isSuccessful) {
-                response.body()?.let { anime ->
-                    val animeEntity = AnimeEntity(
-                        id = anime.mal_id,
-                        title = anime.title,
-                        imageUrl = anime.images.jpg.image_url,
-                        synopsis = anime.synopsis,
-                        score = anime.score,
-                        year = anime.year,
-                        episodes = anime.episodes,
-                        genres = anime.genres.joinToString (", ") {it.name},
-                        haveWatched = false,
-                        isFavorite = false
-                    )
-                    return animeEntity
-                }
-            }
-            return null
+                response.body()
+            } else null
         } catch (e: Exception) {
-            Log.d("GetAnimeByIdAndSaveCatch", e.toString())
-            return null
-        } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
-            return null
+            Log.d("SearchAnimeById", e.toString())
+            null
         }
     }
 
-    suspend fun searchAnimeByTitle(title: String): List<AnimeEntity> {
+
+    suspend fun searchAnimeByTitle(title: String): List<Anime> {
         return try {
             val response = animeService.getAnimeByTitle(title)
             if (response.isSuccessful) {
-                response.body()?.data?.let { animeList ->
-                    val animeEntities = animeList.map { anime ->
-                        AnimeEntity(
-                            id = anime.mal_id,
-                            title = anime.title,
-                            imageUrl = anime.images.jpg.image_url,
-                            synopsis = anime.synopsis,
-                            score = anime.score,
-                            year = anime.year,
-                            episodes = anime.episodes,
-                            genres = anime.genres.joinToString { it.name },
-                            haveWatched = false,
-                            isFavorite = false
-                        )
-                    }
-                    return animeEntities
-                }
-            }
-            emptyList()
+                response.body()?.data ?: emptyList()
+            } else emptyList()
         } catch (e: Exception) {
-            Log.d("SearchAnimeByTitleAndSaveCatch", e.toString())
+            Log.d("SearchAnimeByTitleCatch", e.toString())
             emptyList()
-        } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
-            return emptyList()
         }
     }
+
 }
