@@ -10,8 +10,6 @@ object AnimeRepository {
     private lateinit var _appDatabase: AppDatabase
 
     private val _animeDao by lazy { _appDatabase.animeDao() }
-    private val _animeService = ApiModule.animeService
-
 
     suspend fun getAnimeByIdAndSave(id: Int): AnimeEntity? {
         try {
@@ -20,25 +18,13 @@ object AnimeRepository {
                 return existingAnime
             }
 
-            val response = _animeService.getAnimeByID(id)
-            if (response.isSuccessful) {
-                response.body()?.let { anime ->
-                    val animeEntity = AnimeEntity(
-                        id = anime.mal_id,
-                        title = anime.title,
-                        imageUrl = anime.images.jpg.image_url,
-                        synopsis = anime.synopsis,
-                        score = anime.score,
-                        year = anime.year,
-                        episodes = anime.episodes,
-                        genres = anime.genres.joinToString (", ") {it.name},
-                        haveWatched = false,
-                        isFavorite = false
-                    )
-                    _animeDao.insertAnime(animeEntity)
-                    return animeEntity
-                }
+            val animeEntity = ApiModule.searchAnimeById(id)
+
+            if (animeEntity != null) {
+                _animeDao.insertAnime(animeEntity)
+                return animeEntity
             }
+
             return null
         } catch (e: Exception) {
             Log.d("GetAnimeByIdAndSaveCatch", e.toString())
@@ -48,8 +34,6 @@ object AnimeRepository {
             return null
         }
     }
-
-
     suspend fun searchAnimeByTitleAndSave(title: String): List<AnimeEntity> {
         return try {
             val localResults = _animeDao.getAnimeByTitle(title)
@@ -57,26 +41,11 @@ object AnimeRepository {
                 return localResults
             }
 
-            val response = _animeService.getAnimeByTitle(title)
-            if (response.isSuccessful) {
-                response.body()?.data?.let { animeList ->
-                    val animeEntities = animeList.map { anime ->
-                        AnimeEntity(
-                            id = anime.mal_id,
-                            title = anime.title,
-                            imageUrl = anime.images.jpg.image_url,
-                            synopsis = anime.synopsis,
-                            score = anime.score,
-                            year = anime.year,
-                            episodes = anime.episodes,
-                            genres = anime.genres.joinToString { it.name },
-                            haveWatched = false,
-                            isFavorite = false
-                        )
-                    }
-                    _animeDao.insertAll(animeEntities)
-                    return animeEntities
-                }
+            val animeEntities = ApiModule.searchAnimeByTitle(title)
+
+            if (animeEntities.isNotEmpty()) {
+                _animeDao.insertAll(animeEntities)
+                return animeEntities
             }
             emptyList()
         } catch (e: Exception) {
