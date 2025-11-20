@@ -36,8 +36,8 @@ fun AnimeCardItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(150.dp),
-        shape = RoundedCornerShape(16.dp),
+            .height(120.dp),
+        shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, SelectedBorderColor),
         onClick = {
             if (seeDetails != null) {
@@ -82,9 +82,9 @@ fun AnimeCardItem(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = anime.title,
+                    text = anime.title.uppercase(),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
+                    fontSize = 28.sp,
                     color = Color.White,
                     modifier = Modifier.fillMaxWidth()
                 )
