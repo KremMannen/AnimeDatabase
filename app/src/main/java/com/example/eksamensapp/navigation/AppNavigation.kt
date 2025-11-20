@@ -1,8 +1,15 @@
 package com.example.eksamensapp.navigation
 
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
@@ -15,14 +22,21 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -58,88 +72,235 @@ fun AppNavigation(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar {
-                NavigationBarItem(
-                    selected = selectedItemIndex == 1,
-                    onClick = {
-                        selectedItemIndex = 1
-                        navController.navigate(NavigationRoutes.Home)
-                    },
-                    icon = {
-                        if( selectedItemIndex == 1){
-                            Icon(imageVector = Icons.Filled.Home,
-                                contentDescription = null)
-                        }else{
-                            Icon(imageVector = Icons.Outlined.Home,
-                                contentDescription = null)
-                        }
-                    },
-                    label = {
-                        Text("Home")
-                    }
-                )
+                NavigationBar(
+                    containerColor = Color(0xFF590303)
+            ) {
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 1,
+                        onClick = {
+                            selectedItemIndex = 1
+                            navController.navigate(NavigationRoutes.Home)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 2,
-                    onClick = {
-                        selectedItemIndex = 2
-                        navController.navigate(NavigationRoutes.Search)
-                    },
-                    icon = {
-                        if( selectedItemIndex == 2){
-                            Icon(imageVector = Icons.Filled.Search,
-                                contentDescription = null)
-                        }else{
-                            Icon(imageVector = Icons.Outlined.Search,
-                                contentDescription = null)
-                        }
-                    },
-                    label = {
-                        Text("Search")
-                    }
-                )
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 1) Color(0xFF260101)
+                                        else Color.Transparent
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 1) Color.Red else Color.Transparent,
+                                        shape = shape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 3,
-                    onClick = {
-                        selectedItemIndex = 3
-                        navController.navigate(NavigationRoutes.UserIdea)
-                    },
-                    icon = {
-                        if( selectedItemIndex == 3){
-                            Icon(imageVector = Icons.Filled.Create,
-                                contentDescription = null)
-                        }else{
-                            Icon(imageVector = Icons.Outlined.Create,
-                                contentDescription = null)
-                        }
-                    },
-                    label = {
-                        Text("Create idea")
-                    }
-                )
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    if (selectedItemIndex == 1) {
+                                        Icon(
+                                            imageVector = Icons.Filled.Home,
+                                            contentDescription = null
+                                        )
+                                    } else {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Home,
+                                            contentDescription = null
+                                        )
+                                    }
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 4,
-                    onClick = {
-                        selectedItemIndex = 4
-                        navController.navigate(NavigationRoutes.Watched)
-                    },
-                    icon = {
-                        if( selectedItemIndex == 4){
-                            Icon(imageVector = Icons.Filled.CheckCircle,
-                                contentDescription = null)
-                        }else{
-                            Icon(imageVector = Icons.Outlined.Check,
-                                contentDescription = null)
-                        }
-                    },
-                    label = {
-                        Text("Watched")
-                    }
-                )
+                                    Text(
+                                        text = "Home",
+                                        color = if (selectedItemIndex == 1) Color.Red else Color.White,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 2,
+                        onClick = {
+                            selectedItemIndex = 2
+                            navController.navigate(NavigationRoutes.Search)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
+
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 2) Color(0xFF260101)
+                                        else Color.Transparent
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 2) Color.Red else Color.Transparent,
+                                        shape = shape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    if (selectedItemIndex == 2) {
+                                        Icon(
+                                            imageVector = Icons.Filled.Search,
+                                            contentDescription = null
+                                        )
+                                    } else {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Search,
+                                            contentDescription = null
+                                        )
+                                    }
+
+                                    Text(
+                                        text = "Search",
+                                        color = if (selectedItemIndex == 2) Color.Red else Color.White,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 3,
+                        onClick = {
+                            selectedItemIndex = 3
+                            navController.navigate(NavigationRoutes.UserIdea)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
+
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 3) Color(0xFF260101)
+                                        else Color.Transparent
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 3) Color.Red else Color.Transparent,
+                                        shape = shape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    if (selectedItemIndex == 3) {
+                                        Icon(
+                                            imageVector = Icons.Filled.Create,
+                                            contentDescription = null
+                                        )
+                                    } else {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Create,
+                                            contentDescription = null
+                                        )
+                                    }
+
+                                    Text(
+                                        text = "Ideas",
+                                        color = if (selectedItemIndex == 3) Color.Red else Color.White,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 4,
+                        onClick = {
+                            selectedItemIndex = 4
+                            navController.navigate(NavigationRoutes.Watched)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
+
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 4) Color(0xFF260101)
+                                        else Color.Transparent
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 4) Color.Red else Color.Transparent,
+                                        shape = shape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    if (selectedItemIndex == 4) {
+                                        Icon(
+                                            imageVector = Icons.Filled.CheckCircle,
+                                            contentDescription = null
+                                        )
+                                    } else {
+                                        Icon(
+                                            imageVector = Icons.Outlined.Check,
+                                            contentDescription = null
+                                        )
+                                    }
+
+                                    Text(
+                                        text = "Watched",
+                                        color = if (selectedItemIndex == 4) Color.Red else Color.White,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
+                    )
+                }
             }
-        }
+
     ) { innerPadding ->
         Column ( // Main column surrounding the entire app
             modifier = Modifier.padding(innerPadding)
