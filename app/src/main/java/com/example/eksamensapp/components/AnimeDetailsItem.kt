@@ -15,7 +15,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.eksamensapp.data.database.AnimeEntity
+import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
+import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
 fun AnimeDetailsItem(
@@ -30,14 +32,13 @@ fun AnimeDetailsItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(RedBackgroundColor, shape = RoundedCornerShape(16.dp))
+                .background(TransparentRedBackgroundColor, shape = RoundedCornerShape(16.dp))
                 .padding(12.dp)
         ) {
             Image(
                 painter = rememberAsyncImagePainter(model = animeEntity.imageUrl),
                 contentDescription = animeEntity.title,
                 modifier = Modifier
-                    .width(100.dp)
                     .height(200.dp)
                     .align(Alignment.CenterVertically),
                 contentScale = ContentScale.FillHeight
@@ -70,7 +71,7 @@ fun AnimeDetailsItem(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(RedBackgroundColor, shape = RoundedCornerShape(8.dp))
+                .background(TransparentRedBackgroundColor, shape = RoundedCornerShape(8.dp))
                 .padding(16.dp)
         ) {
             Text(text = animeEntity.synopsis, color = Color.White)

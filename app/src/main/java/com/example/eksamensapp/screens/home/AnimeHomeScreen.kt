@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -79,10 +80,10 @@ fun AnimeHomeScreen(
             }
         }
 
-        Divider(
-            color = LightGrayBorderColor,
+        HorizontalDivider(
+            modifier = Modifier.padding(horizontal = 16.dp),
             thickness = 3.dp,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            color = LightGrayBorderColor
         )
 
         LazyColumn(
