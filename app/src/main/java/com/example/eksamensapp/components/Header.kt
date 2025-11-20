@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.eksamensapp.ui.theme.RedBackgroundColor
+import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 
 
 @Composable
@@ -19,16 +20,16 @@ fun AppHeader(title: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp)
-            .background(RedBackgroundColor),
+            .height(100.dp)
+            .background(DarkRedHeaderColor),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = title,
             color = Color.White,
-            fontSize = 28.sp,
+            fontSize = 32.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 60.dp)
+            fontWeight = FontWeight.Bold,
         )
     }
 }
