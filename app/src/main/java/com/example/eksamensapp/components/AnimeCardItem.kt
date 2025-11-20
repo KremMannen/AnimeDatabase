@@ -2,8 +2,10 @@ package com.example.eksamensapp.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -35,7 +38,12 @@ fun AnimeCardItem(
             .fillMaxWidth()
             .height(150.dp),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, SelectedBorderColor)
+        border = BorderStroke(1.dp, SelectedBorderColor),
+        onClick = {
+            if (seeDetails != null) {
+                seeDetails()
+            }
+        }
     ) {
         Box(
             modifier = Modifier
@@ -69,9 +77,9 @@ fun AnimeCardItem(
             // Content
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-                    .padding(16.dp)
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = anime.title,
@@ -80,17 +88,9 @@ fun AnimeCardItem(
                     color = Color.White,
                     modifier = Modifier.fillMaxWidth()
                 )
-
-                if (seeDetails != null) {
-                    Button(
-                        onClick = seeDetails,
-                        modifier = Modifier.padding(top = 8.dp)
-                    ) {
-                        Text("Se detaljer")
-                    }
                 }
             }
         }
     }
-}
+
 
