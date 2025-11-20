@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,10 +20,12 @@ import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
 fun AnimeDetailsItem(
-    animeEntity: AnimeEntity,
     animeDetailsViewModel: AnimeDetailsViewModel,
     goBack: (() -> Unit)? = null
 ) {
+    val anime = animeDetailsViewModel.anime.collectAsState()
+    val currentAnime = anime.value ?: return
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,8 +38,8 @@ fun AnimeDetailsItem(
                 .padding(12.dp)
         ) {
             Image(
-                painter = rememberAsyncImagePainter(model = animeEntity.imageUrl),
-                contentDescription = animeEntity.title,
+                painter = rememberAsyncImagePainter(model = currentAnime.imageUrl),
+                contentDescription = currentAnime.title,
                 modifier = Modifier
                     .height(200.dp)
                     .align(Alignment.CenterVertically),
@@ -48,23 +51,23 @@ fun AnimeDetailsItem(
                     .fillMaxWidth()
                     .padding(start = 8.dp)
             ) {
-                Text(text = animeEntity.title, color = Color.White)
-                Text(text = "Year: ${animeEntity.year}", color = Color.White)
-                Text(text = "Episodes: ${animeEntity.episodes}", color = Color.White)
-                Text(text = "Genres: ${animeEntity.genres}", color = Color.White)
-                Text(text = "Rating: ${animeEntity.score}", color = Color.White)
+                Text(text = currentAnime.title, color = Color.White)
+                Text(text = "Year: ${currentAnime.year}", color = Color.White)
+                Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
+                Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
+                Text(text = "Rating: ${currentAnime.score}", color = Color.White)
 
                 Button(
                     onClick = {
-                        if (animeEntity.haveWatched) {
-                            animeDetailsViewModel.markAsUnwatched(animeEntity)
+                        if (currentAnime.haveWatched) {
+                            animeDetailsViewModel.markAsUnwatched(currentAnime)
                         } else {
-                            animeDetailsViewModel.markAsWatched(animeEntity)
+                            animeDetailsViewModel.markAsWatched(currentAnime)
                         }
                     }
                 ) {
                     Text(
-                        text = if (animeEntity.haveWatched) "Merk som usett" else "Merk som sett"
+                        text = if (currentAnime.haveWatched) "Merk som usett" else "Merk som sett"
                     )
                 }
             }
@@ -78,7 +81,7 @@ fun AnimeDetailsItem(
                 .background(TransparentRedBackgroundColor, shape = RoundedCornerShape(8.dp))
                 .padding(16.dp)
         ) {
-            Text(text = animeEntity.synopsis, color = Color.White)
+            Text(text = currentAnime.synopsis, color = Color.White)
         }
         if (goBack != null) {
             Button(

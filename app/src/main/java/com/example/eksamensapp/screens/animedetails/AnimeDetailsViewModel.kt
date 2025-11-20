@@ -28,6 +28,7 @@ class AnimeDetailsViewModel : ViewModel() {
         viewModelScope.launch {
             val updatedAnime = animeEntity.copy(haveWatched = true)
             AnimeRepository.updateAnime(updatedAnime)
+            _animeEntity.value = updatedAnime
         }
     }
 
@@ -35,6 +36,7 @@ class AnimeDetailsViewModel : ViewModel() {
         viewModelScope.launch {
             val updatedAnime = animeEntity.copy(haveWatched = false)
             AnimeRepository.updateAnime(updatedAnime)
+            _animeEntity.value = updatedAnime
         }
     }
 }
