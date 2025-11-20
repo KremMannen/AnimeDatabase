@@ -59,6 +59,7 @@ val unselectedBorderColor = Color.Transparent
 val selectedTextColor = Color.Red
 val unselectedTextColor = Color.White
 val boxShape = RoundedCornerShape(16.dp)
+val appBackgroundColor = Color(0xFF232323)
 
 
 @Composable
@@ -78,6 +79,8 @@ fun AppNavigation(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        containerColor = appBackgroundColor,
+
         bottomBar = {
             NavigationBar(
                 containerColor = Color(0xFF590303)
