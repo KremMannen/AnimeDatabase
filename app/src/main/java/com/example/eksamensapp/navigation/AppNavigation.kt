@@ -129,7 +129,7 @@ fun AppNavigation(
                                 }
 
                                 Text(
-                                    text = "Home",
+                                    text = "Hjem",
                                     color = if (selectedItemIndex == 1) SelectedTextColor else UnselectedTextColor,
                                     fontSize = 12.sp
                                 )
@@ -192,7 +192,7 @@ fun AppNavigation(
                                 }
 
                                 Text(
-                                    text = "Search",
+                                    text = "Søk",
                                     color = if (selectedItemIndex == 2) Color.Red else Color.White,
                                     fontSize = 12.sp
                                 )
@@ -255,7 +255,7 @@ fun AppNavigation(
                                 }
 
                                 Text(
-                                    text = "Ideas",
+                                    text = "Idéer",
                                     color = if (selectedItemIndex == 3) Color.Red else Color.White,
                                     fontSize = 12.sp
                                 )
@@ -318,7 +318,7 @@ fun AppNavigation(
                                 }
 
                                 Text(
-                                    text = "Watched",
+                                    text = "Dine serier",
                                     color = if (selectedItemIndex == 4) Color.Red else Color.White,
                                     fontSize = 12.sp
                                 )

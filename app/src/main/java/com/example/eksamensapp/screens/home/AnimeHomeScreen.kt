@@ -83,7 +83,7 @@ fun AnimeHomeScreen(
         }
 
         Divider(
-            color = LightGrayBorderColor, // Eller LightGrayBorderColor
+            color = LightGrayBorderColor,
             thickness = 3.dp,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
