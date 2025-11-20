@@ -1,5 +1,8 @@
 package com.example.eksamensapp.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -37,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsScreen
@@ -76,262 +80,273 @@ fun AppNavigation(
         mutableIntStateOf(1)
     }
 
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    val shouldShowBottomBar = currentRoute?.startsWith("com.example.eksamensapp.navigation.NavigationRoutes.AnimeDetailsRoute") == false
+
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppBackgroundColor,
 
         bottomBar = {
-            NavigationBar(
-                containerColor = RedBackgroundColor
+            AnimatedVisibility(
+                visible = shouldShowBottomBar,
+                enter = slideInVertically(initialOffsetY = { it }),
+                exit = slideOutVertically(targetOffsetY = { it })
             ) {
-                NavigationBarItem(
-                    selected = selectedItemIndex == 1,
-                    onClick = {
-                        selectedItemIndex = 1
-                        navController.navigate(NavigationRoutes.Home)
-                    },
-                    icon = {
-                        Box(
-                            modifier = Modifier
-                                .width(88.dp)
-                                .height(52.dp)
-                                .clip(boxShape)
-                                .background(
+                NavigationBar(
+                    containerColor = RedBackgroundColor
+                ) {
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 1,
+                        onClick = {
+                            selectedItemIndex = 1
+                            navController.navigate(NavigationRoutes.Home)
+                        },
+                        icon = {
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(boxShape)
+                                    .background(
+                                        if (selectedItemIndex == 1) {
+                                            SelectedBackgroundColor
+                                        } else {
+                                            UnselectedBackgroundColor
+                                        }
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 1) {
+                                            SelectedBorderColor
+                                        } else {
+                                            UnselectedBorderColor
+                                        },
+                                        shape = boxShape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     if (selectedItemIndex == 1) {
-                                        SelectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Filled.Home,
+                                            contentDescription = null
+                                        )
                                     } else {
-                                        UnselectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Outlined.Home,
+                                            contentDescription = null
+                                        )
                                     }
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = if (selectedItemIndex == 1){
-                                        SelectedBorderColor
-                                    } else {
-                                        UnselectedBorderColor
-                                           },
-                                    shape = boxShape
-                                )
-                                .padding(horizontal = 12.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                if (selectedItemIndex == 1) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Home,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Home,
-                                        contentDescription = null
+
+                                    Text(
+                                        text = "Hjem",
+                                        color = if (selectedItemIndex == 1) SelectedTextColor else UnselectedTextColor,
+                                        fontSize = 12.sp
                                     )
                                 }
-
-                                Text(
-                                    text = "Hjem",
-                                    color = if (selectedItemIndex == 1) SelectedTextColor else UnselectedTextColor,
-                                    fontSize = 12.sp
-                                )
                             }
-                        }
-                    },
-                    alwaysShowLabel = false,
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = SelectedTextColor,
-                        unselectedIconColor = UnselectedTextColor,
-                        indicatorColor = UnselectedBackgroundColor
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = SelectedTextColor,
+                            unselectedIconColor = UnselectedTextColor,
+                            indicatorColor = UnselectedBackgroundColor
+                        )
                     )
-                )
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 2,
-                    onClick = {
-                        selectedItemIndex = 2
-                        navController.navigate(NavigationRoutes.Search)
-                    },
-                    icon = {
-                        val shape = RoundedCornerShape(16.dp)
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 2,
+                        onClick = {
+                            selectedItemIndex = 2
+                            navController.navigate(NavigationRoutes.Search)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
 
-                        Box(
-                            modifier = Modifier
-                                .width(88.dp)
-                                .height(52.dp)
-                                .clip(shape)
-                                .background(
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 2) {
+                                            SelectedBackgroundColor
+                                        } else {
+                                            UnselectedBackgroundColor
+                                        }
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 2) {
+                                            SelectedBorderColor
+                                        } else {
+                                            UnselectedBorderColor
+                                        },
+                                        shape = boxShape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     if (selectedItemIndex == 2) {
-                                        SelectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Filled.Search,
+                                            contentDescription = null
+                                        )
                                     } else {
-                                        UnselectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Outlined.Search,
+                                            contentDescription = null
+                                        )
                                     }
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = if (selectedItemIndex == 2) {
-                                        SelectedBorderColor
-                                    } else {
-                                        UnselectedBorderColor
-                                    },
-                                    shape = boxShape
-                                )
-                                .padding(horizontal = 12.dp),
-                            contentAlignment = Alignment.Center
 
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                if (selectedItemIndex == 2) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Search,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Search,
-                                        contentDescription = null
+                                    Text(
+                                        text = "Søk",
+                                        color = if (selectedItemIndex == 2) Color.Red else Color.White,
+                                        fontSize = 12.sp
                                     )
                                 }
-
-                                Text(
-                                    text = "Søk",
-                                    color = if (selectedItemIndex == 2) Color.Red else Color.White,
-                                    fontSize = 12.sp
-                                )
                             }
-                        }
-                    },
-                    alwaysShowLabel = false,
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color.Red,
-                        unselectedIconColor = Color.White,
-                        indicatorColor = Color.Transparent
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
                     )
-                )
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 3,
-                    onClick = {
-                        selectedItemIndex = 3
-                        navController.navigate(NavigationRoutes.UserIdea)
-                    },
-                    icon = {
-                        val shape = RoundedCornerShape(16.dp)
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 3,
+                        onClick = {
+                            selectedItemIndex = 3
+                            navController.navigate(NavigationRoutes.UserIdea)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
 
-                        Box(
-                            modifier = Modifier
-                                .width(88.dp)
-                                .height(52.dp)
-                                .clip(shape)
-                                .background(
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 3) {
+                                            SelectedBackgroundColor
+                                        } else {
+                                            UnselectedBackgroundColor
+                                        }
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 3) {
+                                            SelectedBorderColor
+                                        } else {
+                                            UnselectedBorderColor
+                                        },
+                                        shape = boxShape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     if (selectedItemIndex == 3) {
-                                        SelectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Filled.Create,
+                                            contentDescription = null
+                                        )
                                     } else {
-                                        UnselectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Outlined.Create,
+                                            contentDescription = null
+                                        )
                                     }
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = if (selectedItemIndex == 3) {
-                                        SelectedBorderColor
-                                    } else {
-                                        UnselectedBorderColor
-                                    },
-                                    shape = boxShape
-                                )
-                                .padding(horizontal = 12.dp),
-                            contentAlignment = Alignment.Center
 
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                if (selectedItemIndex == 3) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Create,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Create,
-                                        contentDescription = null
+                                    Text(
+                                        text = "Idéer",
+                                        color = if (selectedItemIndex == 3) Color.Red else Color.White,
+                                        fontSize = 12.sp
                                     )
                                 }
-
-                                Text(
-                                    text = "Idéer",
-                                    color = if (selectedItemIndex == 3) Color.Red else Color.White,
-                                    fontSize = 12.sp
-                                )
                             }
-                        }
-                    },
-                    alwaysShowLabel = false,
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color.Red,
-                        unselectedIconColor = Color.White,
-                        indicatorColor = Color.Transparent
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
                     )
-                )
 
-                NavigationBarItem(
-                    selected = selectedItemIndex == 4,
-                    onClick = {
-                        selectedItemIndex = 4
-                        navController.navigate(NavigationRoutes.Watched)
-                    },
-                    icon = {
-                        val shape = RoundedCornerShape(16.dp)
+                    NavigationBarItem(
+                        selected = selectedItemIndex == 4,
+                        onClick = {
+                            selectedItemIndex = 4
+                            navController.navigate(NavigationRoutes.Watched)
+                        },
+                        icon = {
+                            val shape = RoundedCornerShape(16.dp)
 
-                        Box(
-                            modifier = Modifier
-                                .width(88.dp)
-                                .height(52.dp)
-                                .clip(shape)
-                                .background(
+                            Box(
+                                modifier = Modifier
+                                    .width(88.dp)
+                                    .height(52.dp)
+                                    .clip(shape)
+                                    .background(
+                                        if (selectedItemIndex == 4) {
+                                            SelectedBackgroundColor
+                                        } else {
+                                            UnselectedBackgroundColor
+                                        }
+                                    )
+                                    .border(
+                                        width = 1.dp,
+                                        color = if (selectedItemIndex == 4) {
+                                            SelectedBorderColor
+                                        } else {
+                                            UnselectedBorderColor
+                                        },
+                                        shape = boxShape
+                                    )
+                                    .padding(horizontal = 12.dp),
+                                contentAlignment = Alignment.Center
+
+                            ) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     if (selectedItemIndex == 4) {
-                                        SelectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Filled.CheckCircle,
+                                            contentDescription = null
+                                        )
                                     } else {
-                                        UnselectedBackgroundColor
+                                        Icon(
+                                            imageVector = Icons.Outlined.Check,
+                                            contentDescription = null
+                                        )
                                     }
-                                )
-                                .border(
-                                    width = 1.dp,
-                                    color = if (selectedItemIndex == 4) {
-                                        SelectedBorderColor
-                                    } else {
-                                        UnselectedBorderColor
-                                    },
-                                    shape = boxShape
-                                )
-                                .padding(horizontal = 12.dp),
-                            contentAlignment = Alignment.Center
 
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                if (selectedItemIndex == 4) {
-                                    Icon(
-                                        imageVector = Icons.Filled.CheckCircle,
-                                        contentDescription = null
-                                    )
-                                } else {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Check,
-                                        contentDescription = null
+                                    Text(
+                                        text = "Dine serier",
+                                        color = if (selectedItemIndex == 4) Color.Red else Color.White,
+                                        fontSize = 12.sp
                                     )
                                 }
-
-                                Text(
-                                    text = "Dine serier",
-                                    color = if (selectedItemIndex == 4) Color.Red else Color.White,
-                                    fontSize = 12.sp
-                                )
                             }
-                        }
-                    },
-                    alwaysShowLabel = false,
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = Color.Red,
-                        unselectedIconColor = Color.White,
-                        indicatorColor = Color.Transparent
+                        },
+                        alwaysShowLabel = false,
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Red,
+                            unselectedIconColor = Color.White,
+                            indicatorColor = Color.Transparent
+                        )
                     )
-                )
+                }
             }
         }
 

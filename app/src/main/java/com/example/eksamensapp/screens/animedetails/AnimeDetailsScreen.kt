@@ -36,7 +36,7 @@ fun AnimeDetailsScreen(
                 title = "No Title Found"
             }
 
-            AppHeader(title)
+            AppHeader(title.uppercase())
         }
 
         item {
@@ -47,7 +47,7 @@ fun AnimeDetailsScreen(
             anime.value?.let {
                 AnimeDetailsItem(
                     it,
-                    markSeen = {
+                    goBack = {
                         navController.popBackStack()
                     }
                 )

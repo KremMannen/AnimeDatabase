@@ -15,14 +15,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.eksamensapp.data.database.AnimeEntity
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
-import com.example.eksamensapp.ui.theme.RedBackgroundColor
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
 fun AnimeDetailsItem(
     animeEntity: AnimeEntity,
-    markSeen: (() -> Unit)? = null
+    goBack: (() -> Unit)? = null
 ) {
     Column(
         modifier = Modifier
@@ -55,14 +53,13 @@ fun AnimeDetailsItem(
                 Text(text = "Genres: ${animeEntity.genres}", color = Color.White)
                 Text(text = "Rating: ${animeEntity.score}", color = Color.White)
 
-                if (markSeen != null) {
-                    Button(
-                        onClick = markSeen,
-                        modifier = Modifier.padding(top = 8.dp)
-                    ) {
-                        Text("Marker som sett")
-                    }
-                }
+               Button(
+                   onClick = {
+
+                   }
+               ) {
+                   Text(text = "Mark as seen")
+               }
             }
         }
 
@@ -75,6 +72,14 @@ fun AnimeDetailsItem(
                 .padding(16.dp)
         ) {
             Text(text = animeEntity.synopsis, color = Color.White)
+        }
+        if (goBack != null) {
+            Button(
+                onClick = goBack,
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Gå tilbake")
+            }
         }
     }
 }
