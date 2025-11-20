@@ -49,17 +49,16 @@ import com.example.eksamensapp.screens.search.AnimeSearchScreen
 import com.example.eksamensapp.screens.search.AnimeSearchViewModel
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaScreen
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
+import com.example.eksamensapp.ui.theme.AppBackgroundColor
+import com.example.eksamensapp.ui.theme.RedBackgroundColor
+import com.example.eksamensapp.ui.theme.SelectedBackgroundColor
+import com.example.eksamensapp.ui.theme.UnselectedBackgroundColor
+import com.example.eksamensapp.ui.theme.SelectedBorderColor
+import com.example.eksamensapp.ui.theme.UnselectedBorderColor
+import com.example.eksamensapp.ui.theme.SelectedTextColor
+import com.example.eksamensapp.ui.theme.UnselectedTextColor
 
-
-// Nav bar items styling
-val selectedBackgroundColor = Color(0xFF260101)
-val unselectedBackgroundColor = Color.Transparent
-val selectedBorderColor = Color.Red
-val unselectedBorderColor = Color.Transparent
-val selectedTextColor = Color.Red
-val unselectedTextColor = Color.White
-val boxShape = RoundedCornerShape(16.dp)
-val appBackgroundColor = Color(0xFF232323)
+private val boxShape = RoundedCornerShape(16.dp)
 
 
 @Composable
@@ -79,11 +78,11 @@ fun AppNavigation(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = appBackgroundColor,
+        containerColor = AppBackgroundColor,
 
         bottomBar = {
             NavigationBar(
-                containerColor = Color(0xFF590303)
+                containerColor = RedBackgroundColor
             ) {
                 NavigationBarItem(
                     selected = selectedItemIndex == 1,
@@ -99,17 +98,17 @@ fun AppNavigation(
                                 .clip(boxShape)
                                 .background(
                                     if (selectedItemIndex == 1) {
-                                        selectedBackgroundColor
+                                        SelectedBackgroundColor
                                     } else {
-                                        unselectedBackgroundColor
+                                        UnselectedBackgroundColor
                                     }
                                 )
                                 .border(
                                     width = 1.dp,
                                     color = if (selectedItemIndex == 1){
-                                        selectedBorderColor
+                                        SelectedBorderColor
                                     } else {
-                                        unselectedBorderColor
+                                        UnselectedBorderColor
                                            },
                                     shape = boxShape
                                 )
@@ -131,7 +130,7 @@ fun AppNavigation(
 
                                 Text(
                                     text = "Home",
-                                    color = if (selectedItemIndex == 1) selectedTextColor else unselectedTextColor,
+                                    color = if (selectedItemIndex == 1) SelectedTextColor else UnselectedTextColor,
                                     fontSize = 12.sp
                                 )
                             }
@@ -139,9 +138,9 @@ fun AppNavigation(
                     },
                     alwaysShowLabel = false,
                     colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = selectedTextColor,
-                        unselectedIconColor = unselectedTextColor,
-                        indicatorColor = unselectedBackgroundColor
+                        selectedIconColor = SelectedTextColor,
+                        unselectedIconColor = UnselectedTextColor,
+                        indicatorColor = UnselectedBackgroundColor
                     )
                 )
 
@@ -161,17 +160,17 @@ fun AppNavigation(
                                 .clip(shape)
                                 .background(
                                     if (selectedItemIndex == 2) {
-                                        selectedBackgroundColor
+                                        SelectedBackgroundColor
                                     } else {
-                                        unselectedBackgroundColor
+                                        UnselectedBackgroundColor
                                     }
                                 )
                                 .border(
                                     width = 1.dp,
                                     color = if (selectedItemIndex == 2) {
-                                        selectedBorderColor
+                                        SelectedBorderColor
                                     } else {
-                                        unselectedBorderColor
+                                        UnselectedBorderColor
                                     },
                                     shape = boxShape
                                 )
@@ -224,17 +223,17 @@ fun AppNavigation(
                                 .clip(shape)
                                 .background(
                                     if (selectedItemIndex == 3) {
-                                        selectedBackgroundColor
+                                        SelectedBackgroundColor
                                     } else {
-                                        unselectedBackgroundColor
+                                        UnselectedBackgroundColor
                                     }
                                 )
                                 .border(
                                     width = 1.dp,
                                     color = if (selectedItemIndex == 3) {
-                                        selectedBorderColor
+                                        SelectedBorderColor
                                     } else {
-                                        unselectedBorderColor
+                                        UnselectedBorderColor
                                     },
                                     shape = boxShape
                                 )
@@ -287,17 +286,17 @@ fun AppNavigation(
                                 .clip(shape)
                                 .background(
                                     if (selectedItemIndex == 4) {
-                                        selectedBackgroundColor
+                                        SelectedBackgroundColor
                                     } else {
-                                        unselectedBackgroundColor
+                                        UnselectedBackgroundColor
                                     }
                                 )
                                 .border(
                                     width = 1.dp,
                                     color = if (selectedItemIndex == 4) {
-                                        selectedBorderColor
+                                        SelectedBorderColor
                                     } else {
-                                        unselectedBorderColor
+                                        UnselectedBorderColor
                                     },
                                     shape = boxShape
                                 )
