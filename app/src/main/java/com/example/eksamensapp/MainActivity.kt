@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     _animeSearchViewModel,
                     _animeUserIdeaViewModel,
                     _animeWatchedViewModel
-                )
+                    )
                 }
             }
         }

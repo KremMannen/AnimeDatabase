@@ -5,9 +5,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Check
+import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -83,10 +87,10 @@ fun AppNavigation(
                     },
                     icon = {
                         if( selectedItemIndex == 2){
-                            Icon(imageVector = Icons.Filled.CheckCircle,
+                            Icon(imageVector = Icons.Filled.Search,
                                 contentDescription = null)
                         }else{
-                            Icon(imageVector = Icons.Outlined.Check,
+                            Icon(imageVector = Icons.Outlined.Search,
                                 contentDescription = null)
                         }
                     },
@@ -103,10 +107,10 @@ fun AppNavigation(
                     },
                     icon = {
                         if( selectedItemIndex == 3){
-                            Icon(imageVector = Icons.Filled.CheckCircle,
+                            Icon(imageVector = Icons.Filled.Create,
                                 contentDescription = null)
                         }else{
-                            Icon(imageVector = Icons.Outlined.Check,
+                            Icon(imageVector = Icons.Outlined.Create,
                                 contentDescription = null)
                         }
                     },
