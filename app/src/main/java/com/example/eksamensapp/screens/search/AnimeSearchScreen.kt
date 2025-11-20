@@ -10,6 +10,6 @@ fun AnimeSearchScreen(
     animeSearchViewModel: AnimeSearchViewModel,
 ){
     Column() {
-        Text("Placeholder")
+        Text("Search")
     }
 }

@@ -8,8 +8,19 @@ import java.sql.SQLException
 object AnimeRepository {
 
     private lateinit var _appDatabase: AppDatabase
-
     private val _animeDao by lazy { _appDatabase.animeDao() }
+
+    suspend fun getAnimeById(id: Int): AnimeEntity? {
+        try {
+            return _animeDao.getAnimeById(id)
+        } catch (e: java.lang.Exception) {
+            Log.d("getUserIdeaByIdCatch", e.toString())
+            return null
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return null
+        }
+    }
 
     suspend fun getAnimeByIdAndSave(id: Int): AnimeEntity? {
         return try {

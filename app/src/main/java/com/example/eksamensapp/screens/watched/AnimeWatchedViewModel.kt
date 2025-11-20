@@ -1,4 +1,6 @@
 package com.example.eksamensapp.screens.watched
 
-class AnimeWatchedViewModel {
+import androidx.lifecycle.ViewModel
+
+class AnimeWatchedViewModel : ViewModel() {
 }

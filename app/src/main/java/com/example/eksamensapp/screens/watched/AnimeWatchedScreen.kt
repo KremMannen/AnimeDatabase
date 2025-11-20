@@ -9,6 +9,6 @@ fun AnimeWatchedScreen(
     animeWatchedViewModel: AnimeWatchedViewModel
 ){
     Column() {
-        Text("Placeholder")
+        Text("Watched list")
     }
 }

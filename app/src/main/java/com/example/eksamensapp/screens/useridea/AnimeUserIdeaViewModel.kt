@@ -1,4 +1,6 @@
 package com.example.eksamensapp.screens.useridea
 
-class AnimeUserIdeaViewModel {
+import androidx.lifecycle.ViewModel
+
+class AnimeUserIdeaViewModel : ViewModel() {
 }

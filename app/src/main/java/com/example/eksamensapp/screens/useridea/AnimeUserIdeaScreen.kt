@@ -11,6 +11,6 @@ fun AnimeUserIdeaScreen(
     animeUserIdeaViewModel: AnimeUserIdeaViewModel,
 ){
     Column() {
-        Text("Placeholder")
+        Text("Your ideas")
     }
 }

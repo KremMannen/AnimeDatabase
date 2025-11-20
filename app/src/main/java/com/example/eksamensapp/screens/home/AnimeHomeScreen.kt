@@ -10,6 +10,6 @@ fun AnimeHomeScreen(
     animeHomeViewModel: AnimeHomeViewModel,
 ){
     Column() {
-        Text("Placeholder")
+        Text("Home")
     }
 }

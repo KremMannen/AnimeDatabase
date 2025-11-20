@@ -1,4 +1,6 @@
 package com.example.eksamensapp.screens.home
 
-class AnimeHomeViewModel {
+import androidx.lifecycle.ViewModel
+
+class AnimeHomeViewModel : ViewModel() {
 }
