@@ -39,10 +39,9 @@ fun AnimeDetailsScreen(
 
         AppHeader(title.uppercase())
 
-        Spacer(modifier = Modifier.height(8.dp))
 
         LazyColumn(
-            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
 
             item {
