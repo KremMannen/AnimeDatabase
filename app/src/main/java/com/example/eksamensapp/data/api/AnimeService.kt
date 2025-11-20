@@ -19,4 +19,9 @@ interface AnimeService {
     suspend fun getAnimeByTitle(
         @Query("q") title: String
     ): Response<AnimeList>
+
+    @GET("anime")
+    suspend fun getAnimeByPage(
+        @Query("page") page: Int
+    ): Response<AnimeList>
 }

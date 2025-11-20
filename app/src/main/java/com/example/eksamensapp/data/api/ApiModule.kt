@@ -49,15 +49,22 @@ object ApiModule {
     }
 
     suspend fun getAllAnime() : List<Anime> {
-        return try {
-            val response = animeService.getAllAnime()
-            if (response.isSuccessful) {
-                response.body()?.data ?: emptyList()
-            } else emptyList()
+        val allAnime = mutableListOf<Anime>()
+        try {
+            // We only fetch 2 pages to avoid being limited by API
+            val responsePage1 = animeService.getAnimeByPage(1)
+            if (responsePage1.isSuccessful) {
+                responsePage1.body()?.data?.let { allAnime.addAll(it) }
+            }
+
+            val responsePage2 = animeService.getAnimeByPage(2)
+            if (responsePage2.isSuccessful) {
+                responsePage2.body()?.data?.let { allAnime.addAll(it) }
+            }
         } catch (e: Exception) {
             Log.d("SearchAnimeByTitleCatch", e.toString())
-            emptyList()
         }
+        return allAnime
     }
 
 }
