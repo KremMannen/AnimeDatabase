@@ -13,13 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
 import com.example.eksamensapp.data.database.AnimeEntity
+import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
 fun AnimeDetailsItem(
     animeEntity: AnimeEntity,
+    animeDetailsViewModel: AnimeDetailsViewModel,
     goBack: (() -> Unit)? = null
 ) {
     Column(
@@ -53,13 +54,13 @@ fun AnimeDetailsItem(
                 Text(text = "Genres: ${animeEntity.genres}", color = Color.White)
                 Text(text = "Rating: ${animeEntity.score}", color = Color.White)
 
-               Button(
-                   onClick = {
-
-                   }
-               ) {
-                   Text(text = "Mark as seen")
-               }
+                Button(
+                    onClick = {
+                        animeDetailsViewModel.markAsWatched(animeEntity)
+                    }
+                ) {
+                    Text(text = "Merk som sett")
+                }
             }
         }
 

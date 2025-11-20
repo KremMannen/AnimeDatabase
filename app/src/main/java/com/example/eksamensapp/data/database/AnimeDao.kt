@@ -25,4 +25,7 @@ interface AnimeDao {
     suspend fun insertAll(animeList: List<AnimeEntity>)
     @Query("SELECT COUNT(*) FROM AnimeEntity")
     suspend fun getCount(): Int
+
+    @Update
+    suspend fun updateAnime(animeEntity: AnimeEntity) : Int
 }

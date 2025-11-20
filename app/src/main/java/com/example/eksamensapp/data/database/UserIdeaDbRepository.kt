@@ -80,10 +80,10 @@ object UserIdeaDbRepository {
            return _userIdeaDao.updateIdea(userIdeaEntity)
         } catch (e: Exception) {
             Log.d("updateUserIdeaCatch", e.toString())
-            return null
+            return -1
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved oppdatering av data ${e.message}")
-            return null
+            return -1
         }
     }
 

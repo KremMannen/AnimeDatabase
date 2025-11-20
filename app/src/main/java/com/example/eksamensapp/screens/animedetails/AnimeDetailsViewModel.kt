@@ -17,4 +17,17 @@ class AnimeDetailsViewModel : ViewModel() {
             _animeEntity.value = AnimeRepository.getAnimeById(id)
         }
     }
+
+    fun updateAnime(animeEntity: AnimeEntity) {
+        viewModelScope.launch {
+            AnimeRepository.updateAnime(animeEntity)
+        }
+    }
+
+    fun markAsWatched(animeEntity: AnimeEntity) {
+        viewModelScope.launch {
+            val updatedAnime = animeEntity.copy(haveWatched = true)
+            AnimeRepository.updateAnime(updatedAnime)
+        }
+    }
 }

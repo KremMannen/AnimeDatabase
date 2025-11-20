@@ -61,6 +61,18 @@ object AnimeRepository {
         }
     }
 
+    suspend fun updateAnime(animeEntity: AnimeEntity) : Int? {
+        try {
+            return _animeDao.updateAnime(animeEntity)
+        } catch (e: java.lang.Exception) {
+            Log.d("updateAnimeCatch", e.toString())
+            return -1
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved oppdatering av data ${e.message}")
+            return -1
+        }
+    }
+
     suspend fun getAnimeByIdAndSave(id: Int): AnimeEntity? {
         return try {
             // Check DB first

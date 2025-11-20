@@ -47,6 +47,7 @@ fun AnimeDetailsScreen(
             anime.value?.let {
                 AnimeDetailsItem(
                     it,
+                    animeDetailsViewModel = animeDetailsViewModel,
                     goBack = {
                         navController.popBackStack()
                     }
