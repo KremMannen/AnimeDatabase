@@ -48,4 +48,16 @@ object ApiModule {
         }
     }
 
+    suspend fun getAllAnime() : List<Anime> {
+        return try {
+            val response = animeService.getAllAnime()
+            if (response.isSuccessful) {
+                response.body()?.data ?: emptyList()
+            } else emptyList()
+        } catch (e: Exception) {
+            Log.d("SearchAnimeByTitleCatch", e.toString())
+            emptyList()
+        }
+    }
+
 }

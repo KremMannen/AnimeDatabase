@@ -18,10 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.eksamensapp.data.api.Anime
+import com.example.eksamensapp.data.database.AnimeEntity
 
 @Composable
 fun AnimeListItem(
-    anime: Anime,
+    anime: AnimeEntity,
     seeDetails: (() -> Unit)? = null
 ){
     Card(

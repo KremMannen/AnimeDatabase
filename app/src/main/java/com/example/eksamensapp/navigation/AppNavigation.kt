@@ -344,7 +344,7 @@ fun AppNavigation(
                 startDestination = NavigationRoutes.Home
             ) {
                 composable <NavigationRoutes.Home> {
-                    AnimeHomeScreen(animeHomeViewModel)
+                    AnimeHomeScreen(animeHomeViewModel, navController)
                 }
 
                 composable<NavigationRoutes.AnimeDetailsRoute> {backStackEntry ->

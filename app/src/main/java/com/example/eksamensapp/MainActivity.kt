@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.eksamensapp.data.database.AnimeRepository
 import com.example.eksamensapp.data.database.UserIdeaDbRepository
 import com.example.eksamensapp.navigation.AppNavigation
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
@@ -32,7 +33,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         UserIdeaDbRepository.initializeDatabase(applicationContext)
+
+        AnimeRepository.initializeDatabase(applicationContext)
 
         enableEdgeToEdge()
         setContent {

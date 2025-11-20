@@ -23,5 +23,6 @@ interface AnimeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(animeList: List<AnimeEntity>)
-
+    @Query("SELECT COUNT(*) FROM AnimeEntity")
+    suspend fun getCount(): Int
 }
