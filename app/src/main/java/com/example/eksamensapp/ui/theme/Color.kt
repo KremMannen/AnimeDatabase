@@ -20,6 +20,9 @@ val UnselectedBorderColor = Color.Transparent
 val SelectedTextColor = Color.Red
 val UnselectedTextColor = Color.White
 
+val LightGrayBorderColor = Color(0xFF515151)
+
+
 val DarkRedHeaderColor = Color(0xFF400101)
 
 val RedBackgroundColor = Color(0xFF590303)
