@@ -1,6 +1,8 @@
 package com.example.eksamensapp.screens.animedetails
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,32 +28,33 @@ fun AnimeDetailsScreen(
         animeDetailsViewModel.setAnime(id)
     }
 
-    LazyColumn (
-        modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        item {
-            var title = anime.value?.title ?: ""
+        var title = anime.value?.title ?: ""
 
-            if (title.isEmpty()) {
-                title = "No Title Found"
-            }
-
-            AppHeader(title.uppercase())
+        if (title.isEmpty()) {
+            title = "No Title Found"
         }
 
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
-        }
+        AppHeader(title.uppercase())
 
-        item {
-            anime.value?.let {
-                AnimeDetailsItem(
-                    it,
-                    animeDetailsViewModel = animeDetailsViewModel,
-                    goBack = {
-                        navController.popBackStack()
-                    }
-                )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        LazyColumn(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+        ) {
+
+            item {
+                anime.value?.let {
+                    AnimeDetailsItem(
+                        it,
+                        animeDetailsViewModel = animeDetailsViewModel,
+                        goBack = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
             }
         }
     }
