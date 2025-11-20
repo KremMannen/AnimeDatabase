@@ -56,10 +56,16 @@ fun AnimeDetailsItem(
 
                 Button(
                     onClick = {
-                        animeDetailsViewModel.markAsWatched(animeEntity)
+                        if (animeEntity.haveWatched) {
+                            animeDetailsViewModel.markAsUnwatched(animeEntity)
+                        } else {
+                            animeDetailsViewModel.markAsWatched(animeEntity)
+                        }
                     }
                 ) {
-                    Text(text = "Merk som sett")
+                    Text(
+                        text = if (animeEntity.haveWatched) "Merk som usett" else "Merk som sett"
+                    )
                 }
             }
         }

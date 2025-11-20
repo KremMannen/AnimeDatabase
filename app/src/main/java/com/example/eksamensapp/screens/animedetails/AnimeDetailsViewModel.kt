@@ -30,4 +30,11 @@ class AnimeDetailsViewModel : ViewModel() {
             AnimeRepository.updateAnime(updatedAnime)
         }
     }
+
+    fun markAsUnwatched(animeEntity: AnimeEntity) {
+        viewModelScope.launch {
+            val updatedAnime = animeEntity.copy(haveWatched = false)
+            AnimeRepository.updateAnime(updatedAnime)
+        }
+    }
 }
