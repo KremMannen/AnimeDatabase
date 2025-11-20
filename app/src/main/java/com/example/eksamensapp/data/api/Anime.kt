@@ -16,7 +16,7 @@ data class Images(
 )
 
 data class ImageUrl(
-    val image_url: String,
+    val large_image_url: String
 )
 
 data class Genre(

@@ -110,7 +110,7 @@ object AnimeRepository {
         return AnimeEntity(
             id = anime.mal_id,
             title = anime.title,
-            imageUrl = anime.images.jpg.image_url,
+            imageUrl = anime.images.jpg.large_image_url,
             synopsis = anime.synopsis,
             score = anime.score,
             year = anime.year,
