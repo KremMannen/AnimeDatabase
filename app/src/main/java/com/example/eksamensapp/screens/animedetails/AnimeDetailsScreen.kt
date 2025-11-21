@@ -33,12 +33,12 @@ fun AnimeDetailsScreen(
     ) {
         var title = anime.value?.title ?: ""
 
+        //Skal ikke være mulig for en Anime i databasen å ikke ha tittel, men har failsafe likevel.
         if (title.isEmpty()) {
             title = "No Title Found"
         }
 
         AppHeader(title.uppercase())
-
 
         LazyColumn(
             modifier = Modifier.padding(16.dp)
