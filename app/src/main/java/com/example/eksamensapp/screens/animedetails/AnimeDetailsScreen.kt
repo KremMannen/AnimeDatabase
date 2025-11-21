@@ -47,7 +47,6 @@ fun AnimeDetailsScreen(
         LazyColumn(
             modifier = Modifier.padding(16.dp)
         ) {
-
             item {
                 anime.value?.let {
                     AnimeDetailsItem(

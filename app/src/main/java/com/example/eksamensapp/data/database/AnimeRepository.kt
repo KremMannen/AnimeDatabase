@@ -99,6 +99,18 @@ object AnimeRepository {
         }
     }
 
+    suspend fun getAnimeByWatchedStatus(): List<AnimeEntity> {
+        try {
+            return _animeDao.getWatchedAnime()
+        } catch (e: java.lang.Exception) {
+            Log.d("getAllAnime", e.toString())
+            return emptyList()
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return emptyList()
+        }
+    }
+
     suspend fun updateAnime(animeEntity: AnimeEntity) : Int {
         try {
             return _animeDao.updateAnime(animeEntity)
