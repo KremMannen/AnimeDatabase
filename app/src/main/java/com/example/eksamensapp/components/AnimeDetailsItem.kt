@@ -33,7 +33,6 @@ import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 @Composable
 fun AnimeDetailsItem(
     animeDetailsViewModel: AnimeDetailsViewModel,
-    goBack: (() -> Unit)? = null
 ) {
     val anime = animeDetailsViewModel.anime.collectAsState()
     val currentAnime = anime.value ?: return
@@ -131,14 +130,6 @@ fun AnimeDetailsItem(
                 color = Color.White,
                 modifier = Modifier.padding(16.dp)
             )
-        }
-        if (goBack != null) {
-            Button(
-                onClick = goBack,
-                modifier = Modifier.padding(top = 8.dp)
-            ) {
-                Text("Gå tilbake")
-            }
         }
     }
 }

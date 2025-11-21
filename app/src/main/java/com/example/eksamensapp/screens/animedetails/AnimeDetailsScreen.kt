@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeDetailsItem
 import com.example.eksamensapp.components.AppHeader
+import com.example.eksamensapp.components.DetailsAppHeader
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
 
 @Composable
@@ -38,7 +39,10 @@ fun AnimeDetailsScreen(
             title = "No Title Found"
         }
 
-        AppHeader(title.uppercase())
+        DetailsAppHeader(
+            title = title,
+            onBackClick = { navController.popBackStack() }
+        )
 
         LazyColumn(
             modifier = Modifier.padding(16.dp)
@@ -48,9 +52,6 @@ fun AnimeDetailsScreen(
                 anime.value?.let {
                     AnimeDetailsItem(
                         animeDetailsViewModel = animeDetailsViewModel,
-                        goBack = {
-                            navController.popBackStack()
-                        }
                     )
                 }
             }
