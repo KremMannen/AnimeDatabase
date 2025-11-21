@@ -35,6 +35,12 @@ class AnimeWatchedViewModel : ViewModel() {
         }
     }
 
+    fun filterFavorites() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _animes.value = AnimeRepository.getAnimeByWatchedStatus().filter { it.isFavorite }
+        }
+    }
+
     private fun refreshAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
             _animes.value = AnimeRepository.getAnimeByWatchedStatus()
