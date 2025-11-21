@@ -108,11 +108,7 @@ fun AnimeFavoriteItem(
 
                 IconButton(
                     onClick = {
-                        if (animeEntity.isFavorite) {
-                            animeWatchedViewModel.unsetFavorite(animeEntity)
-                        } else {
-                            animeWatchedViewModel.setFavorite(animeEntity)
-                        }
+                        animeWatchedViewModel.toggleFavorite(animeEntity)
                     },
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -137,4 +133,5 @@ fun AnimeFavoriteItem(
         }
     }
 }
+
 
