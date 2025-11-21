@@ -13,17 +13,7 @@ import kotlinx.coroutines.launch
 
 class AnimeWatchedViewModel : ViewModel() {
     private val _animes = MutableStateFlow<List<AnimeEntity>>(emptyList())
-    private val _animeEntity = MutableStateFlow<AnimeEntity?>(null)
     val animes = _animes.asStateFlow()
-    val anime = _animeEntity.asStateFlow()
-
-
-    fun setAnime(id: Int) {
-        viewModelScope.launch {
-            _animeEntity.value = AnimeRepository.getAnimeById(id)
-        }
-    }
-
 
     fun setAnimesByWatchedStatus() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,25 +21,27 @@ class AnimeWatchedViewModel : ViewModel() {
         }
     }
 
-
     fun setFavorite(animeEntity: AnimeEntity) {
         viewModelScope.launch {
             AnimeRepository.updateAnime(animeEntity.copy(isFavorite = true))
-            setAnime(animeEntity.id)
+            refreshAnimes()
         }
     }
-
 
     fun unsetFavorite(animeEntity: AnimeEntity) {
         viewModelScope.launch {
             AnimeRepository.updateAnime(animeEntity.copy(isFavorite = false))
-            setAnime(animeEntity.id)
+            refreshAnimes()
         }
     }
 
+    private fun refreshAnimes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _animes.value = AnimeRepository.getAnimeByWatchedStatus()
+        }
+    }
 
     init {
         setAnimesByWatchedStatus()
     }
 }
-
