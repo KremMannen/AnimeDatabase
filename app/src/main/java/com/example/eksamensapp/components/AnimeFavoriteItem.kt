@@ -7,16 +7,27 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -80,48 +91,48 @@ fun AnimeFavoriteItem(
                         )
                     )
             )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = animeEntity.title.uppercase(),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 28.sp,
+                    color = Color.White,
+                    modifier = Modifier.align(Alignment.CenterStart)
+                )
 
-            Row {
-                Column(
+                IconButton(
+                    onClick = {
+                        if (animeEntity.isFavorite) {
+                            animeWatchedViewModel.unsetFavorite(animeEntity)
+                        } else {
+                            animeWatchedViewModel.setFavorite(animeEntity)
+                        }
+                    },
                     modifier = Modifier
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center
+                        .align(Alignment.TopEnd)
                 ) {
-                    Text(
-                        text = animeEntity.title.uppercase(),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 28.sp,
-                        color = Color.White,
-                        modifier = Modifier.fillMaxWidth()
+                    Icon(
+                        imageVector = if (animeEntity.isFavorite) {
+                            Icons.Filled.Favorite
+                        } else {
+                            Icons.Outlined.Favorite
+                        },
+                        contentDescription = if (animeEntity.isFavorite) {
+                            "Remove from favorites"
+                        } else {
+                            "Add to favorites"
+                        },
+                        tint = if (animeEntity.isFavorite) {
+                            Color.Red
+                        } else {
+                            SelectedButtonColor
+                        },
+                        modifier = Modifier.size(32.dp)
                     )
-
-                    Button(
-                        onClick = {
-                            if (animeEntity.isFavorite) {
-                                animeWatchedViewModel.unsetFavorite(animeEntity)
-                            } else {
-                                animeWatchedViewModel.setFavorite(animeEntity)
-                            }
-                        },
-                        colors = if (animeEntity.isFavorite) {
-                            ButtonDefaults.buttonColors(
-                                containerColor = SelectedButtonColor,
-                                contentColor = Color.White
-                            )
-                        } else {
-                            ButtonDefaults.buttonColors(
-                                containerColor = DarkRedHeaderColor,
-                                contentColor = Color.White
-                            )
-                        },
-                        border = if (animeEntity.isFavorite) {
-                            BorderStroke(1.dp, SelectedBorderColor)
-                        } else {
-                            BorderStroke(1.dp, RedBackgroundColor)
-                        },
-                    ) {
-                        Text(text = if (animeEntity.isFavorite) "Fjern fra favoritter" else "Legg til favoritter")
-                    }
                 }
             }
         }
