@@ -39,8 +39,6 @@ fun AnimeFavoriteItem(
     animeWatchedViewModel: AnimeWatchedViewModel,
     seeDetails: (() -> Unit)? = null
 ) {
-    val isFavorite = animeEntity.isFavorite
-
 
     Card(
         modifier = Modifier
@@ -99,13 +97,13 @@ fun AnimeFavoriteItem(
 
                     Button(
                         onClick = {
-                            if (isFavorite) {
+                            if (animeEntity.isFavorite) {
                                 animeWatchedViewModel.unsetFavorite(animeEntity)
                             } else {
                                 animeWatchedViewModel.setFavorite(animeEntity)
                             }
                         },
-                        colors = if (isFavorite) {
+                        colors = if (animeEntity.isFavorite) {
                             ButtonDefaults.buttonColors(
                                 containerColor = SelectedButtonColor,
                                 contentColor = Color.White
@@ -116,13 +114,13 @@ fun AnimeFavoriteItem(
                                 contentColor = Color.White
                             )
                         },
-                        border = if (isFavorite) {
+                        border = if (animeEntity.isFavorite) {
                             BorderStroke(1.dp, SelectedBorderColor)
                         } else {
                             BorderStroke(1.dp, RedBackgroundColor)
                         },
                     ) {
-                        Text(text = if (isFavorite) "Fjern fra favoritter" else "Legg til favoritter")
+                        Text(text = if (animeEntity.isFavorite) "Fjern fra favoritter" else "Legg til favoritter")
                     }
                 }
             }

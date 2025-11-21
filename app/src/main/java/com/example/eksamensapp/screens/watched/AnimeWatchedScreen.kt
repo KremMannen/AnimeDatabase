@@ -42,12 +42,11 @@ fun AnimeWatchedScreen(
 ) {
     val animes = animeWatchedViewModel.animes.collectAsState()
 
-
     val backStackEntry = navController.currentBackStackEntryAsState().value
+
     LaunchedEffect(backStackEntry) {
         animeWatchedViewModel.setAnimesByWatchedStatus()
     }
-
 
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader("Dine sette serier")
