@@ -14,10 +14,14 @@ import kotlinx.coroutines.launch
 class AnimeWatchedViewModel : ViewModel() {
     private val _animes = MutableStateFlow<List<AnimeEntity>>(emptyList())
     val animes = _animes.asStateFlow()
+    private val _totalWatchedCount = MutableStateFlow(0)
+    val totalWatchedCount = _totalWatchedCount.asStateFlow()
 
     fun setAnimesByWatchedStatus() {
         viewModelScope.launch(Dispatchers.IO) {
-            _animes.value = AnimeRepository.getAnimeByWatchedStatus()
+            val watchedAnimes = AnimeRepository.getAnimeByWatchedStatus()
+            _animes.value = watchedAnimes
+            _totalWatchedCount.value = watchedAnimes.size
         }
     }
 
@@ -43,7 +47,9 @@ class AnimeWatchedViewModel : ViewModel() {
 
     private fun refreshAnimes() {
         viewModelScope.launch(Dispatchers.IO) {
-            _animes.value = AnimeRepository.getAnimeByWatchedStatus()
+            val watchedAnimes = AnimeRepository.getAnimeByWatchedStatus()
+            _animes.value = watchedAnimes
+            _totalWatchedCount.value = watchedAnimes.size
         }
     }
 

@@ -19,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -100,6 +101,7 @@ fun AnimeFavoriteItem(
                     text = animeEntity.title.uppercase(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 28.sp,
+                    lineHeight = 26.sp,
                     color = Color.White,
                     modifier = Modifier.align(Alignment.CenterStart)
                 )
@@ -115,24 +117,21 @@ fun AnimeFavoriteItem(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                 ) {
-                    Icon(
-                        imageVector = if (animeEntity.isFavorite) {
-                            Icons.Filled.Favorite
-                        } else {
-                            Icons.Outlined.Favorite
-                        },
-                        contentDescription = if (animeEntity.isFavorite) {
-                            "Remove from favorites"
-                        } else {
-                            "Add to favorites"
-                        },
-                        tint = if (animeEntity.isFavorite) {
-                            Color.Red
-                        } else {
-                            SelectedButtonColor
-                        },
-                        modifier = Modifier.size(32.dp)
-                    )
+                    if (animeEntity.isFavorite) {
+                        Icon(
+                            imageVector = Icons.Filled.Favorite,
+                            contentDescription = "Remove from favorites icon",
+                            tint = Color.Red,
+                            modifier = Modifier.size(38.dp)
+                        )
+                    } else {
+                        Icon(
+                            imageVector = Icons.Outlined.FavoriteBorder,
+                            contentDescription = "Add to favorites icon",
+                            tint = Color.Red,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
                 }
             }
         }

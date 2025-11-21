@@ -85,6 +85,7 @@ fun AnimeCardItem(
                     text = anime.title.uppercase(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 28.sp,
+                    lineHeight = 26.sp,
                     color = Color.White,
                     modifier = Modifier.fillMaxWidth()
                 )
