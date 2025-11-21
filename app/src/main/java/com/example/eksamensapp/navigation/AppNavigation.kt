@@ -380,7 +380,7 @@ fun AppNavigation(
                 }
 
                 composable <NavigationRoutes.Watched> {
-                    AnimeWatchedScreen(animeWatchedViewModel)
+                    AnimeWatchedScreen(animeWatchedViewModel, navController)
                 }
             }
         }
