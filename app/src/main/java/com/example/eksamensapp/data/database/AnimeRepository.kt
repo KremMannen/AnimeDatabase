@@ -31,7 +31,7 @@ object AnimeRepository {
 
         // Populate from API
         val apiResults = ApiModule.getAllAnime()
-        if (apiResults.isNullOrEmpty()) {
+        if (apiResults.isEmpty()) {
             Log.e("DB_POPULATE", "API returned empty list. Aborting DB population.")
             return
         }
@@ -51,7 +51,20 @@ object AnimeRepository {
     }
     suspend fun getAnimeById(id: Int): AnimeEntity? {
         try {
-            return _animeDao.getAnimeById(id)
+            // Check DB first
+            var animeEntity = _animeDao.getAnimeById(id)
+            if (animeEntity != null) {
+                return animeEntity
+            }
+            // Check API, and save to database if found
+            searchApiAnimeByIdAndSave(id)
+
+            // Check DB again
+            animeEntity = _animeDao.getAnimeById(id)
+            if (animeEntity != null) {
+                return animeEntity
+            }
+            return null
         } catch (e: java.lang.Exception) {
             Log.d("getUserIdeaByIdCatch", e.toString())
             return null
@@ -61,7 +74,32 @@ object AnimeRepository {
         }
     }
 
-    suspend fun updateAnime(animeEntity: AnimeEntity) : Int? {
+    suspend fun getAnimeByTitle(title: String): List<AnimeEntity> {
+        try {
+            // Check DB first
+            var animeEntity = _animeDao.getAnimeByTitle(title)
+            if (!animeEntity.isEmpty()) {
+                return animeEntity
+            }
+            // Check API, and save to database if found
+            searchApiAnimeByTitleAndSave(title)
+
+            // Check DB again
+            animeEntity = _animeDao.getAnimeByTitle(title)
+            if (!animeEntity.isEmpty()) {
+                return animeEntity
+            }
+            return emptyList()
+        } catch (e: java.lang.Exception) {
+            Log.d("getUserIdeaByIdCatch", e.toString())
+            return emptyList()
+        } catch (e: SQLException) {
+            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            return emptyList()
+        }
+    }
+
+    suspend fun updateAnime(animeEntity: AnimeEntity) : Int {
         try {
             return _animeDao.updateAnime(animeEntity)
         } catch (e: java.lang.Exception) {
@@ -73,49 +111,33 @@ object AnimeRepository {
         }
     }
 
-    suspend fun getAnimeByIdAndSave(id: Int): AnimeEntity? {
-        return try {
-            // Check DB first
-            _animeDao.getAnimeById(id)?.let {
-                return it
-            }
-
-            // Check API if no hits in local database
-            val anime = ApiModule.searchAnimeById(id)
-            if (anime != null) {
-                val animeEntity = mapToEntity(anime)
+    suspend fun searchApiAnimeByIdAndSave(id: Int) {
+        try {
+            val animeEntity = ApiModule.searchAnimeById(id)
+            if (animeEntity != null) {
+                val animeEntity = mapToEntity(animeEntity)
                 _animeDao.insertAnime(animeEntity)
-                return animeEntity
+                Log.i("SearchApiAnimeByIdAndSave", "Lagret anime fra API")
             }
-            null
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
-            null
         } catch (e: Exception) {
-            Log.d("GetAnimeByIdAndSaveCatch", e.toString())
-            null
+            Log.d("SearchApiAnimeByIdAndSave", e.toString())
         }
     }
 
-    suspend fun searchAnimeByTitleAndSave(title: String): List<AnimeEntity> {
-        return try {
-            val localResults = _animeDao.getAnimeByTitle(title)
-            if (localResults.isNotEmpty()) {
-                return localResults
-            }
+    suspend fun searchApiAnimeByTitleAndSave(title: String) {
+        try {
             val apiResults = ApiModule.searchAnimeByTitle(title)
             if (apiResults.isNotEmpty()) {
                 val animeEntities = mapToEntityList(apiResults)
                 _animeDao.insertAll(animeEntities)
-                return animeEntities
+                Log.i("SearchAnimeByTitleAndSave", "Lagret anime-liste fra API")
             }
-            emptyList()
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
-            emptyList()
         } catch (e: Exception) {
-            Log.d("SearchAnimeByTitleAndSaveCatch", e.toString())
-            emptyList()
+            Log.d("SearchApiAnimeByTitleAndSave", e.toString())
         }
     }
     private fun mapToEntity(anime: Anime): AnimeEntity {
