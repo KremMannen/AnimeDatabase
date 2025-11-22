@@ -1,5 +1,8 @@
 package com.example.eksamensapp.data.api
 
+data class ApiResponse(
+    val data: Anime
+)
 data class Anime(
     val mal_id: Int,
     val title: String,

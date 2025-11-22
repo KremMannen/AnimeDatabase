@@ -54,6 +54,7 @@ object AnimeRepository {
             // Check DB first
             var animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
+                Log.i("getAnimeById", "Fant anime i DB")
                 return animeEntity
             }
             // Check API, and save to database if found
@@ -62,6 +63,7 @@ object AnimeRepository {
             // Check DB again
             animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
+                Log.i("getAnimeById", "Fant anime i DB etter API henting")
                 return animeEntity
             }
             return null
@@ -79,10 +81,12 @@ object AnimeRepository {
             // Check DB first
             var animeEntity = _animeDao.getAnimeByTitle(title)
             if (!animeEntity.isEmpty()) {
+                Log.i("getAnimeByTitle", "Fant anime i DB")
                 return animeEntity
             }
             // Check API, and save to database if found
             searchApiAnimeByTitleAndSave(title)
+            Log.i("getAnimeByTitle", "Sjekker API")
 
             // Check DB again
             animeEntity = _animeDao.getAnimeByTitle(title)
@@ -125,9 +129,10 @@ object AnimeRepository {
 
     suspend fun searchApiAnimeByIdAndSave(id: Int) {
         try {
-            val animeEntity = ApiModule.searchAnimeById(id)
-            if (animeEntity != null) {
-                val animeEntity = mapToEntity(animeEntity)
+            val anime = ApiModule.searchAnimeById(id)
+
+            if (anime != null) {
+                val animeEntity = mapToEntity(anime)
                 _animeDao.insertAnime(animeEntity)
                 Log.i("SearchApiAnimeByIdAndSave", "Lagret anime fra API")
             }
@@ -153,6 +158,7 @@ object AnimeRepository {
         }
     }
     private fun mapToEntity(anime: Anime): AnimeEntity {
+
         return AnimeEntity(
             id = anime.mal_id,
             title = anime.title,

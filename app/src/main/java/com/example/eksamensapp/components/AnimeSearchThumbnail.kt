@@ -1,0 +1,61 @@
+package com.example.eksamensapp.components
+
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.eksamensapp.data.database.AnimeEntity
+import com.example.eksamensapp.ui.theme.SelectedBorderColor
+
+@Composable
+fun AnimeSearchThumbnail(
+    anime: AnimeEntity,
+    seeDetails: (() -> Unit)? = null
+) {
+    Card(
+        modifier = Modifier
+            .wrapContentSize(), // Use wrapContentSize to let the image define the size
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, SelectedBorderColor),
+        onClick = {
+            if (seeDetails != null) {
+                seeDetails()
+            }
+        }
+    ) {
+        Box(
+            modifier = Modifier
+                .wrapContentSize() // Ensure the Box also wraps the content size
+        ) {
+            AsyncImage(
+                model = anime.imageUrl,
+                contentDescription = anime.title,
+                modifier = Modifier
+                    .fillMaxWidth(), // Fill the width of the Box/Card
+                contentScale = ContentScale.Crop // Crop to maintain aspect ratio
+            )
+        }
+    }
+}

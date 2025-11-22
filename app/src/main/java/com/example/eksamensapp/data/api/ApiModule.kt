@@ -27,10 +27,20 @@ object ApiModule {
         return try {
             val response = animeService.getAnimeByID(id)
             if (response.isSuccessful) {
-                response.body()
-            } else null
+                val apiResponse = response.body()?.data
+                if (apiResponse != null) {
+                    // Proceed with non-null ApiResponse object
+                    apiResponse
+                } else {
+                    Log.w("SearchAnimeById", "ApiResponse object is null")
+                    null
+                }
+            } else {
+                Log.w("SearchAnimeById", "Response not successful: ${response.code()}")
+                null
+            }
         } catch (e: Exception) {
-            Log.d("SearchAnimeById", e.toString())
+            Log.d("SearchAnimeById", "Exception occurred: ${e.message}")
             null
         }
     }
