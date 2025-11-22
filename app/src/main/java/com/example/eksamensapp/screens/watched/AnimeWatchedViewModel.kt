@@ -25,13 +25,11 @@ class AnimeWatchedViewModel : ViewModel() {
         }
     }
 
-
-
     fun toggleFavorite(animeEntity: AnimeEntity) {
         viewModelScope.launch {
             val updatedAnimeEntity = animeEntity.copy(isFavorite = !animeEntity.isFavorite)
             AnimeRepository.updateAnime(updatedAnimeEntity)
-            refreshAnimes()
+            setAnimesByWatchedStatus()
         }
     }
 
@@ -39,14 +37,6 @@ class AnimeWatchedViewModel : ViewModel() {
     fun filterFavorites() {
         viewModelScope.launch(Dispatchers.IO) {
             _animes.value = AnimeRepository.getAnimeByWatchedStatus().filter { it.isFavorite }
-        }
-    }
-
-    private fun refreshAnimes() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val watchedAnimes = AnimeRepository.getAnimeByWatchedStatus()
-            _animes.value = watchedAnimes
-            _totalWatchedCount.value = watchedAnimes.size
         }
     }
 
