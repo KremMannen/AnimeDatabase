@@ -17,8 +17,8 @@ interface AnimeDao {
     suspend fun getAnimeById(id: Int): AnimeEntity?
 
 
-    @Query("SELECT * FROM AnimeEntity WHERE title= :title")
-    suspend fun getAnimeByTitle(title: String) : List<AnimeEntity>
+    @Query("SELECT * FROM AnimeEntity WHERE title LIKE '%' || :title || '%' COLLATE NOCASE")
+    suspend fun getAnimeByTitle(title: String): List<AnimeEntity>
 
 
     @Query("SELECT * FROM AnimeEntity WHERE haveWatched = 1")
