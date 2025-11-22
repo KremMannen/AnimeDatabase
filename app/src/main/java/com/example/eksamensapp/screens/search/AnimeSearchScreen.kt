@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.eksamensapp.components.AnimeSearchThumbnail
+import com.example.eksamensapp.components.AnimeSearchItem
 import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
@@ -93,7 +93,7 @@ fun AnimeSearchScreen(
                     contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
                 ) {
                     items(results.value) { result ->
-                        AnimeSearchThumbnail(
+                        AnimeSearchItem(
                             anime = result,
                             seeDetails = {
                                 navController.navigate(

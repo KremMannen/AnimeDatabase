@@ -15,7 +15,7 @@ import com.example.eksamensapp.data.database.AnimeEntity
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
 
 @Composable
-fun AnimeSearchThumbnail(
+fun AnimeSearchItem(
     anime: AnimeEntity,
     seeDetails: (() -> Unit)? = null
 ) {
