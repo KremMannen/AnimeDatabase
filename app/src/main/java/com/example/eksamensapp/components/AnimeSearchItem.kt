@@ -57,7 +57,7 @@ fun AnimeSearchItem(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Image on the left
+
             AsyncImage(
                 model = anime.imageUrl,
                 contentDescription = anime.title,
@@ -70,13 +70,13 @@ fun AnimeSearchItem(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Details on the right
+
             Column(
                 modifier = Modifier
                     .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                // Title
+
                 Text(
                     text = anime.title,
                     style = MaterialTheme.typography.titleMedium,
@@ -86,14 +86,14 @@ fun AnimeSearchItem(
                     color = Color.White
                 )
 
-                // Score
+
                 Text(
                     text = "Score: ${anime.score}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White
                 )
 
-                // Genre
+
                 Text(
                     text = anime.genres,
                     style = MaterialTheme.typography.bodySmall,
