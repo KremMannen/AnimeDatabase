@@ -1,7 +1,11 @@
 package com.example.eksamensapp.data.api
 
-data class ApiResponse(
+data class AnimeResponse(
     val data: Anime
+)
+
+data class AnimeListResponse (
+    val data: List<Anime>
 )
 data class Anime(
     val mal_id: Int,

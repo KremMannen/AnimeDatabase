@@ -25,10 +25,10 @@ object ApiModule {
             if (response.isSuccessful) {
                 val apiResponse = response.body()?.data
                 if (apiResponse != null) {
-                    // Proceed with non-null ApiResponse object
+                    // Proceed with non-null AnimeResponse object
                     apiResponse
                 } else {
-                    Log.w("SearchAnimeById", "ApiResponse object is null")
+                    Log.w("SearchAnimeById", "AnimeResponse object is null")
                     null
                 }
             } else {
