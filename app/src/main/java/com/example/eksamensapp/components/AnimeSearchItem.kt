@@ -1,18 +1,34 @@
 package com.example.eksamensapp.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.eksamensapp.data.database.AnimeEntity
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
+import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
 fun AnimeSearchItem(
@@ -21,26 +37,71 @@ fun AnimeSearchItem(
 ) {
     Card(
         modifier = Modifier
-            .wrapContentSize(), // Use wrapContentSize to let the image define the size
+            .fillMaxWidth()
+            .height(140.dp),
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, SelectedBorderColor),
+        colors = CardDefaults.cardColors(
+            containerColor = TransparentRedBackgroundColor
+        ),
         onClick = {
             if (seeDetails != null) {
                 seeDetails()
             }
         }
     ) {
-        Box(
+        Row(
             modifier = Modifier
-                .wrapContentSize() // Ensure the Box also wraps the content size
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            // Image on the left
             AsyncImage(
                 model = anime.imageUrl,
                 contentDescription = anime.title,
                 modifier = Modifier
-                    .fillMaxWidth(), // Fill the width of the Box/Card
-                contentScale = ContentScale.Crop // Crop to maintain aspect ratio
+                    .width(90.dp)
+                    .height(124.dp)
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
             )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            // Details on the right
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                // Title
+                Text(
+                    text = anime.title,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    color = Color.White
+                )
+
+                // Score
+                Text(
+                    text = "Score: ${anime.score}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.White
+                )
+
+                // Genre
+                Text(
+                    text = anime.genres,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.White,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }
