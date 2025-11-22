@@ -17,7 +17,6 @@ class AnimeSearchViewModel : ViewModel() {
 
     fun setSearchedAnime(input: String) {
         val id = input.toIntOrNull()
-
         // Om input er et tall, søk på id
         if (id != null) {
             viewModelScope.launch(Dispatchers.IO) {

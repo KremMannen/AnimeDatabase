@@ -15,8 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeSearchThumbnail
 import com.example.eksamensapp.components.AppHeader
+import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -24,8 +26,9 @@ import com.example.eksamensapp.ui.theme.SelectedButtonColor
 @Composable
 fun AnimeSearchScreen(
     animeSearchViewModel: AnimeSearchViewModel,
+    navController: NavController
 ) {
-    val results by animeSearchViewModel.searchedAnime.collectAsState()
+    val results = animeSearchViewModel.searchedAnime.collectAsState()
 
     var searchText by remember { mutableStateOf("") }
 
@@ -77,7 +80,7 @@ fun AnimeSearchScreen(
                 color = LightGrayBorderColor
             )
 
-            if (results.isEmpty()) {
+            if (results.value.isEmpty()) {
                 // Display a message when there are no results
                 Text(
                     text = "No results found.",
@@ -89,18 +92,17 @@ fun AnimeSearchScreen(
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                     contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
                 ) {
-                    items(results.chunked(2)) { pair ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            AnimeSearchThumbnail(anime = pair[0])
-                            if (pair.size > 1) {
-                                AnimeSearchThumbnail(anime = pair[1])
-                            } else {
-                                Spacer(modifier = Modifier.weight(1f))
+                    items(results.value) { result ->
+                        AnimeSearchThumbnail(
+                            anime = result,
+                            seeDetails = {
+                                navController.navigate(
+                                    NavigationRoutes.AnimeDetailsRoute(
+                                        result.id
+                                    )
+                                )
                             }
-                        }
+                        )
                     }
                 }
             }
