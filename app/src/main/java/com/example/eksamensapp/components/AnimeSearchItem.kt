@@ -82,7 +82,7 @@ fun AnimeSearchItem(
             ) {
 
                 Text(
-                    text = anime.title.uppercase(),
+                    text = anime.title,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     maxLines = 2,
