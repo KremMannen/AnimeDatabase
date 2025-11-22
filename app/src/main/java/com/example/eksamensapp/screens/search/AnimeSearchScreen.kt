@@ -3,9 +3,9 @@ package com.example.eksamensapp.screens.search
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,13 +33,24 @@ fun AnimeSearchScreen(
             value = searchText,
             onValueChange = {
                 searchText = it
-                animeSearchViewModel.setSearchedAnime(it)
             },
             label = { Text("Search by ID", color = Color.White) },
             textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
             modifier = Modifier
                 .fillMaxWidth(0.9f)
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Search button
+        Button(
+            onClick = {
+                animeSearchViewModel.setSearchedAnime(searchText)
+            },
+            modifier = Modifier.fillMaxWidth(0.9f)
+        ) {
+            Text("Search")
+        }
 
         Spacer(modifier = Modifier.height(80.dp))
 

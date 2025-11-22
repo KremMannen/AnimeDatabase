@@ -7,9 +7,9 @@ data class Anime(
     val mal_id: Int,
     val title: String,
     val images: Images,
-    val synopsis: String,
+    val synopsis: String?,
     val score: Double,
-    val year: Int,
+    val year: Int?,
     val episodes: Int,
     val genres: List<Genre>
 )
