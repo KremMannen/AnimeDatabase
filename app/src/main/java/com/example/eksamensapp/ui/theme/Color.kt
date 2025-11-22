@@ -23,6 +23,8 @@ val SelectedButtonColor = Color(0xFF730202)
 
 val LightGrayBorderColor = Color(0xFF515151)
 
+val StarYellow = Color(0xFFFFC300)
+
 
 val DarkRedHeaderColor = Color(0xFF400101)
 val TransparentRedBackgroundColor = DarkRedHeaderColor.copy(alpha = 0.5f)

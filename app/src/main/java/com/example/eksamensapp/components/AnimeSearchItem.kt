@@ -12,8 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.eksamensapp.data.database.AnimeEntity
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
+import com.example.eksamensapp.ui.theme.StarYellow
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
@@ -78,20 +82,30 @@ fun AnimeSearchItem(
             ) {
 
                 Text(
-                    text = anime.title,
+                    text = anime.title.uppercase(),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     color = Color.White
                 )
-
-
-                Text(
-                    text = "Score: ${anime.score}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
+                    Icon(
+                       imageVector = Icons.Filled.Star,
+                        contentDescription = "Score Icon",
+                        tint = StarYellow,
+                        modifier = Modifier
+                            .size(18.dp)
+                    )
+                    Text(
+                        text = "Score: ${anime.score}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White
+                    )
+                }
 
 
                 Text(
