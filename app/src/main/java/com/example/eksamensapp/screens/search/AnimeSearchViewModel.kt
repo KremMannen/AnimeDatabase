@@ -11,11 +11,12 @@ import kotlinx.coroutines.launch
 
 class AnimeSearchViewModel : ViewModel() {
 
-
     private val _searchedAnime = MutableStateFlow<List<AnimeEntity>>(emptyList())
     val searchedAnime = _searchedAnime.asStateFlow()
-
-    fun setSearchedAnime(input: String) {
+    fun setSearchedAnime(anime: List<AnimeEntity>) {
+        _searchedAnime.value = anime
+    }
+    fun handleInput(input: String) {
         val id = input.toIntOrNull()
         // Om input er et tall, søk på id
         if (id != null) {
@@ -26,15 +27,17 @@ class AnimeSearchViewModel : ViewModel() {
             }
         }
         // Ellers søk på title
-        if (id == null && input.isNotBlank()) {viewModelScope.launch(Dispatchers.IO) {
-            _searchedAnime.value = AnimeRepository.getAnimeByTitle(input)
-        }}
-
+        if (id == null && input.isNotBlank()) {
+            viewModelScope.launch(Dispatchers.IO) {
+                setSearchedAnime(AnimeRepository.getAnimeByTitle(input))
+            }
+        }
     }
 
     fun showAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            _searchedAnime.value = AnimeRepository.getAllAnime()
+            val searchedAnime = AnimeRepository.getAllAnime()
+            setSearchedAnime(searchedAnime)
         }
     }
 

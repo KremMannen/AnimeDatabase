@@ -59,7 +59,7 @@ fun AnimeSearchScreen(
             // Search button
             Button(
                 onClick = {
-                    animeSearchViewModel.setSearchedAnime(searchText)
+                    animeSearchViewModel.handleInput(searchText)
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
