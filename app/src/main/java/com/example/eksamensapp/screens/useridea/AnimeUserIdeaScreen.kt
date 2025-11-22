@@ -51,6 +51,10 @@ fun AnimeUserIdeaScreen(
 ) {
     val userIdeas = animeUserIdeaViewModel.userIdeas.collectAsState()
 
+    LaunchedEffect(Unit) {
+        animeUserIdeaViewModel.showAll()
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         AppHeader("Anime idèer")
 
