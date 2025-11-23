@@ -14,7 +14,7 @@ interface UserIdeaDao {
     @Query("SELECT * FROM UserIdeaEntity WHERE id = :id")
     suspend fun getIdeaById(id: Int): UserIdeaEntity?
 
-    @Query("SELECT * FROM UserIdeaEntity WHERE title= :title")
+    @Query("SELECT * FROM UserIdeaEntity WHERE title LIKE '%' || :title || '%' COLLATE NOCASE")
     suspend fun getIdeaByTitle(title: String) : UserIdeaEntity?
 
     @Query("DELETE FROM UserIdeaEntity WHERE id= :id")

@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.DeleteUserIdeaItem
 import com.example.eksamensapp.components.DetailsAppHeader
+import com.example.eksamensapp.components.SearchIdeasItem
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -97,59 +98,18 @@ fun DeleteIdeaScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value = searchText,
-                onValueChange = {
-                    searchText = it
-                },
-                label = { Text("Søk etter ID eller Tittel", color = Color.White) },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-            )
-
-            Button(
-                onClick = {
-                    deleteIdeaViewModel.handleInput(searchText)
-                },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRedHeaderColor,
-                    contentColor = Color.White
-                ),
-                border = BorderStroke(1.dp, SelectedButtonColor),
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .padding(16.dp)
-            ) {
-                Text("Søk")
-            }
-
-            HorizontalDivider(
-                thickness = 3.dp,
-                color = LightGrayBorderColor
-            )
-
-            if (results.value.isEmpty()) {
-                // Display a message when there are no results
-                Text(
-                    text = "No results found.",
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-            } else {
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
-                ) {
-                    items(results.value) { result ->
-                        DeleteUserIdeaItem(
-                            userIdea = result,
-                            deleteIdeaViewModel = deleteIdeaViewModel
-                        )
-                    }
+            SearchIdeasItem(
+                searchText = searchText,
+                onSearchTextChange = { searchText = it },
+                onSearchClick = { deleteIdeaViewModel.handleInput(searchText) },
+                results = results.value,
+                itemContent = { userIdea ->
+                    DeleteUserIdeaItem(
+                        userIdea = userIdea,
+                        deleteIdeaViewModel = deleteIdeaViewModel
+                    )
                 }
-            }
+            )
         }
     }
 }

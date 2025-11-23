@@ -57,6 +57,9 @@ import com.example.eksamensapp.screens.useridea.addidea.AddIdeaScreen
 import com.example.eksamensapp.screens.useridea.addidea.AddIdeaViewModel
 import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaScreen
 import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
+import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaScreen
+import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
+import com.example.eksamensapp.screens.useridea.updateidea.editidea.EditIdeaScreen
 import com.example.eksamensapp.ui.theme.AppBackgroundColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
 import com.example.eksamensapp.ui.theme.SelectedBackgroundColor
@@ -77,7 +80,8 @@ fun AppNavigation(
     animeUserIdeaViewModel: AnimeUserIdeaViewModel,
     animeWatchedViewModel: AnimeWatchedViewModel,
     addIdeaViewModel: AddIdeaViewModel,
-    deleteIdeaViewModel: DeleteIdeaViewModel
+    deleteIdeaViewModel: DeleteIdeaViewModel,
+    updateIdeaViewModel: UpdateIdeaViewModel
     ) {
 
     val navController = rememberNavController()
@@ -392,6 +396,15 @@ fun AppNavigation(
                     )
                 }
 
+                composable<NavigationRoutes.EditIdea> {backStackEntry ->
+                    val args = backStackEntry.toRoute<NavigationRoutes.EditIdea>()
+                    EditIdeaScreen(
+                        updateIdeaViewModel,
+                        navController,
+                        args.id
+                    )
+                }
+
                 composable <NavigationRoutes.Search> {
                     AnimeSearchScreen(animeSearchViewModel, navController)
                 }
@@ -410,6 +423,10 @@ fun AppNavigation(
 
                 composable < NavigationRoutes.DeleteIdea> {
                     DeleteIdeaScreen(deleteIdeaViewModel, navController)
+                }
+
+                composable < NavigationRoutes.UpdateIdea> {
+                    UpdateIdeaScreen(updateIdeaViewModel, navController)
                 }
             }
         }

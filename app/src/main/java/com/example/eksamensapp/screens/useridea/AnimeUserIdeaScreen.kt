@@ -154,7 +154,7 @@ fun AnimeUserIdeaScreen(
                             .fillMaxWidth(),
                         onClick = {
                             navController.navigate(
-                                NavigationRoutes.DeleteIdea
+                                NavigationRoutes.UpdateIdea
                             )
                         },
                         colors = ButtonDefaults.buttonColors(

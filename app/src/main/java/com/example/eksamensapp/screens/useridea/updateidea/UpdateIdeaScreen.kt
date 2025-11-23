@@ -28,8 +28,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeSearchItem
 import com.example.eksamensapp.components.AppHeader
+import com.example.eksamensapp.components.DeleteUserIdeaItem
 import com.example.eksamensapp.components.DetailsAppHeader
 import com.example.eksamensapp.components.GenreSelectionItem
+import com.example.eksamensapp.components.SearchIdeasItem
+import com.example.eksamensapp.components.UpdateUserIdeaItem
 import com.example.eksamensapp.data.database.UserIdeaDbRepository
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.navigation.NavigationRoutes
@@ -47,37 +50,29 @@ fun UpdateIdeaScreen(
     updateIdeaViewModel: UpdateIdeaViewModel,
     navController: NavController
 ) {
-    var title by remember { mutableStateOf("") }
-    var synopsis by remember { mutableStateOf("") }
-    var selectedGenres by remember { mutableStateOf(setOf<String>()) }
+    val results = updateIdeaViewModel.searchedIdea.collectAsState()
 
-    fun handleUpdateIdea() {
-        if (title.isBlank() || synopsis.isBlank() || selectedGenres.isEmpty()) {
-            return
-        }
-        val idea = UserIdeaEntity(
-            title = title,
-            synopsis = synopsis,
-            genres = selectedGenres.joinToString(", ")
-        )
+    var searchText by remember { mutableStateOf("") }
 
-        updateIdeaViewModel.handleUpdateIdea(idea)
-        title = ""
-        synopsis = ""
-        selectedGenres = emptySet()
+    // Uten denne vil popbackstack kallet til EditIdeaScreen
+    // returnere til denne filen, og søkelisten viser en utdatert liste
+    LaunchedEffect(Unit) {
+        updateIdeaViewModel.showAll()
     }
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        DetailsAppHeader("Anime idèer", onBackClick = { navController.popBackStack() })
 
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        DetailsAppHeader(
+            title = "Oppdater idé",
+            onBackClick = { navController.popBackStack() }
+        )
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -94,7 +89,7 @@ fun UpdateIdeaScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Opprett eget anime konsept!",
+                            text = "Oppdater Anime-konsept",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
@@ -102,95 +97,30 @@ fun UpdateIdeaScreen(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
-                            text = "Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.",
+                            text = "Her får du full oversikt over dine idéer og muligheten til å oppdatere dem",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
                             textAlign = TextAlign.Center,
-
                         )
                     }
                 }
             }
-
             Spacer(modifier = Modifier.height(16.dp))
 
-            TextField(
-                value = title,
-                onValueChange = {
-                    title = it
-                },
-                label = { Text("Tittel...", color = Color.DarkGray) },
-                textStyle = TextStyle(color = Color.Black),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.LightGray,
-                    disabledContainerColor = Color.Gray,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(
-                        width = 1.dp,
-                        color = SelectedButtonColor,
-                        )
-            )
-
-            TextField(
-                value = synopsis,
-                onValueChange = {
-                    synopsis = it
-                },
-                label = { Text("Synopsis...", color = Color.DarkGray) },
-                textStyle = TextStyle(color = Color.DarkGray),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.LightGray,
-                    disabledContainerColor = Color.Gray,
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-                    .border(
-                        width = 1.dp,
-                        color = SelectedButtonColor,
+            SearchIdeasItem(
+                searchText = searchText,
+                onSearchTextChange = { searchText = it },
+                onSearchClick = { updateIdeaViewModel.handleInput(searchText) },
+                results = results.value,
+                itemContent = { userIdea ->
+                    UpdateUserIdeaItem(
+                        userIdea,
+                        updateIdeaViewModel,
+                        navController
                     )
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-
-            GenreSelectionItem(
-                selectedGenres = selectedGenres,
-                onGenresChanged = { newGenres ->
-                    selectedGenres = newGenres
                 }
             )
-
-            HorizontalDivider(
-                thickness = 3.dp,
-                color = LightGrayBorderColor,
-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
-            )
-
-            Button(
-                onClick = {
-                    handleUpdateIdea()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRedHeaderColor
-                ),
-                shape = RoundedCornerShape(10.dp),
-                border = BorderStroke(1.dp, SelectedBorderColor),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(76.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 16.dp)
-            ) {
-                Text(
-                    text = "Legg til Anime Idè",
-                    fontSize = 20.sp)
-            }
         }
     }
 }

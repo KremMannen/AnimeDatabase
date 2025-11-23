@@ -41,6 +41,7 @@ class DeleteIdeaViewModel : ViewModel() {
                 _searchedIdea.value = userIdea?.let { listOf(it) } ?: emptyList()
             }
         }
+
         // Ellers søk på title
         if (id == null && input.isNotBlank()) {
             viewModelScope.launch(Dispatchers.IO) {
