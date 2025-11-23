@@ -49,10 +49,39 @@ fun AddIdeaScreen(
     var synopsis by remember { mutableStateOf("") }
     var selectedGenres by remember { mutableStateOf(setOf<String>()) }
 
+    var titleError by remember { mutableStateOf<String?>(null) }
+    var synopsisError by remember { mutableStateOf<String?>(null) }
+    var genresError by remember { mutableStateOf<String?>(null) }
 
+    fun validateFields(): Boolean {
+        var isValid = true
+
+        if (title.isBlank()) {
+            titleError = "Vennligst fyll inn tittel"
+            isValid = false
+        } else {
+            titleError = null
+        }
+
+        if (synopsis.isBlank()) {
+            synopsisError = "Vennligst fyll inn synopsis"
+            isValid = false
+        } else {
+            synopsisError = null
+        }
+
+        if (selectedGenres.isEmpty()) {
+            genresError = "Vennligst velg minst én sjanger"
+            isValid = false
+        } else {
+            genresError = null
+        }
+
+        return isValid
+    }
 
     fun handleAddIdea() {
-        if (title.isBlank() || synopsis.isBlank() || selectedGenres.isEmpty()) {
+        if (!validateFields()) {
             return
         }
 
@@ -122,7 +151,10 @@ fun AddIdeaScreen(
                 onValueChange = {
                     title = it
                 },
-                label = { Text("Tittel...", color = Color.DarkGray) },
+                label = { Text(
+                    titleError ?: "Tittel...",
+                    color = if (titleError != null) Color.Red else Color.DarkGray
+                )  },
                 textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
@@ -142,7 +174,10 @@ fun AddIdeaScreen(
                 onValueChange = {
                     synopsis = it
                 },
-                label = { Text("Synopsis...", color = Color.DarkGray) },
+                label = { Text(
+                    synopsisError ?: "Synopsis...",
+                    color = if (synopsisError != null) Color.Red else Color.DarkGray
+                )  },
                 textStyle = androidx.compose.ui.text.TextStyle(color = Color.DarkGray),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
@@ -160,14 +195,24 @@ fun AddIdeaScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            GenreSelectionItem(
-                selectedGenres = selectedGenres,
-                onGenresChanged = { newGenres ->
-                    selectedGenres = newGenres
+            Column {
+                GenreSelectionItem(
+                    selectedGenres = selectedGenres,
+                    onGenresChanged = { newGenres ->
+                        selectedGenres = newGenres
+                        if (newGenres.isNotEmpty()) genresError = null
+                    }
+                )
+
+                if (genresError != null) {
+                    Text(
+                        text = genresError!!,
+                        color = Color.Red,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(start = 4.dp, top = 4.dp)
+                    )
                 }
-            )
-
-
+            }
 
             HorizontalDivider(
                 thickness = 3.dp,
