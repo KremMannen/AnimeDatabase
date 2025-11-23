@@ -17,6 +17,11 @@ class AnimeSearchViewModel : ViewModel() {
         _searchedAnime.value = anime
     }
     fun handleInput(input: String) {
+        if (input.isBlank()) {
+            showAll()
+            return
+        }
+
         val id = input.toIntOrNull()
         // Om input er et tall, søk på id
         if (id != null) {
