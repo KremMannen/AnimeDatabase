@@ -1,4 +1,4 @@
-package com.example.eksamensapp.screens.useridea.addidea
+package com.example.eksamensapp.screens.useridea.updateidea
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -20,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaDbRepository
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.navigation.NavigationRoutes
+import com.example.eksamensapp.screens.useridea.addidea.AddIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkGreyTransparent
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
@@ -41,33 +43,29 @@ import com.example.eksamensapp.ui.theme.SelectedButtonColor
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
 @Composable
-fun AddIdeaScreen(
-    addIdeaViewModel: AddIdeaViewModel,
+fun UpdateIdeaScreen(
+    updateIdeaViewModel: UpdateIdeaViewModel,
     navController: NavController
 ) {
     var title by remember { mutableStateOf("") }
     var synopsis by remember { mutableStateOf("") }
     var selectedGenres by remember { mutableStateOf(setOf<String>()) }
 
-
-
-    fun handleAddIdea() {
+    fun handleUpdateIdea() {
         if (title.isBlank() || synopsis.isBlank() || selectedGenres.isEmpty()) {
             return
         }
-
         val idea = UserIdeaEntity(
             title = title,
             synopsis = synopsis,
             genres = selectedGenres.joinToString(", ")
         )
 
-        addIdeaViewModel.handleAddIdea(idea)
+        updateIdeaViewModel.handleUpdateIdea(idea)
         title = ""
         synopsis = ""
         selectedGenres = emptySet()
     }
-
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -123,7 +121,7 @@ fun AddIdeaScreen(
                     title = it
                 },
                 label = { Text("Tittel...", color = Color.DarkGray) },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
+                textStyle = TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -143,7 +141,7 @@ fun AddIdeaScreen(
                     synopsis = it
                 },
                 label = { Text("Synopsis...", color = Color.DarkGray) },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.DarkGray),
+                textStyle = TextStyle(color = Color.DarkGray),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -160,14 +158,13 @@ fun AddIdeaScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+
             GenreSelectionItem(
                 selectedGenres = selectedGenres,
                 onGenresChanged = { newGenres ->
                     selectedGenres = newGenres
                 }
             )
-
-
 
             HorizontalDivider(
                 thickness = 3.dp,
@@ -177,7 +174,7 @@ fun AddIdeaScreen(
 
             Button(
                 onClick = {
-                    handleAddIdea()
+                    handleUpdateIdea()
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = DarkRedHeaderColor
