@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.DeleteUserIdeaItem
-import com.example.eksamensapp.components.DetailsAppHeader
+import com.example.eksamensapp.components.AppHeaderItem
 import com.example.eksamensapp.components.SearchIdeasItem
 import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
@@ -48,7 +48,7 @@ fun DeleteIdeaScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        DetailsAppHeader(
+        AppHeaderItem(
             title = "Slett idé",
             onBackClick = { navController.popBackStack() }
         )

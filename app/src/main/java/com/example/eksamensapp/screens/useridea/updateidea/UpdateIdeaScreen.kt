@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.eksamensapp.components.DetailsAppHeader
+import com.example.eksamensapp.components.AppHeaderItem
 import com.example.eksamensapp.components.SearchIdeasItem
 import com.example.eksamensapp.components.UpdateUserIdeaItem
 import com.example.eksamensapp.ui.theme.DarkRed
@@ -48,7 +48,7 @@ fun UpdateIdeaScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        DetailsAppHeader(
+        AppHeaderItem(
             title = "Oppdater idé",
             onBackClick = { navController.popBackStack() }
         )

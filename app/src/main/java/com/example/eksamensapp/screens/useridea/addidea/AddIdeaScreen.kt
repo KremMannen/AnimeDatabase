@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.eksamensapp.components.DetailsAppHeader
+import com.example.eksamensapp.components.AppHeaderItem
 import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.ui.theme.DarkRed
@@ -100,7 +100,7 @@ fun AddIdeaScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        DetailsAppHeader("Anime idèer", onBackClick = { navController.popBackStack() })
+        AppHeaderItem("Anime idèer", onBackClick = { navController.popBackStack() })
 
         Column(
             modifier = Modifier

@@ -26,9 +26,10 @@ import com.example.eksamensapp.ui.theme.DarkRed
 
 
 @Composable
-fun DetailsAppHeader(
+fun AppHeaderItem(
     title: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    fontSize: Int = 32
 ) {
     Box(
         modifier = Modifier
@@ -56,7 +57,7 @@ fun DetailsAppHeader(
             Text(
                 text = title,
                 color = Color.White,
-                fontSize = 32.sp,
+                fontSize = fontSize.sp,
                 lineHeight = 36.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier

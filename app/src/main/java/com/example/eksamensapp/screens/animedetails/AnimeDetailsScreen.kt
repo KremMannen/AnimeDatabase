@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeDetailsItem
-import com.example.eksamensapp.components.DetailsAppHeader
+import com.example.eksamensapp.components.AppHeaderItem
 
 @Composable
 fun AnimeDetailsScreen(
@@ -30,14 +30,10 @@ fun AnimeDetailsScreen(
     ) {
         var title = anime.value?.title ?: ""
 
-        //Skal ikke være mulig for en Anime i databasen å ikke ha tittel, men har failsafe likevel.
-        if (title.isEmpty()) {
-            title = "No Title Found"
-        }
-
-        DetailsAppHeader(
+        AppHeaderItem(
             title = title,
-            onBackClick = { navController.popBackStack() }
+            onBackClick = { navController.popBackStack() },
+            fontSize = if (title.length > 25) 20 else 32 // 32 er standard
         )
 
         LazyColumn(
