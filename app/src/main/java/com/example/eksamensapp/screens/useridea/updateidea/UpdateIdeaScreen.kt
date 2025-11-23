@@ -54,8 +54,6 @@ fun UpdateIdeaScreen(
 
     var searchText by remember { mutableStateOf("") }
 
-    // Uten denne vil popbackstack kallet til EditIdeaScreen
-    // returnere til denne filen, og søkelisten viser en utdatert liste
     LaunchedEffect(Unit) {
         updateIdeaViewModel.showAll()
     }
