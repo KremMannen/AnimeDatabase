@@ -51,6 +51,7 @@ import com.example.eksamensapp.screens.watched.AnimeWatchedViewModel
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
+import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
 @Composable
 fun AnimeUserIdeaScreen(
@@ -124,7 +125,7 @@ fun AnimeUserIdeaScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding( top = 8.dp, bottom = 8.dp)
+                        .padding( top = 8.dp, bottom = 16.dp)
                 ) {
                     Button(
                         modifier = Modifier

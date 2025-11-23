@@ -3,6 +3,7 @@ package com.example.eksamensapp.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.eksamensapp.data.database.UserIdeaEntity
+import com.example.eksamensapp.ui.theme.DarkGrayCardColor
 import com.example.eksamensapp.ui.theme.DarkGreyTransparent
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
@@ -32,7 +34,7 @@ fun UserIdeaItem(
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         colors = CardDefaults.cardColors(
-            containerColor = DarkGreyTransparent
+            containerColor = DarkGrayCardColor
         ),
         onClick = {
             onClick?.invoke()
@@ -44,6 +46,11 @@ fun UserIdeaItem(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
             // Title
             Text(
                 text = userIdea.title,
@@ -51,6 +58,13 @@ fun UserIdeaItem(
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
+                Text(
+                    text = userIdea.id.toString(),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = Color.White,
+                )
+
+            }
 
             // Genres
             Text(

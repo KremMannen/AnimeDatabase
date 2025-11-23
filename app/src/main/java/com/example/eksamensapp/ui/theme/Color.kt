@@ -24,6 +24,8 @@ val LightGrayBorderColor = Color(0xFF515151)
 
 val DarkGreyTransparent = Color(0x803A3A3A)
 
+val DarkGrayCardColor = Color(0xFF1A1A1A)
+
 val StarYellow = Color(0xFFFFC300)
 
 
