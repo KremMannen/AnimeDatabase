@@ -2,7 +2,6 @@ package com.example.eksamensapp.screens.useridea.deleteidea
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,16 +13,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,11 +34,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.eksamensapp.components.AnimeSearchItem
 import com.example.eksamensapp.components.DeleteUserIdeaItem
 import com.example.eksamensapp.components.DetailsAppHeader
-import com.example.eksamensapp.components.UserIdeaItem
-import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -112,6 +108,23 @@ fun DeleteIdeaScreen(
                     .fillMaxWidth(0.9f)
                     .padding(bottom = 16.dp)
             )
+
+            Button(
+                onClick = {
+                    deleteIdeaViewModel.handleInput(searchText)
+                },
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = DarkRedHeaderColor,
+                    contentColor = Color.White
+                ),
+                border = BorderStroke(1.dp, SelectedButtonColor),
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(16.dp)
+            ) {
+                Text("Søk")
+            }
 
             HorizontalDivider(
                 thickness = 3.dp,
