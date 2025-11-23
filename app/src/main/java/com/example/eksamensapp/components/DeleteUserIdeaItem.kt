@@ -91,8 +91,8 @@ fun DeleteUserIdeaItem(
             Button(
                 modifier = Modifier
                     .padding(top = 8.dp)
-                    .fillMaxWidth(0.8f)
-                    .height(56.dp),
+                    .fillMaxWidth()
+                    .height(40.dp),
                 onClick = {
                     deleteIdeaViewModel.handleDeleteIdea(userIdea.id)
                 },
@@ -104,7 +104,7 @@ fun DeleteUserIdeaItem(
                 border = BorderStroke(1.dp, Color.Red)
             ) {
                 Text(
-                    text = "Lag anime idé",
+                    text = "Slett",
                     fontSize = 16.sp)
             }
         }
