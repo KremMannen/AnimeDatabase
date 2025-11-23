@@ -2,6 +2,7 @@ package com.example.eksamensapp.screens.useridea.addidea
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -33,6 +34,8 @@ import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkGreyTransparent
 import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
+import com.example.eksamensapp.ui.theme.RedBackgroundColor
+import com.example.eksamensapp.ui.theme.SelectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
@@ -74,7 +77,7 @@ fun AddIdeaScreen(
 
         Column(
             modifier = Modifier
-                .padding(12.dp),
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -82,8 +85,7 @@ fun AddIdeaScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(12.dp)
-                    .height(150.dp),
+                    .height(125.dp),
                 border = BorderStroke(1.dp, LightGrayBorderColor)
             ) {
                 Box(
@@ -100,19 +102,22 @@ fun AddIdeaScreen(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
-                            modifier = Modifier.padding(top = 16.dp)
                         )
+                        Spacer(modifier = Modifier.height(8.dp))
+
                         Text(
                             text = "Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.",
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(16.dp)
+
                         )
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             TextField(
                 value = title,
@@ -126,7 +131,12 @@ fun AddIdeaScreen(
                     unfocusedContainerColor = Color.LightGray,
                     disabledContainerColor = Color.Gray,
                 ),
-                modifier = Modifier.fillMaxWidth(0.9f)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(
+                        width = 1.dp,
+                        color = SelectedButtonColor,
+                        )
             )
 
             TextField(
@@ -142,11 +152,18 @@ fun AddIdeaScreen(
                     disabledContainerColor = Color.Gray,
                 ),
                 modifier = Modifier
-                    .fillMaxWidth(0.9f)
+                    .fillMaxWidth()
                     .height(120.dp)
+                    .border(
+                        width = 1.dp,
+                        color = SelectedButtonColor,
+                    )
             )
 
-            Column(modifier = Modifier.fillMaxWidth(0.9f)) {
+            Spacer(modifier = Modifier.height(8.dp))
+
+
+            Column(modifier = Modifier.fillMaxWidth()) {
                 Text("Velg sjangre:", color = Color.White, modifier = Modifier.padding(bottom = 8.dp))
 
                 FlowRow(
@@ -178,26 +195,28 @@ fun AddIdeaScreen(
             HorizontalDivider(
                 thickness = 3.dp,
                 color = LightGrayBorderColor,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
             )
-        }
 
-
-        Button(
-            onClick = {
-                handleAddIdea()
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = DarkRedHeaderColor
-            ),
-            shape = RoundedCornerShape(10.dp),
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .height(56.dp)
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 16.dp)
-        ) {
-            Text("Legg til Anime Idè")
+            Button(
+                onClick = {
+                    handleAddIdea()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = DarkRedHeaderColor
+                ),
+                shape = RoundedCornerShape(10.dp),
+                border = BorderStroke(1.dp, SelectedBorderColor),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(76.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 16.dp)
+            ) {
+                Text(
+                    text = "Legg til Anime Idè",
+                    fontSize = 20.sp)
+            }
         }
     }
 }
