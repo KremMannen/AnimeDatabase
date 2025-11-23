@@ -36,6 +36,7 @@ import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.components.UserIdeaItem
 import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
@@ -97,7 +98,7 @@ fun AnimeUserIdeaScreen(
                         )
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = DarkRed,
+                        containerColor = DarkerRed,
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(10.dp),
@@ -122,7 +123,7 @@ fun AnimeUserIdeaScreen(
                             )
                         },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = DarkRed,
+                            containerColor = DarkerRed,
                             contentColor = Color.White
                         ),
                         shape = RoundedCornerShape(10.dp),
@@ -144,7 +145,7 @@ fun AnimeUserIdeaScreen(
                             )
                         },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = DarkRed,
+                            containerColor = DarkerRed,
                             contentColor = Color.White
                         ),
                         shape = RoundedCornerShape(10.dp),

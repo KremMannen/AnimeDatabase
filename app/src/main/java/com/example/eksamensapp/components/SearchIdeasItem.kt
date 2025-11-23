@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
@@ -61,7 +62,7 @@ fun SearchIdeasItem(
             onClick = onSearchClick,
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = DarkRed,
+                containerColor = DarkerRed,
                 contentColor = Color.White
             ),
             border = BorderStroke(1.dp, SelectedButtonColor),

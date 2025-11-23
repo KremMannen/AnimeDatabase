@@ -33,6 +33,7 @@ import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -191,7 +192,7 @@ fun EditIdeaScreen(
                     handleUpdateIdea()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRed
+                    containerColor = DarkerRed
                 ),
                 shape = RoundedCornerShape(10.dp),
                 border = BorderStroke(1.dp, SelectedBorderColor),

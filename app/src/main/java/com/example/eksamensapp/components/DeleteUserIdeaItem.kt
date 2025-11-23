@@ -25,6 +25,7 @@ import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
 @Composable
@@ -98,7 +99,7 @@ fun DeleteUserIdeaItem(
                     deleteIdeaViewModel.handleDeleteIdea(userIdea.id)
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRed,
+                    containerColor = DarkerRed,
                     contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(10.dp),

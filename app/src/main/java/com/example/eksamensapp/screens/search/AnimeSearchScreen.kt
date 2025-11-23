@@ -30,6 +30,7 @@ import com.example.eksamensapp.components.AnimeSearchItem
 import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
@@ -73,7 +74,7 @@ fun AnimeSearchScreen(
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRed,
+                    containerColor = DarkerRed,
                     contentColor = Color.White
                 ),
                 border = BorderStroke(1.dp, SelectedButtonColor),
@@ -91,7 +92,6 @@ fun AnimeSearchScreen(
             )
 
             if (results.value.isEmpty()) {
-                // Display a message when there are no results
                 Text(
                     text = "No results found.",
                     color = Color.White,

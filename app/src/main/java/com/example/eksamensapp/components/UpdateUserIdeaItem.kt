@@ -27,6 +27,7 @@ import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
 @Composable
@@ -101,7 +102,7 @@ fun UpdateUserIdeaItem(
                     )
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRed,
+                    containerColor = DarkerRed,
                     contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(10.dp),
