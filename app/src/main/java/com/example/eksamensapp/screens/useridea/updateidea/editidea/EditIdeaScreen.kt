@@ -1,14 +1,13 @@
 package com.example.eksamensapp.screens.useridea.updateidea.editidea
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
+
 import androidx.compose.material3.HorizontalDivider
 
 import androidx.compose.material3.Text
@@ -19,8 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -49,9 +47,39 @@ fun EditIdeaScreen(
     var synopsis by remember { mutableStateOf("") }
     var selectedGenres by remember { mutableStateOf(setOf<String>()) }
 
+    var titleError by remember { mutableStateOf<String?>(null) }
+    var synopsisError by remember { mutableStateOf<String?>(null) }
+    var genresError by remember { mutableStateOf<String?>(null) }
+
+    fun validateFields(): Boolean {
+        var isValid = true
+
+        if (title.isBlank()) {
+            titleError = "Vennligst fyll inn tittel"
+            isValid = false
+        } else {
+            titleError = null
+        }
+
+        if (synopsis.isBlank()) {
+            synopsisError = "Vennligst fyll inn synopsis"
+            isValid = false
+        } else {
+            synopsisError = null
+        }
+
+        if (selectedGenres.isEmpty()) {
+            genresError = "Vennligst velg minst én sjanger"
+            isValid = false
+        } else {
+            genresError = null
+        }
+
+        return isValid
+    }
+
     fun handleUpdateIdea() {
-        if (title.isBlank() || synopsis.isBlank() || selectedGenres.isEmpty() || id == null) {
-            // TODO: introduce function that gives user feedback
+        if (!validateFields()) {
             return
         }
         val idea = UserIdeaEntity(
@@ -88,7 +116,10 @@ fun EditIdeaScreen(
                 onValueChange = {
                     title = it
                 },
-                label = { Text("Tittel...", color = Color.DarkGray) },
+                label = { Text(
+                    titleError ?: "Tittel...",
+                    color = if (titleError != null) Color.Red else Color.DarkGray
+                )  },
                 textStyle = TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
@@ -108,7 +139,10 @@ fun EditIdeaScreen(
                 onValueChange = {
                     synopsis = it
                 },
-                label = { Text("Synopsis...", color = Color.DarkGray) },
+                label = { Text(
+                    synopsisError ?: "Synopsis...",
+                    color = if (synopsisError != null) Color.Red else Color.DarkGray
+                )  },
                 textStyle = TextStyle(color = Color.DarkGray),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
@@ -126,13 +160,24 @@ fun EditIdeaScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            Column {
+                GenreSelectionItem(
+                    selectedGenres = selectedGenres,
+                    onGenresChanged = { newGenres ->
+                        selectedGenres = newGenres
+                        if (newGenres.isNotEmpty()) genresError = null
+                    }
+                )
 
-            GenreSelectionItem(
-                selectedGenres = selectedGenres,
-                onGenresChanged = { newGenres ->
-                    selectedGenres = newGenres
+                if (genresError != null) {
+                    Text(
+                        text = genresError!!,
+                        color = Color.Red,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(start = 4.dp, top = 4.dp)
+                    )
                 }
-            )
+            }
 
             HorizontalDivider(
                 thickness = 3.dp,
