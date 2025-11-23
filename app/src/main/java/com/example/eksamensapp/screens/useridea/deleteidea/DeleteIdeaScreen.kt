@@ -106,7 +106,6 @@ fun DeleteIdeaScreen(
                 textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(bottom = 16.dp)
             )
 
             Button(
