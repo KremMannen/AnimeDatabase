@@ -15,6 +15,9 @@ sealed class NavigationRoutes {
     object UserIdea : NavigationRoutes()
 
     @Serializable
+    object AddIdea : NavigationRoutes()
+
+    @Serializable
     object Watched : NavigationRoutes()
 
     @Serializable

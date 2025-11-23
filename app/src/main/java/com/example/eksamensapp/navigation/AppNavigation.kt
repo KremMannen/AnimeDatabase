@@ -53,6 +53,8 @@ import com.example.eksamensapp.screens.search.AnimeSearchScreen
 import com.example.eksamensapp.screens.search.AnimeSearchViewModel
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaScreen
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
+import com.example.eksamensapp.screens.useridea.addidea.AddIdeaScreen
+import com.example.eksamensapp.screens.useridea.addidea.AddIdeaViewModel
 import com.example.eksamensapp.ui.theme.AppBackgroundColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
 import com.example.eksamensapp.ui.theme.SelectedBackgroundColor
@@ -71,19 +73,34 @@ fun AppNavigation(
     animeDetailsViewModel: AnimeDetailsViewModel,
     animeSearchViewModel: AnimeSearchViewModel,
     animeUserIdeaViewModel: AnimeUserIdeaViewModel,
-    animeWatchedViewModel: AnimeWatchedViewModel
+    animeWatchedViewModel: AnimeWatchedViewModel,
+    addIdeaViewModel: AddIdeaViewModel
     ) {
 
     val navController = rememberNavController()
-
     var selectedItemIndex by rememberSaveable {
         mutableIntStateOf(1)
     }
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val shouldShowBottomBar = currentRoute?.startsWith("com.example.eksamensapp.navigation.NavigationRoutes.AnimeDetailsRoute") == false
 
+    fun shouldShowBottomBar(currentRoute: String?): Boolean {
+        val hiddenRoutes = listOf(
+            "com.example.eksamensapp.navigation.NavigationRoutes.AnimeDetailsRoute",
+            "com.example.eksamensapp.navigation.NavigationRoutes.AddIdea"
+        )
+
+        if (currentRoute == null) return true
+
+        for (hiddenRoute in hiddenRoutes) {
+            if (currentRoute.startsWith(hiddenRoute)) {
+                return false
+            }
+        }
+        return true
+    }
+
+    val showBottomBar = shouldShowBottomBar(currentRoute)
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -91,7 +108,7 @@ fun AppNavigation(
 
         bottomBar = {
             AnimatedVisibility(
-                visible = shouldShowBottomBar,
+                visible = showBottomBar,
                 enter = slideInVertically(initialOffsetY = { it }),
                 exit = slideOutVertically(targetOffsetY = { it })
             ) {
@@ -376,11 +393,15 @@ fun AppNavigation(
                 }
 
                 composable <NavigationRoutes.UserIdea> {
-                    AnimeUserIdeaScreen(animeUserIdeaViewModel)
+                    AnimeUserIdeaScreen(animeUserIdeaViewModel, navController)
                 }
 
                 composable <NavigationRoutes.Watched> {
                     AnimeWatchedScreen(animeWatchedViewModel, navController)
+                }
+
+                composable < NavigationRoutes.AddIdea> {
+                    AddIdeaScreen(addIdeaViewModel, navController)
                 }
             }
         }

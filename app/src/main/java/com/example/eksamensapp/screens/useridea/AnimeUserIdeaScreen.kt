@@ -15,6 +15,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -47,7 +49,8 @@ import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
 @Composable
 fun AnimeUserIdeaScreen(
-    animeUserIdeaViewModel: AnimeUserIdeaViewModel
+    animeUserIdeaViewModel: AnimeUserIdeaViewModel,
+    navController: NavController
 ) {
     val userIdeas = animeUserIdeaViewModel.userIdeas.collectAsState()
 
@@ -73,9 +76,22 @@ fun AnimeUserIdeaScreen(
                     .padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+                Button(
+                    onClick = {
+                        navController.navigate(
+                            NavigationRoutes.AddIdea)
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = DarkRedHeaderColor
+                    ),
+                    shape = RoundedCornerShape(20.dp)
+                ) {
+                    Text("Lag anime ide")
+                }
+            }
 
             }
-        }
+
 
         HorizontalDivider(
             modifier = Modifier.padding(horizontal = 16.dp),
