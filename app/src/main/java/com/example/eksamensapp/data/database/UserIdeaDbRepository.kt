@@ -47,7 +47,13 @@ object UserIdeaDbRepository {
 
     suspend fun getUserIdeaByTitle(title: String) : UserIdeaEntity? {
          try {
-             return _userIdeaDao.getIdeaByTitle(title)
+             var userIdeaEntityList = _userIdeaDao.getIdeaByTitle(title)
+
+             if (userIdeaEntityList != null) {
+                 Log.i("getAnimeByTitle", "Fant anime i DB")
+                 return userIdeaEntityList
+             }
+             return null
         } catch (e: Exception) {
             Log.d("getAnimeByTitleCatch", e.toString())
             return null
