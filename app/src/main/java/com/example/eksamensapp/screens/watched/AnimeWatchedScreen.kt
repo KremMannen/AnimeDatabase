@@ -40,7 +40,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.eksamensapp.components.AnimeFavoriteItem
 import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.navigation.NavigationRoutes
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
 
@@ -68,7 +68,7 @@ fun AnimeWatchedScreen(
                 .padding(16.dp)
                 .height(50.dp),
             border = BorderStroke(1.dp, LightGrayBorderColor),
-            colors = CardDefaults.cardColors(containerColor = DarkRedHeaderColor),
+            colors = CardDefaults.cardColors(containerColor = DarkRed),
             shape = RoundedCornerShape(5.dp)
         ) {
             Row(

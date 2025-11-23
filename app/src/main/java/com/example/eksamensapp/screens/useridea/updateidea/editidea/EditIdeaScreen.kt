@@ -2,37 +2,38 @@ package com.example.eksamensapp.screens.useridea.updateidea.editidea
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
-
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-
 import androidx.compose.material3.HorizontalDivider
-
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
 import com.example.eksamensapp.components.DetailsAppHeader
 import com.example.eksamensapp.components.GenreSelectionItem
-
 import com.example.eksamensapp.data.database.UserIdeaEntity
-
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
-
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
-
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
@@ -190,7 +191,7 @@ fun EditIdeaScreen(
                     handleUpdateIdea()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRedHeaderColor
+                    containerColor = DarkRed
                 ),
                 shape = RoundedCornerShape(10.dp),
                 border = BorderStroke(1.dp, SelectedBorderColor),

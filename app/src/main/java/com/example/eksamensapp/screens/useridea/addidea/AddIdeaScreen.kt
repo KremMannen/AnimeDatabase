@@ -35,7 +35,7 @@ import androidx.navigation.NavController
 import com.example.eksamensapp.components.DetailsAppHeader
 import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaEntity
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -118,7 +118,7 @@ fun AddIdeaScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(DarkRedHeaderColor),
+                        .background(DarkRed),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(
@@ -225,7 +225,7 @@ fun AddIdeaScreen(
                     handleAddIdea()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRedHeaderColor
+                    containerColor = DarkRed
                 ),
                 shape = RoundedCornerShape(10.dp),
                 border = BorderStroke(1.dp, SelectedBorderColor),

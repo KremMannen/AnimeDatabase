@@ -45,8 +45,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsScreen
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
-import com.example.eksamensapp.screens.watched.AnimeWatchedScreen
-import com.example.eksamensapp.screens.watched.AnimeWatchedViewModel
 import com.example.eksamensapp.screens.home.AnimeHomeScreen
 import com.example.eksamensapp.screens.home.AnimeHomeViewModel
 import com.example.eksamensapp.screens.search.AnimeSearchScreen
@@ -60,13 +58,15 @@ import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaScreen
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
 import com.example.eksamensapp.screens.useridea.updateidea.editidea.EditIdeaScreen
+import com.example.eksamensapp.screens.watched.AnimeWatchedScreen
+import com.example.eksamensapp.screens.watched.AnimeWatchedViewModel
 import com.example.eksamensapp.ui.theme.AppBackgroundColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
 import com.example.eksamensapp.ui.theme.SelectedBackgroundColor
-import com.example.eksamensapp.ui.theme.UnselectedBackgroundColor
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
-import com.example.eksamensapp.ui.theme.UnselectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedTextColor
+import com.example.eksamensapp.ui.theme.UnselectedBackgroundColor
+import com.example.eksamensapp.ui.theme.UnselectedBorderColor
 import com.example.eksamensapp.ui.theme.UnselectedTextColor
 
 private val boxShape = RoundedCornerShape(16.dp)

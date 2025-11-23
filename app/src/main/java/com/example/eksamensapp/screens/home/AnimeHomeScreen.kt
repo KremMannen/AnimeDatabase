@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,7 +28,7 @@ import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeCardItem
 import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.navigation.NavigationRoutes
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
 
@@ -55,7 +54,7 @@ fun AnimeHomeScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(DarkRedHeaderColor),
+                    .background(DarkRed),
                 contentAlignment = Alignment.Center
             ) {
                 Column(

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 
 
 @Composable
@@ -34,7 +34,7 @@ fun DetailsAppHeader(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .background(DarkRedHeaderColor),
+            .background(DarkRed),
         contentAlignment = Alignment.Center
     ) {
         Row(

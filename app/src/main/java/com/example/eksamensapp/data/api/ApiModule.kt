@@ -1,12 +1,10 @@
 package com.example.eksamensapp.data.api
 
 import android.util.Log
-import com.example.eksamensapp.data.database.AnimeEntity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.sql.SQLException
 
 object ApiModule {
     private val _httpClient = OkHttpClient.Builder()

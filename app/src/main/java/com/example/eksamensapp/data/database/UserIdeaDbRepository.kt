@@ -3,7 +3,6 @@ package com.example.eksamensapp.data.database
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
-import java.lang.Exception
 import java.sql.SQLException
 
 object UserIdeaDbRepository {

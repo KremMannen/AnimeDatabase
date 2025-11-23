@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import com.example.eksamensapp.components.DetailsAppHeader
 import com.example.eksamensapp.components.SearchIdeasItem
 import com.example.eksamensapp.components.UpdateUserIdeaItem
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
 @Composable
@@ -67,7 +67,7 @@ fun UpdateIdeaScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(DarkRedHeaderColor),
+                        .background(DarkRed),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(

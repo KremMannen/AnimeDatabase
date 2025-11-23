@@ -2,7 +2,9 @@ package com.example.eksamensapp.components
 
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.eksamensapp.ui.theme.DarkRedHeaderColor
+import com.example.eksamensapp.ui.theme.DarkRed
 
 
 @Composable
@@ -21,7 +23,7 @@ fun AppHeader(title: String) {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .background(DarkRedHeaderColor),
+            .background(DarkRed),
         contentAlignment = Alignment.Center
     ) {
         Text(

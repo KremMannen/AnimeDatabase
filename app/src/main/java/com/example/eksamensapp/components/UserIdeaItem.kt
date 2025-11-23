@@ -19,8 +19,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
-import com.example.eksamensapp.ui.theme.DarkGreyTransparent
-import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 
 @Composable
 fun UserIdeaItem(

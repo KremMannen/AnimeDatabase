@@ -1,10 +1,8 @@
 package com.example.eksamensapp.screens.animedetails
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -13,9 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeDetailsItem
-import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.components.DetailsAppHeader
-import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
 
 @Composable
 fun AnimeDetailsScreen(

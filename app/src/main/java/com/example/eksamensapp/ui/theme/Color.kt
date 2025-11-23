@@ -29,7 +29,7 @@ val DarkGrayCardColor = Color(0xFF1A1A1A)
 val StarYellow = Color(0xFFFFC300)
 
 
-val DarkRedHeaderColor = Color(0xFF400101)
-val TransparentRedBackgroundColor = DarkRedHeaderColor.copy(alpha = 0.5f)
+val DarkRed = Color(0xFF400101)
+val TransparentRedBackgroundColor = DarkRed.copy(alpha = 0.5f)
 val RedBackgroundColor = Color(0xFF590303)
 
