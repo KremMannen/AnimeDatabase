@@ -17,13 +17,6 @@ class AnimeDetailsViewModel : ViewModel() {
             _animeEntity.value = AnimeRepository.getAnimeById(id)
         }
     }
-
-    fun updateAnime(animeEntity: AnimeEntity) {
-        viewModelScope.launch {
-            AnimeRepository.updateAnime(animeEntity)
-        }
-    }
-
     fun toggleWatched(animeEntity: AnimeEntity) {
         viewModelScope.launch {
             val updatedAnimeEntity = animeEntity.copy(haveWatched = !animeEntity.haveWatched)
