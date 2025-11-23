@@ -77,11 +77,7 @@ fun AnimeDetailsItem(
                             .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     onClick = {
-                        if (currentAnime.haveWatched) {
-                            animeDetailsViewModel.markAsUnwatched(currentAnime)
-                        } else {
-                            animeDetailsViewModel.markAsWatched(currentAnime)
-                        }
+                        animeDetailsViewModel.toggleWatched(currentAnime)
                     },
                     colors = if (currentAnime.haveWatched) {
                         ButtonDefaults.buttonColors(

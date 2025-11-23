@@ -24,18 +24,12 @@ class AnimeDetailsViewModel : ViewModel() {
         }
     }
 
-
-    fun markAsWatched(animeEntity: AnimeEntity) {
+    fun toggleWatched(animeEntity: AnimeEntity) {
         viewModelScope.launch {
-            AnimeRepository.updateAnime(animeEntity.copy(haveWatched = true))
+            val updatedAnimeEntity = animeEntity.copy(haveWatched = !animeEntity.haveWatched)
+            AnimeRepository.updateAnime(updatedAnimeEntity)
             setAnime(animeEntity.id)
         }
     }
 
-    fun markAsUnwatched(animeEntity: AnimeEntity) {
-        viewModelScope.launch {
-            AnimeRepository.updateAnime(animeEntity.copy(haveWatched = false))
-            setAnime(animeEntity.id)
-        }
-    }
 }
