@@ -55,6 +55,8 @@ import com.example.eksamensapp.screens.useridea.AnimeUserIdeaScreen
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
 import com.example.eksamensapp.screens.useridea.addidea.AddIdeaScreen
 import com.example.eksamensapp.screens.useridea.addidea.AddIdeaViewModel
+import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaScreen
+import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
 import com.example.eksamensapp.ui.theme.AppBackgroundColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
 import com.example.eksamensapp.ui.theme.SelectedBackgroundColor
@@ -74,7 +76,8 @@ fun AppNavigation(
     animeSearchViewModel: AnimeSearchViewModel,
     animeUserIdeaViewModel: AnimeUserIdeaViewModel,
     animeWatchedViewModel: AnimeWatchedViewModel,
-    addIdeaViewModel: AddIdeaViewModel
+    addIdeaViewModel: AddIdeaViewModel,
+    deleteIdeaViewModel: DeleteIdeaViewModel
     ) {
 
     val navController = rememberNavController()
@@ -87,7 +90,8 @@ fun AppNavigation(
     fun shouldShowBottomBar(currentRoute: String?): Boolean {
         val hiddenRoutes = listOf(
             "com.example.eksamensapp.navigation.NavigationRoutes.AnimeDetailsRoute",
-            "com.example.eksamensapp.navigation.NavigationRoutes.AddIdea"
+            "com.example.eksamensapp.navigation.NavigationRoutes.AddIdea",
+            "com.example.eksamensapp.navigation.NavigationRoutes.DeleteIdea"
         )
 
         if (currentRoute == null) return true
@@ -402,6 +406,10 @@ fun AppNavigation(
 
                 composable < NavigationRoutes.AddIdea> {
                     AddIdeaScreen(addIdeaViewModel, navController)
+                }
+
+                composable < NavigationRoutes.DeleteIdea> {
+                    DeleteIdeaScreen(deleteIdeaViewModel, navController)
                 }
             }
         }

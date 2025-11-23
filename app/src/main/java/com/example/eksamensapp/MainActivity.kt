@@ -21,6 +21,7 @@ import com.example.eksamensapp.screens.home.AnimeHomeViewModel
 import com.example.eksamensapp.screens.search.AnimeSearchViewModel
 import com.example.eksamensapp.screens.useridea.AnimeUserIdeaViewModel
 import com.example.eksamensapp.screens.useridea.addidea.AddIdeaViewModel
+import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
 import com.example.eksamensapp.screens.watched.AnimeWatchedViewModel
 import com.example.eksamensapp.ui.theme.EksamensAppTheme
 
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
     private val _animeUserIdeaViewModel: AnimeUserIdeaViewModel by viewModels()
     private val _animeWatchedViewModel : AnimeWatchedViewModel by viewModels()
     private val _editIdeaViewModel : AddIdeaViewModel by viewModels()
+    private val _deleteIdeaViewModel : DeleteIdeaViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +52,8 @@ class MainActivity : ComponentActivity() {
                     _animeSearchViewModel,
                     _animeUserIdeaViewModel,
                     _animeWatchedViewModel,
-                    _editIdeaViewModel
+                    _editIdeaViewModel,
+                    _deleteIdeaViewModel
                     )
                 }
             }

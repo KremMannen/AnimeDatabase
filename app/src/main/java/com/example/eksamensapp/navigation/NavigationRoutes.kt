@@ -18,6 +18,8 @@ sealed class NavigationRoutes {
     object AddIdea : NavigationRoutes()
 
     @Serializable
+    object DeleteIdea : NavigationRoutes()
+    @Serializable
     object Watched : NavigationRoutes()
 
     @Serializable
