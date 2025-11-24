@@ -36,6 +36,7 @@ import com.example.eksamensapp.components.AppHeaderItem
 import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.ui.theme.DarkRed
+import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -127,7 +128,7 @@ fun AddIdeaScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(DarkRed),
+                        .background(DarkerRed),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(

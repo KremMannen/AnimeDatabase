@@ -38,7 +38,6 @@ fun UpdateIdeaScreen(
     navController: NavController
 ) {
     val results = updateIdeaViewModel.searchedIdea.collectAsState()
-    val userIdea by remember { mutableStateOf(updateIdeaViewModel.searchedIdea.value) }
 
 
 

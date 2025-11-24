@@ -13,8 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,11 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeSearchItem
 import com.example.eksamensapp.components.AppHeader
 import com.example.eksamensapp.navigation.NavigationRoutes
-import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
@@ -40,6 +40,7 @@ fun AnimeSearchScreen(
     navController: NavController
 ) {
     val results = animeSearchViewModel.searchedAnime.collectAsState()
+    val isLoading = animeSearchViewModel.isLoading.collectAsState()
 
     var searchText by remember { mutableStateOf("") }
 
@@ -55,19 +56,19 @@ fun AnimeSearchScreen(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Søkefelt
-            OutlinedTextField(
+
+            TextField(
                 value = searchText,
                 onValueChange = {
                     searchText = it
                 },
-                label = { Text("Søk etter ID eller Tittel", color = Color.White) },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
+                label = { Text("Søk etter ID eller Tittel", color = Color.DarkGray) },
+                textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
             )
 
-            // Search button
+
             Button(
                 onClick = {
                     animeSearchViewModel.handleInput(searchText)
@@ -91,28 +92,60 @@ fun AnimeSearchScreen(
                 color = LightGrayBorderColor
             )
 
-            if (results.value.isEmpty()) {
-                Text(
-                    text = "No results found.",
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-            } else {
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
-                ) {
-                    items(results.value) { result ->
-                        AnimeSearchItem(
-                            anime = result,
-                            seeDetails = {
-                                navController.navigate(
-                                    NavigationRoutes.AnimeDetailsRoute(
-                                        result.id
-                                    )
-                                )
-                            }
+            when {
+                isLoading.value -> {
+                    Text(
+                        // Teknisk sett vises denne også ved søk i databasen, men database søk er så raske at
+                        // bruker ser meldingen kun når den søker i API
+                        text = "Ingen treff funnet i database, søker i API...",
+                        color = Color.White,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 16.dp),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                }
+                results.value.isEmpty() -> {
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = "Ingen resultater funnet.",
+                            color = Color.White
                         )
+                        Text(
+                            text = "SQL søk: ${animeSearchViewModel.sqlError.value ?: "OK"}",
+                            color = if (animeSearchViewModel.sqlError.collectAsState().value != null) Color.Red else Color.Green,
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = "API søk: ${animeSearchViewModel.apiError.value ?: "OK"}",
+                            color = if (animeSearchViewModel.apiError.collectAsState().value != null) Color.Red else Color.Green,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+                else -> {
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp)
+                    ) {
+                        items(results.value) { result ->
+                            AnimeSearchItem(
+                                anime = result,
+                                seeDetails = {
+                                    navController.navigate(
+                                        NavigationRoutes.AnimeDetailsRoute(
+                                            result.id
+                                        )
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
             }
