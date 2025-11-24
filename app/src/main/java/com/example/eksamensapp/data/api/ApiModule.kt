@@ -35,7 +35,7 @@ object ApiModule {
             }
         } catch (e: Exception) {
             Log.d("SearchAnimeById", "Exception occurred: ${e.message}")
-            null
+            throw e
         }
     }
     suspend fun searchAnimeByTitle(title: String): List<Anime> {
@@ -46,7 +46,7 @@ object ApiModule {
             } else emptyList()
         } catch (e: Exception) {
             Log.d("SearchAnimeByTitleCatch", e.toString())
-            emptyList()
+            throw e
         }
     }
     suspend fun getAllAnime() : List<Anime> {

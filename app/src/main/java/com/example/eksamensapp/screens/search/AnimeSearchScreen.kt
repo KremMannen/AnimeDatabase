@@ -118,12 +118,12 @@ fun AnimeSearchScreen(
                             color = Color.White
                         )
                         Text(
-                            text = "SQL søk: ${animeSearchViewModel.sqlError.value ?: "OK"}",
+                            text = "Database status: ${animeSearchViewModel.sqlError.value ?: "OK"}",
                             color = if (animeSearchViewModel.sqlError.collectAsState().value != null) Color.Red else Color.Green,
                             fontSize = 14.sp
                         )
                         Text(
-                            text = "API søk: ${animeSearchViewModel.apiError.value ?: "OK"}",
+                            text = "API status: ${animeSearchViewModel.apiError.value ?: "OK"}",
                             color = if (animeSearchViewModel.apiError.collectAsState().value != null) Color.Red else Color.Green,
                             fontSize = 14.sp
                         )

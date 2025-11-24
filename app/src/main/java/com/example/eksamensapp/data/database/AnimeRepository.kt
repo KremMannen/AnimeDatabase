@@ -67,12 +67,12 @@ object AnimeRepository {
                 return animeEntity
             }
             return null
-        } catch (e: java.lang.Exception) {
-            Log.d("getUserIdeaByIdCatch", e.toString())
-            return null
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
-            return null
+            throw e
+        } catch (e: Exception) {
+            Log.d("getAnimeByTitle", e.toString())
+            throw e
         }
     }
 
@@ -93,12 +93,12 @@ object AnimeRepository {
                 return animeEntityList
             }
             return emptyList()
-        } catch (e: java.lang.Exception) {
-            Log.d("getUserIdeaByIdCatch", e.toString())
-            return emptyList()
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
-            return emptyList()
+            throw e
+        } catch (e: Exception) {
+            Log.d("getAnimeByTitle", e.toString())
+            throw e
         }
     }
 
@@ -163,8 +163,10 @@ object AnimeRepository {
             }
         } catch (e: SQLException) {
             Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
+            throw e
         } catch (e: Exception) {
             Log.d("SearchApiAnimeByTitleAndSave", e.toString())
+            throw e
         }
     }
     private fun mapToEntity(anime: Anime): AnimeEntity {

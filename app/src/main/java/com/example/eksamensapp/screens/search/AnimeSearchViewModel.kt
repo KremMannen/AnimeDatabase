@@ -1,5 +1,6 @@
 package com.example.eksamensapp.screens.search
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eksamensapp.data.database.AnimeEntity
@@ -8,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.sql.SQLException
 
 class AnimeSearchViewModel : ViewModel() {
 
@@ -44,10 +46,13 @@ class AnimeSearchViewModel : ViewModel() {
                 try {
                     val anime = AnimeRepository.getAnimeById(id)
                     _searchedAnime.value = anime?.let { listOf(it) } ?: emptyList()
-                } catch (e: Exception) {
+                } catch (e: SQLException) {
                     _sqlError.value = e.message ?: "Unknown error"
                     _searchedAnime.value = emptyList()
-                } finally {
+                } catch (e: Exception) {
+                    _apiError.value = e.message ?: "Unknown error"
+                    _searchedAnime.value = emptyList()
+                }  finally {
                     _isLoading.value = false
                 }
             }
@@ -58,7 +63,15 @@ class AnimeSearchViewModel : ViewModel() {
                 _isLoading.value = true
                 try {
                     setSearchedAnime(AnimeRepository.getAnimeByTitle(input))
-                } finally {
+                }
+                catch (e: SQLException) {
+                    _sqlError.value = e.message ?: "Unknown error"
+                    _searchedAnime.value = emptyList()
+                } catch (e: Exception) {
+                    _apiError.value = e.message ?: "Unknown error"
+                    _searchedAnime.value = emptyList()
+                }
+                finally {
                     _isLoading.value = false
                 }
             }
