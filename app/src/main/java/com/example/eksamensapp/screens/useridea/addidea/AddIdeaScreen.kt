@@ -53,6 +53,11 @@ fun AddIdeaScreen(
     var synopsisError by remember { mutableStateOf<String?>(null) }
     var genresError by remember { mutableStateOf<String?>(null) }
 
+    var pageTitle by remember { mutableStateOf<String>("Opprett anime-konsept") }
+    var pageText by remember { mutableStateOf<String>("Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.") }
+
+
+
     fun validateFields(): Boolean {
         var isValid = true
 
@@ -92,9 +97,13 @@ fun AddIdeaScreen(
         )
 
         addIdeaViewModel.handleAddIdea(idea)
+
         title = ""
         synopsis = ""
         selectedGenres = emptySet()
+        pageTitle = "Idea successfully added!"
+        pageText = ""
+
     }
 
     Column(
@@ -125,7 +134,7 @@ fun AddIdeaScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "Opprett eget anime konsept!",
+                            text = pageTitle,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
@@ -133,7 +142,7 @@ fun AddIdeaScreen(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
-                            text = "Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.",
+                            text = pageText,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,

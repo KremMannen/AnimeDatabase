@@ -17,6 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,18 +33,18 @@ import com.example.eksamensapp.ui.theme.SelectedButtonColor
 
 @Composable
 fun SearchIdeasItem(
-    searchText: String,
-    onSearchTextChange: (String) -> Unit,
-    onSearchClick: () -> Unit,
+    onSearchClick: (String) -> Unit,
     results: List<UserIdeaEntity>,
     itemContent: @Composable (UserIdeaEntity) -> Unit
 ) {
+    var searchText by remember { mutableStateOf("") }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextField(
             value = searchText,
-            onValueChange = onSearchTextChange,
+            onValueChange = {searchText = it},
             label = { Text("Søk etter ID eller Tittel", color = Color.DarkGray) },
             textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
             colors = TextFieldDefaults.colors(
@@ -59,7 +63,7 @@ fun SearchIdeasItem(
         )
 
         Button(
-            onClick = onSearchClick,
+            onClick = { onSearchClick(searchText) },
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = DarkerRed,

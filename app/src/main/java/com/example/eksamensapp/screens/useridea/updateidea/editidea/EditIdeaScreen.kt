@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,6 +53,8 @@ fun EditIdeaScreen(
     var titleError by remember { mutableStateOf<String?>(null) }
     var synopsisError by remember { mutableStateOf<String?>(null) }
     var genresError by remember { mutableStateOf<String?>(null) }
+
+    var userIdeaEntity by remember { mutableStateOf<UserIdeaEntity?>(null) }
 
     fun validateFields(): Boolean {
         var isValid = true
@@ -97,10 +100,24 @@ fun EditIdeaScreen(
         selectedGenres = emptySet()
         navController.popBackStack()
     }
+
+
+    LaunchedEffect(Unit) {
+        // Fyller feltene med infoen til idèen som redigeres
+        userIdeaEntity = updateIdeaViewModel.getUserById(id)
+        title = userIdeaEntity?.title ?: ""
+        synopsis = userIdeaEntity?.synopsis ?: ""
+        selectedGenres = userIdeaEntity?.genres?.split(", ")?.toSet() ?: emptySet()
+
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AppHeaderItem("Anime idèer", onBackClick = { navController.popBackStack() })
+        AppHeaderItem(
+            "Oppdater idè",
+            onBackClick = { navController.popBackStack() }
+        )
 
         Column(
             modifier = Modifier
@@ -108,11 +125,6 @@ fun EditIdeaScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-
-
-
-
-
             TextField(
                 value = title,
                 onValueChange = {
@@ -145,7 +157,7 @@ fun EditIdeaScreen(
                     synopsisError ?: "Synopsis...",
                     color = if (synopsisError != null) Color.Red else Color.DarkGray
                 )  },
-                textStyle = TextStyle(color = Color.DarkGray),
+                textStyle = TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,

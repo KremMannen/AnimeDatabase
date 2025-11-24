@@ -38,8 +38,9 @@ fun UpdateIdeaScreen(
     navController: NavController
 ) {
     val results = updateIdeaViewModel.searchedIdea.collectAsState()
+    val userIdea by remember { mutableStateOf(updateIdeaViewModel.searchedIdea.value) }
 
-    var searchText by remember { mutableStateOf("") }
+
 
     LaunchedEffect(Unit) {
         updateIdeaViewModel.showAll()
@@ -94,16 +95,12 @@ fun UpdateIdeaScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             SearchIdeasItem(
-                searchText = searchText,
-                onSearchTextChange = { searchText = it },
-                onSearchClick = { updateIdeaViewModel.handleInput(searchText) },
+                onSearchClick = { searchText ->
+                    updateIdeaViewModel.handleInput(searchText)
+                },
                 results = results.value,
                 itemContent = { userIdea ->
-                    UpdateUserIdeaItem(
-                        userIdea,
-                        updateIdeaViewModel,
-                        navController
-                    )
+                    UpdateUserIdeaItem(userIdea, updateIdeaViewModel, navController)
                 }
             )
         }

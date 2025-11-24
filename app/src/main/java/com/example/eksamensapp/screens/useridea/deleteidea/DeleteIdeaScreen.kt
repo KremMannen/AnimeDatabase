@@ -39,8 +39,6 @@ fun DeleteIdeaScreen(
 ) {
     val results = deleteIdeaViewModel.searchedIdea.collectAsState()
 
-    var searchText by remember { mutableStateOf("") }
-
     LaunchedEffect(Unit) {
         deleteIdeaViewModel.showAll()
     }
@@ -94,9 +92,8 @@ fun DeleteIdeaScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             SearchIdeasItem(
-                searchText = searchText,
-                onSearchTextChange = { searchText = it },
-                onSearchClick = { deleteIdeaViewModel.handleInput(searchText) },
+                onSearchClick = { searchText ->
+                    deleteIdeaViewModel.handleInput(searchText) },
                 results = results.value,
                 itemContent = { userIdea ->
                     DeleteUserIdeaItem(

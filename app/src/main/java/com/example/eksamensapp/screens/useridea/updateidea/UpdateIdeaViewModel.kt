@@ -26,6 +26,10 @@ class UpdateIdeaViewModel : ViewModel() {
         }
     }
 
+    suspend fun getUserById(id: Int): UserIdeaEntity? {
+            return UserIdeaDbRepository.getUserIdeaById(id)
+    }
+
     fun handleInput(input: String) {
         if (input.isBlank()) {
             showAll()
