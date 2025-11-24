@@ -26,7 +26,6 @@ import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.navigation.NavigationRoutes
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
-import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 

@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.screens.useridea.deleteidea.DeleteIdeaViewModel
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
-import com.example.eksamensapp.ui.theme.DarkRed
 import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 

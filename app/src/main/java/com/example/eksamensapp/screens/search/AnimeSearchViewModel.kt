@@ -1,6 +1,5 @@
 package com.example.eksamensapp.screens.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.eksamensapp.data.database.AnimeEntity
