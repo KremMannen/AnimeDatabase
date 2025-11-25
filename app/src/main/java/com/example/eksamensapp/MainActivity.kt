@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
     private val _animeSearchViewModel : AnimeSearchViewModel by viewModels()
     private val _animeUserIdeaViewModel: AnimeUserIdeaViewModel by viewModels()
     private val _animeWatchedViewModel : AnimeWatchedViewModel by viewModels()
-    private val _editIdeaViewModel : AddIdeaViewModel by viewModels()
+    private val _addIdeaViewModel : AddIdeaViewModel by viewModels()
     private val _deleteIdeaViewModel : DeleteIdeaViewModel by viewModels()
 
     private val _updateIdeaViewModel : UpdateIdeaViewModel by viewModels()
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     _animeSearchViewModel,
                     _animeUserIdeaViewModel,
                     _animeWatchedViewModel,
-                    _editIdeaViewModel,
+                    _addIdeaViewModel,
                     _deleteIdeaViewModel,
                     _updateIdeaViewModel
                     )
