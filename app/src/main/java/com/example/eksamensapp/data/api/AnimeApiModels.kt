@@ -12,7 +12,7 @@ data class Anime(
     val title: String,
     val images: Images,
     val synopsis: String?,
-    val score: Double,
+    val score: Double? = 0.0,
     val year: Int?,
     val episodes: Int,
     val genres: List<Genre>

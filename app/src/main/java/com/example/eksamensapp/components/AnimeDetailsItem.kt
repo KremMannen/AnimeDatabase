@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -54,7 +55,6 @@ fun AnimeDetailsItem(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .border(1.dp, LightGrayBorderColor, shape = RoundedCornerShape(16.dp))
                 .background(TransparentRedBackgroundColor, shape = RoundedCornerShape(16.dp))
                 .padding(12.dp)
@@ -64,6 +64,7 @@ fun AnimeDetailsItem(
                 contentDescription = currentAnime.title,
                 modifier = Modifier
                     .height(200.dp)
+                    .widthIn(max = 140.dp) // unreleased animes har mye bredere bilde, denne begrenser hvor bredt et bilde kan være
                     .align(Alignment.CenterVertically),
                 contentScale = ContentScale.FillHeight
             )
@@ -75,8 +76,10 @@ fun AnimeDetailsItem(
                 verticalArrangement = Arrangement.Bottom
 
             ) {
-
-                Text(text = "Year: ${currentAnime.year}", color = Color.White)
+                Text(
+                    text = "Year: ${if (currentAnime.year == 0) "Unreleased" else currentAnime.year}",
+                    color = Color.White
+                )
                 Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)

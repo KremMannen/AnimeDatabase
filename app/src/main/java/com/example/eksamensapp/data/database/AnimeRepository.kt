@@ -189,7 +189,7 @@ object AnimeRepository {
             title = anime.title,
             imageUrl = anime.images.jpg.large_image_url,
             synopsis = anime.synopsis?: "No synopsis available",
-            score = anime.score,
+            score = anime.score?: 0.0,
             year = anime.year?: 0,
             episodes = anime.episodes,
             genres = anime.genres.joinToString(", ") { it.name },
