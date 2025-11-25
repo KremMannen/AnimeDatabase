@@ -89,20 +89,28 @@ fun AnimeDetailsItem(
                 if (currentAnime.year != 0) {
                     Button(
                         modifier = Modifier
-                            .padding(top = 16.dp)
+                            .padding(top = 8.dp)
                             .fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp),
                         onClick = {
                             animeDetailsViewModel.toggleWatched(currentAnime)
                         },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (currentAnime.haveWatched) SelectedButtonColor else DarkerRed,
-                            contentColor = Color.White
-                        ),
-                        border = BorderStroke(
-                            width = 1.dp,
-                            color = if (currentAnime.haveWatched) SelectedBorderColor else RedBackgroundColor
-                        )
+                        colors = if (currentAnime.haveWatched) {
+                            ButtonDefaults.buttonColors(
+                                containerColor = SelectedButtonColor,
+                                contentColor = Color.White
+                            )
+                        } else {
+                            ButtonDefaults.buttonColors(
+                                containerColor = DarkerRed,
+                                contentColor = Color.White
+                            )
+                        },
+                        border = if (currentAnime.haveWatched) {
+                            BorderStroke(1.dp, SelectedBorderColor)
+                        } else {
+                            BorderStroke(1.dp, RedBackgroundColor)
+                        }
                     ) {
                         if (currentAnime.haveWatched) {
                             Icon(
