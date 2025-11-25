@@ -18,7 +18,6 @@ object AnimeRepository {
             klass = AppDatabase::class.java,
             name = "anime-database"
         )
-            .addMigrations(MIGRATION_2_3)
             .build()
     }
 
