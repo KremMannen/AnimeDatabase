@@ -84,43 +84,46 @@ fun AnimeDetailsItem(
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)
 
-                Button(
-                    modifier = Modifier
+                if (currentAnime.year != 0) {
+                    Button(
+                        modifier = Modifier
                             .padding(top = 8.dp)
                             .fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    onClick = {
-                        animeDetailsViewModel.toggleWatched(currentAnime)
-                    },
-                    colors = if (currentAnime.haveWatched) {
-                        ButtonDefaults.buttonColors(
-                            containerColor = SelectedButtonColor,
-                            contentColor = Color.White
-                        )
-                    } else {
-                        ButtonDefaults.buttonColors(
-                            containerColor = DarkerRed,
-                            contentColor = Color.White
-                        )
-                    },
-                    border = if (currentAnime.haveWatched) {
-                        BorderStroke(1.dp, SelectedBorderColor)
-                    } else {
-                        BorderStroke(1.dp, RedBackgroundColor)
-                    },
-                ) {
-                    if (currentAnime.haveWatched) {
-                        Icon(
-                            imageVector = Icons.Filled.CheckCircle,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Sett")
-                    } else {
-                        Text(text = "Merk som sett")
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = {
+                            animeDetailsViewModel.toggleWatched(currentAnime)
+                        },
+                        colors = if (currentAnime.haveWatched) {
+                            ButtonDefaults.buttonColors(
+                                containerColor = SelectedButtonColor,
+                                contentColor = Color.White
+                            )
+                        } else {
+                            ButtonDefaults.buttonColors(
+                                containerColor = DarkerRed,
+                                contentColor = Color.White
+                            )
+                        },
+                        border = if (currentAnime.haveWatched) {
+                            BorderStroke(1.dp, SelectedBorderColor)
+                        } else {
+                            BorderStroke(1.dp, RedBackgroundColor)
+                        },
+                    ) {
+                        if (currentAnime.haveWatched) {
+                            Icon(
+                                imageVector = Icons.Filled.CheckCircle,
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(text = "Sett")
+                        } else {
+                            Text(text = "Merk som sett")
+                        }
                     }
                 }
+
             }
         }
 
