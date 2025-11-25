@@ -15,7 +15,8 @@ data class Anime(
     val score: Double? = 0.0,
     val year: Int?,
     val episodes: Int,
-    val genres: List<Genre>
+    val genres: List<Genre>,
+    val type: String
 )
 
 data class Images(

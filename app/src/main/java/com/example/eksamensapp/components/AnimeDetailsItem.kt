@@ -82,7 +82,10 @@ fun AnimeDetailsItem(
                     text = "Year: ${if (currentAnime.year == 0) "Unreleased" else currentAnime.year}",
                     color = Color.White
                 )
-                Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
+                Text(text = "Type: ${currentAnime.type}", color = Color.White)
+                if (currentAnime.type == "TV") {
+                    Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
+                }
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)
 

@@ -18,6 +18,7 @@ object AnimeRepository {
             klass = AppDatabase::class.java,
             name = "anime-database"
         )
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
 
@@ -183,6 +184,7 @@ object AnimeRepository {
         Log.d("MapToEntity", "episodes: ${anime.episodes}")
         Log.d("MapToEntity", "genres: ${anime.genres}")
         Log.d("MapToEntity", "genres size: ${anime.genres.size}")
+        Log.d("MapToEntity", "Anime type: ${anime.type}")
 
         return AnimeEntity(
             id = anime.mal_id,
@@ -193,6 +195,7 @@ object AnimeRepository {
             year = anime.year?: 0,
             episodes = anime.episodes,
             genres = anime.genres.joinToString(", ") { it.name },
+            type = anime.type,
             haveWatched = false,
             isFavorite = false
         )

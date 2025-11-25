@@ -14,6 +14,7 @@ data class AnimeEntity (
     val year: Int,
     val episodes: Int,
     val genres: String,
+    val type: String,
     val haveWatched: Boolean = false,
     val isFavorite: Boolean = false,
     )
