@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,6 +48,10 @@ fun AnimeSearchScreen(
     val apiError = animeSearchViewModel.apiError.collectAsState()
 
     var searchText by remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        animeSearchViewModel.showAll()
+    }
 
     Column(
         modifier = Modifier

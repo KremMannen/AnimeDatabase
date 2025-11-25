@@ -84,8 +84,4 @@ class AnimeSearchViewModel : ViewModel() {
         }
     }
 
-    init {
-        showAll()
-    }
-
 }
