@@ -15,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -41,6 +43,8 @@ fun AnimeSearchScreen(
 ) {
     val results = animeSearchViewModel.searchedAnime.collectAsState()
     val isLoading = animeSearchViewModel.isLoading.collectAsState()
+    val sqlError = animeSearchViewModel.sqlError.collectAsState()
+    val apiError = animeSearchViewModel.apiError.collectAsState()
 
     var searchText by remember { mutableStateOf("") }
 
@@ -63,7 +67,10 @@ fun AnimeSearchScreen(
                     searchText = it
                 },
                 label = { Text("Søk etter ID eller Tittel", color = Color.DarkGray) },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black
+                ),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
             )
@@ -102,7 +109,7 @@ fun AnimeSearchScreen(
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
                             .padding(top = 16.dp),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                        textAlign = TextAlign.Center
                     )
                 }
                 results.value.isEmpty() -> {
@@ -115,17 +122,29 @@ fun AnimeSearchScreen(
                     ) {
                         Text(
                             text = "Ingen resultater funnet.",
-                            color = Color.White
+                            color = Color.White,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
                         )
                         Text(
-                            text = "Database status: ${animeSearchViewModel.sqlError.value ?: "OK. Ingen treff i database"}",
-                            color = if (animeSearchViewModel.sqlError.collectAsState().value != null) Color.Red else Color.Green,
-                            fontSize = 14.sp
+                            text = if (sqlError.value != null) {
+                                "Database status: Could not fetch results:\n\n${sqlError.value}"
+                            } else {
+                                "Database status: OK. Ingen treff i database"
+                            },
+                            color = if (sqlError.value != null) Color.Red else Color.Green,
+                            fontSize = 14.sp,
+                            textAlign = TextAlign.Center
                         )
+
                         Text(
-                            text = "API status: ${animeSearchViewModel.apiError.value ?: "OK. Ingen treff i API"}",
-                            color = if (animeSearchViewModel.apiError.collectAsState().value != null) Color.Red else Color.Green,
-                            fontSize = 14.sp
+                            text = if (apiError.value != null) {
+                                "API status: Error\n\n${apiError.value}"
+                            } else {
+                                "API status: OK. Ingen treff i API"
+                            },
+                            color = if (apiError.value != null) Color.Red else Color.Green,
+                            fontSize = 14.sp,
+                            textAlign = TextAlign.Center
                         )
                     }
                 }
