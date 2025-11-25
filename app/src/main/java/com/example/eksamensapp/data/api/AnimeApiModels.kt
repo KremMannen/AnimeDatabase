@@ -13,7 +13,7 @@ data class Anime(
     val images: Images,
     val synopsis: String?,
     val score: Double? = 0.0,
-    val year: Int?,
+    val aired: Aired?,
     val episodes: Int,
     val genres: List<Genre>,
     val type: String
@@ -29,4 +29,16 @@ data class ImageUrl(
 
 data class Genre(
     val name: String,
+)
+
+data class Aired(
+    val prop: AiredProp
+)
+
+data class AiredProp(
+    val from: AiredDate
+)
+
+data class AiredDate(
+    val year: Int?
 )

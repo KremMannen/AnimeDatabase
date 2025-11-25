@@ -11,7 +11,7 @@ data class AnimeEntity (
     val imageUrl: String,
     val synopsis: String,
     val score: Double,
-    val year: Int,
+    val aired: Int,
     val episodes: Int,
     val genres: String,
     val type: String,

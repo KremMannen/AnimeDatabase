@@ -78,10 +78,7 @@ fun AnimeDetailsItem(
                     .padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "Year: ${if (currentAnime.year == 0) "Unreleased" else currentAnime.year}",
-                    color = Color.White
-                )
+                Text(text = "Year: ${currentAnime.aired}", color = Color.White)
                 Text(text = "Type: ${currentAnime.type}", color = Color.White)
                 if (currentAnime.type == "TV") {
                     Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
@@ -89,7 +86,7 @@ fun AnimeDetailsItem(
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)
 
-                if (currentAnime.year != 0) {
+                if (currentAnime.aired < 2026) {
                     Button(
                         modifier = Modifier
                             .padding(top = 8.dp)

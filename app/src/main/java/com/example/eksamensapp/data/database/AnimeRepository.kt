@@ -18,7 +18,7 @@ object AnimeRepository {
             klass = AppDatabase::class.java,
             name = "anime-database"
         )
-            .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .build()
     }
 
@@ -180,7 +180,7 @@ object AnimeRepository {
         Log.d("MapToEntity", "synopsis: ${anime.synopsis}")
         Log.d("MapToEntity", "synopsis is null: ${anime.synopsis == null}")
         Log.d("MapToEntity", "score: ${anime.score}")
-        Log.d("MapToEntity", "year: ${anime.year}")
+        Log.d("MapToEntity", "year: ${anime.aired?.prop?.from?.year}")
         Log.d("MapToEntity", "episodes: ${anime.episodes}")
         Log.d("MapToEntity", "genres: ${anime.genres}")
         Log.d("MapToEntity", "genres size: ${anime.genres.size}")
@@ -192,7 +192,7 @@ object AnimeRepository {
             imageUrl = anime.images.jpg.large_image_url,
             synopsis = anime.synopsis?: "No synopsis available",
             score = anime.score?: 0.0,
-            year = anime.year?: 0,
+            aired = anime.aired?.prop?.from?.year ?: 0,
             episodes = anime.episodes,
             genres = anime.genres.joinToString(", ") { it.name },
             type = anime.type,
