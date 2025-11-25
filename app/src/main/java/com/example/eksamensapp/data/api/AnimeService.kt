@@ -17,8 +17,12 @@ interface AnimeService {
 
     @GET("anime")
     suspend fun getAnimeByTitle(
-        @Query("q") title: String
+        @Query("q") title: String,
+        @Query("sfw") sfw: Boolean = true, // APIet har mye lugubert innhold, denne er viktig for å skåne sensor
+        @Query("limit") limit: Int = 5, // For å unngå rate limiting ved mye søk
+        @Query("page") page: Int = 1
     ): Response<AnimeListResponse>
+
 
     @GET("anime")
     suspend fun getAnimeByPage(
