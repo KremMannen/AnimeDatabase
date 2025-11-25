@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +34,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
+import com.example.eksamensapp.ui.theme.DarkGrayCardColor
+import com.example.eksamensapp.ui.theme.DarkGreyTransparent
 import com.example.eksamensapp.ui.theme.DarkerRed
 import com.example.eksamensapp.ui.theme.LightGrayBorderColor
 import com.example.eksamensapp.ui.theme.RedBackgroundColor
@@ -64,7 +67,7 @@ fun AnimeDetailsItem(
                 contentDescription = currentAnime.title,
                 modifier = Modifier
                     .height(200.dp)
-                    .widthIn(max = 140.dp) // unreleased animes har mye bredere bilde, denne begrenser hvor bredt et bilde kan være
+                    .widthIn(max = 140.dp)
                     .align(Alignment.CenterVertically),
                 contentScale = ContentScale.FillHeight
             )
@@ -73,8 +76,7 @@ fun AnimeDetailsItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(start = 8.dp),
-                verticalArrangement = Arrangement.Bottom
-
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = "Year: ${if (currentAnime.year == 0) "Unreleased" else currentAnime.year}",
@@ -87,28 +89,20 @@ fun AnimeDetailsItem(
                 if (currentAnime.year != 0) {
                     Button(
                         modifier = Modifier
-                            .padding(top = 8.dp)
+                            .padding(top = 16.dp)
                             .fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp),
                         onClick = {
                             animeDetailsViewModel.toggleWatched(currentAnime)
                         },
-                        colors = if (currentAnime.haveWatched) {
-                            ButtonDefaults.buttonColors(
-                                containerColor = SelectedButtonColor,
-                                contentColor = Color.White
-                            )
-                        } else {
-                            ButtonDefaults.buttonColors(
-                                containerColor = DarkerRed,
-                                contentColor = Color.White
-                            )
-                        },
-                        border = if (currentAnime.haveWatched) {
-                            BorderStroke(1.dp, SelectedBorderColor)
-                        } else {
-                            BorderStroke(1.dp, RedBackgroundColor)
-                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (currentAnime.haveWatched) SelectedButtonColor else DarkerRed,
+                            contentColor = Color.White
+                        ),
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = if (currentAnime.haveWatched) SelectedBorderColor else RedBackgroundColor
+                        )
                     ) {
                         if (currentAnime.haveWatched) {
                             Icon(
@@ -122,8 +116,29 @@ fun AnimeDetailsItem(
                             Text(text = "Merk som sett")
                         }
                     }
+                } else {
+                    Card(
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth()
+                            .height(40.dp),
+                        shape = RoundedCornerShape(10.dp),
+                        border = BorderStroke(1.dp, DarkGrayCardColor),
+                        colors = CardDefaults.cardColors(
+                            containerColor = DarkGreyTransparent
+                        ),
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Ikke utgitt enda",
+                                color = Color.White
+                            )
+                        }
+                    }
                 }
-
             }
         }
 
