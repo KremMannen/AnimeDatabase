@@ -54,7 +54,7 @@ object AnimeRepository {
             // Check DB first
             var animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
-                Log.i("getAnimeById", "Fant anime i DB")
+                Log.i("getAnimeById", "Fant anime i DB med id: ${id}")
                 return animeEntity
             }
             // Check API, and save to database if found
@@ -63,7 +63,7 @@ object AnimeRepository {
             // Check DB again
             animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
-                Log.i("getAnimeById", "Fant anime i DB etter API henting")
+                Log.i("getAnimeById", "Fant anime i DB etter API henting med id: ${id}")
                 return animeEntity
             }
             return null

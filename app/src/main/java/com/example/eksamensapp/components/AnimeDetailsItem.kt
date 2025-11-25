@@ -4,9 +4,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -68,15 +70,16 @@ fun AnimeDetailsItem(
 
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp)
+                    .fillMaxSize()
+                    .padding(start = 8.dp),
+                verticalArrangement = Arrangement.Bottom
+
             ) {
-                Text(text = currentAnime.title, color = Color.White)
+
                 Text(text = "Year: ${currentAnime.year}", color = Color.White)
                 Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)
-
 
                 Button(
                     modifier = Modifier
