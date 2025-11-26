@@ -24,7 +24,8 @@ fun GenreSelectionItem(
 ){
     val availableGenres = listOf(
         "Action", "Adventure", "Comedy", "Drama", "Fantasy",
-        "Horror", "Mystery", "Romance", "Sci-Fi", "Slice of Life"
+        "Horror", "Mystery", "Romance", "Sci-Fi", "Slice of Life",
+        "School", "Cyberpunk", "Thriller", "Supernatural", "Steampunk"
     )
 
     Column(modifier = Modifier.fillMaxWidth()) {
