@@ -55,8 +55,7 @@ fun AddIdeaScreen(
     var synopsisError by remember { mutableStateOf<String?>(null) }
     var genresError by remember { mutableStateOf<String?>(null) }
 
-    var pageTitle by remember { mutableStateOf<String>("Opprett anime-konsept") }
-    var pageText by remember { mutableStateOf<String>("Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.") }
+    var userFeedback by remember { mutableStateOf<String>("") }
 
     fun validateFields(): Boolean {
         var isValid = true
@@ -97,14 +96,13 @@ fun AddIdeaScreen(
         title = ""
         synopsis = ""
         selectedGenres = emptySet()
-        pageTitle = "Idea successfully added!"
-        pageText = ""
+        userFeedback = "Idèen er lagret"
     }
 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AppHeaderWithCallback("Anime idèer", onBackClick = { navController.popBackStack() })
+        AppHeaderWithCallback("Opprett Anime idèer", onBackClick = { navController.popBackStack() })
 
         Column(
             modifier = Modifier
@@ -113,42 +111,13 @@ fun AddIdeaScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(125.dp),
-                border = BorderStroke(1.dp, LightGrayBorderColor)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(DarkerRed),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = pageTitle,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = pageText,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            textAlign = TextAlign.Center,
-
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = userFeedback,
+                color = Color.Green,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
 
             TextField(
                 value = title,
@@ -222,24 +191,28 @@ fun AddIdeaScreen(
                 modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
             )
 
-            Button(
-                onClick = {
-                    handleAddIdea()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkRed
-                ),
-                shape = RoundedCornerShape(10.dp),
-                border = BorderStroke(1.dp, SelectedBorderColor),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(76.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 16.dp)
+            Box(
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text(
-                    text = "Legg til Anime Idè",
-                    fontSize = 20.sp)
+                Button(
+                    onClick = {
+                        handleAddIdea()
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = DarkRed
+                    ),
+                    shape = RoundedCornerShape(10.dp),
+                    border = BorderStroke(1.dp, SelectedBorderColor),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(76.dp)
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 16.dp)
+                ) {
+                    Text(
+                        text = "Legg til Anime Idè",
+                        fontSize = 20.sp)
+                }
             }
         }
     }
