@@ -29,7 +29,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.eksamensapp.components.AppHeaderItem
+import com.example.eksamensapp.components.AppHeaderWithCallback
 import com.example.eksamensapp.components.GenreSelectionItem
 import com.example.eksamensapp.data.database.UserIdeaEntity
 import com.example.eksamensapp.screens.useridea.updateidea.UpdateIdeaViewModel
@@ -113,7 +113,7 @@ fun EditIdeaScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        AppHeaderItem(
+        AppHeaderWithCallback(
             "Oppdater idè",
             onBackClick = { navController.popBackStack() }
         )

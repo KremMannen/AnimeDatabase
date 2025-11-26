@@ -26,7 +26,7 @@ import com.example.eksamensapp.ui.theme.DarkRed
 
 
 @Composable
-fun AppHeaderItem(
+fun AppHeaderWithCallback(
     title: String,
     onBackClick: () -> Unit,
     fontSize: Int = 32

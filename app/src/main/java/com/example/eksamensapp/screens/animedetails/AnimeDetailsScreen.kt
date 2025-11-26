@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.eksamensapp.components.AnimeDetailsItem
-import com.example.eksamensapp.components.AppHeaderItem
+import com.example.eksamensapp.components.AppHeaderWithCallback
 
 @Composable
 fun AnimeDetailsScreen(
@@ -30,7 +30,7 @@ fun AnimeDetailsScreen(
     ) {
         var title = anime.value?.title ?: ""
 
-        AppHeaderItem(
+        AppHeaderWithCallback(
             title = title,
             onBackClick = { navController.popBackStack() },
             fontSize = if (title.length > 25) 20 else 32 // 32 er standard

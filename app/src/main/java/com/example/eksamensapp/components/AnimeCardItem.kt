@@ -56,18 +56,11 @@ fun AnimeCardItem(
                 contentScale = ContentScale.Crop
             )
 
-            // Gradient overlay for better text readability
+            // Gjennomsiktig overlay for å gjøre titler enklere å lese
             Box(
                 modifier = Modifier
                     .matchParentSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black.copy(alpha = 0.7f)
-                            )
-                        )
-                    )
+                    .background(Color.Black.copy(alpha = 0.7f))
             )
 
             // Content
