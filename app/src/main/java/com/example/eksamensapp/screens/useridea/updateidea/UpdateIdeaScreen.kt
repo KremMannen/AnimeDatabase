@@ -95,7 +95,7 @@ fun UpdateIdeaScreen(
                 },
                 results = results.value,
                 itemContent = { userIdea ->
-                    UpdateUserIdeaItem(userIdea, updateIdeaViewModel, navController)
+                    UpdateUserIdeaItem(userIdea, navController)
                 }
             )
         }

@@ -49,7 +49,7 @@ fun UserIdeaItem(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-            // Title
+
             Text(
                 text = userIdea.title,
                 style = MaterialTheme.typography.titleLarge,
@@ -64,7 +64,6 @@ fun UserIdeaItem(
 
             }
 
-            // Genres
             Text(
                 text = userIdea.genres,
                 style = MaterialTheme.typography.labelMedium,
@@ -72,7 +71,6 @@ fun UserIdeaItem(
                 fontWeight = FontWeight.SemiBold
             )
 
-            // Synopsis
             Text(
                 text = userIdea.synopsis,
                 style = MaterialTheme.typography.bodyMedium,

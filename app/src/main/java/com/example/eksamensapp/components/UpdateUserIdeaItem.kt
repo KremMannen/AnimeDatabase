@@ -32,7 +32,6 @@ import com.example.eksamensapp.ui.theme.SelectedButtonColor
 @Composable
 fun UpdateUserIdeaItem(
     userIdea: UserIdeaEntity,
-    updateIdeaViewModel: UpdateIdeaViewModel,
     navController : NavController,
 ) {
     Card(
