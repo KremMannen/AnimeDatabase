@@ -60,7 +60,7 @@ fun AnimeCardItem(
             Box(
                 modifier = Modifier
                     .matchParentSize()
-                    .background(Color.Black.copy(alpha = 0.7f))
+                    .background(Color.Black.copy(alpha = 0.5f))
             )
 
             // Content
