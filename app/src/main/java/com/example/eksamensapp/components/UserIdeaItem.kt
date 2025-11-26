@@ -57,7 +57,6 @@ fun UserIdeaItem(
                     style = MaterialTheme.typography.labelMedium,
                     color = Color.White,
                 )
-
             }
 
             Text(

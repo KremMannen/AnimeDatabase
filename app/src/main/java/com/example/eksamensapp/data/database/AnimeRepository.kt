@@ -22,14 +22,14 @@ object AnimeRepository {
     }
 
     suspend fun populateDatabaseFromApi() {
-        // Check if DB already has data
+        // Sjekk om databasen har data.
         val existingCount = _animeDao.getCount()
         if (existingCount > 0) {
             Log.d("DB_POPULATE", "Database already populated. Skipping API load.")
             return
         }
 
-        // Populate from API
+        // Om den er tom, fylles databasen med data fra API.
         val apiResults = ApiModule.getAllAnime()
         if (apiResults.isEmpty()) {
             Log.e("DB_POPULATE", "API returned empty list. Aborting DB population.")
@@ -42,25 +42,26 @@ object AnimeRepository {
         try {
             return _animeDao.getAnime()
         } catch (e: java.lang.Exception) {
-            Log.d("getAllAnime", e.toString())
+            Log.d("AnimeRepository getAllAnime", e.toString())
             return emptyList()
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("AnimeRepository getAllAnime", e.toString())
             return emptyList()
         }
     }
     suspend fun getAnimeById(id: Int): AnimeEntity? {
         try {
-            // Check DB first
+            // Sjekk database først
             var animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
                 Log.i("getAnimeById", "Fant anime i DB med id: ${id}")
                 return animeEntity
             }
-            // Check API, and save to database if found
+
+            // Om databasen har ingen treff, forsøk å hent fra API og lagre dette til database
             searchApiAnimeByIdAndSave(id)
 
-            // Check DB again
+            // Sjekker databasen igjen
             animeEntity = _animeDao.getAnimeById(id)
             if (animeEntity != null) {
                 Log.i("getAnimeById", "Fant anime i DB etter API henting med id: ${id}")
@@ -68,10 +69,10 @@ object AnimeRepository {
             }
             return null
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("AnimeRepository getAnimeById", e.toString())
             throw e
         } catch (e: Exception) {
-            Log.d("getAnimeByTitle", e.toString())
+            Log.d("AnimeRepository getAnimeById", e.toString())
             throw e
         }
     }
@@ -94,10 +95,10 @@ object AnimeRepository {
             }
             return emptyList()
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("AnimeRepository getAnimeByTitle", e.toString())
             throw e
         } catch (e: Exception) {
-            Log.d("getAnimeByTitle", e.toString())
+            Log.d("AnimeRepository getAnimeByTitle", e.toString())
             throw e
         }
     }
@@ -106,10 +107,10 @@ object AnimeRepository {
         try {
             return _animeDao.getWatchedAnime()
         } catch (e: java.lang.Exception) {
-            Log.d("getAllAnime", e.toString())
+            Log.d("AnimeRepository getAnimeByWatchedStatus", e.toString())
             return emptyList()
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("AnimeRepository getAnimeByWatchedStatus", e.toString())
             return emptyList()
         }
     }
@@ -118,10 +119,10 @@ object AnimeRepository {
         try {
             return _animeDao.updateAnime(animeEntity)
         } catch (e: java.lang.Exception) {
-            Log.d("updateAnimeCatch", e.toString())
+            Log.d("AnimeRepository updateAnime", e.toString())
             return -1
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppdatering av data ${e.message}")
+            Log.e("AnimeRepository updateAnime", e.toString())
             return -1
         }
     }
@@ -140,9 +141,9 @@ object AnimeRepository {
                 Log.i("SearchApiAnimeByIdAndSave", "Fant ikke anime i API")
             }
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
+            Log.e("AnimeRepository searchApiAnimeByIdAndSave", e.toString())
         } catch (e: Exception) {
-            Log.d("SearchApiAnimeByIdAndSave", e.toString())
+            Log.d("AnimeRepository searchApiAnimeByIdAndSave", e.toString())
         }
     }
 
@@ -151,39 +152,39 @@ object AnimeRepository {
             val animeList = ApiModule.searchAnimeByTitle(title)
 
             if (animeList.isNotEmpty()) {
-                Log.i("SearchAnimeByTitleAndSave", "Liste fra API er ikke tom, forsøker å mappe")
+                Log.i("AnimeRepository SearchAnimeByTitleAndSave", "Liste fra API er ikke tom, forsøker å mappe")
                 val animeEntities = mapToEntityList(animeList)
 
                 _animeDao.insertAll(animeEntities)
-                Log.i("SearchAnimeByTitleAndSave", "Lagret anime-liste fra API")
+                Log.i("AnimeRepository SearchAnimeByTitleAndSave", "Lagret anime-liste fra API")
             }
 
             else {
                 Log.i("SearchApiAnimeByTitleAndSave", "Fant ikke anime i API")
             }
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
+            Log.e("AnimeRepository searchApiAnimeByTitleAndSave", e.toString())
             throw e
         } catch (e: Exception) {
-            Log.d("SearchApiAnimeByTitleAndSave", e.toString())
+            Log.d("AnimeRepository searchApiAnimeByTitleAndSave", e.toString())
             throw e
         }
     }
     private fun mapToEntity(anime: Anime): AnimeEntity {
-        Log.d("MapToEntity", "=== Starting mapToEntity ===")
-        Log.d("MapToEntity", "mal_id: ${anime.mal_id}")
-        Log.d("MapToEntity", "title: ${anime.title}")
-        Log.d("MapToEntity", "images: ${anime.images}")
-        Log.d("MapToEntity", "images.jpg: ${anime.images.jpg}")
-        Log.d("MapToEntity", "large_image_url: ${anime.images.jpg.large_image_url}")
-        Log.d("MapToEntity", "synopsis: ${anime.synopsis}")
-        Log.d("MapToEntity", "synopsis is null: ${anime.synopsis == null}")
-        Log.d("MapToEntity", "score: ${anime.score}")
-        Log.d("MapToEntity", "year: ${anime.aired?.prop?.from?.year}")
-        Log.d("MapToEntity", "episodes: ${anime.episodes}")
-        Log.d("MapToEntity", "genres: ${anime.genres}")
-        Log.d("MapToEntity", "genres size: ${anime.genres.size}")
-        Log.d("MapToEntity", "Anime type: ${anime.type}")
+        Log.d("AnimeRepository MapToEntity", "=== Starting mapToEntity ===")
+        Log.d("AnimeRepository MapToEntity", "mal_id: ${anime.mal_id}")
+        Log.d("AnimeRepository MapToEntity", "title: ${anime.title}")
+        Log.d("AnimeRepository MapToEntity", "images: ${anime.images}")
+        Log.d("AnimeRepository MapToEntity", "images.jpg: ${anime.images.jpg}")
+        Log.d("AnimeRepository MapToEntity", "large_image_url: ${anime.images.jpg.large_image_url}")
+        Log.d("AnimeRepository MapToEntity", "synopsis: ${anime.synopsis}")
+        Log.d("AnimeRepository MapToEntity", "synopsis is null: ${anime.synopsis == null}")
+        Log.d("AnimeRepository MapToEntity", "score: ${anime.score}")
+        Log.d("AnimeRepository MapToEntity", "year: ${anime.aired?.prop?.from?.year}")
+        Log.d("AnimeRepository MapToEntity", "episodes: ${anime.episodes}")
+        Log.d("AnimeRepository MapToEntity", "genres: ${anime.genres}")
+        Log.d("AnimeRepository MapToEntity", "genres size: ${anime.genres.size}")
+        Log.d("AnimeRepository MapToEntity", "Anime type: ${anime.type}")
 
         return AnimeEntity(
             id = anime.mal_id,
@@ -201,17 +202,17 @@ object AnimeRepository {
     }
 
     private fun mapToEntityList(animeList: List<Anime>): List<AnimeEntity> {
-        Log.d("MapToEntityList", "=== Starting mapToEntityList ===")
-        Log.d("MapToEntityList", "animeList size: ${animeList.size}")
+        Log.d("AnimeRepository MapToEntityList", "=== Starting mapToEntityList ===")
+        Log.d("AnimeRepository MapToEntityList", "animeList size: ${animeList.size}")
 
         return animeList.mapIndexed { index, anime ->
-            Log.d("MapToEntityList", "Processing anime at index $index")
+            Log.d("AnimeRepository MapToEntityList", "Processing anime at index $index")
             try {
                 mapToEntity(anime)
             } catch (e: Exception) {
-                Log.e("MapToEntityList", "Error mapping anime at index $index: ${e.message}")
-                Log.e("MapToEntityList", "Problematic anime: $anime")
-                throw e
+                Log.e("AnimeRepository MapToEntityList", "Error mapping anime at index $index: ${e.message}")
+                Log.e("AnimeRepository MapToEntityList", "Problematic anime: $anime")
+                return emptyList()
             }
         }
     }

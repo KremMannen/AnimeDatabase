@@ -99,7 +99,6 @@ fun AppNavigation(
             "com.example.eksamensapp.navigation.NavigationRoutes.UpdateIdea",
             "com.example.eksamensapp.navigation.NavigationRoutes.EditIdea"
         )
-
         if (currentRoute == null) return true
 
         for (hiddenRoute in hiddenRoutes) {
@@ -115,7 +114,6 @@ fun AppNavigation(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = AppBackgroundColor,
-
         bottomBar = {
             AnimatedVisibility(
                 visible = showBottomBar,
@@ -378,7 +376,7 @@ fun AppNavigation(
         }
 
     ) { innerPadding ->
-        Column ( // Main column surrounding the entire app
+        Column (
             modifier = Modifier.padding(innerPadding)
         ){
             NavHost(

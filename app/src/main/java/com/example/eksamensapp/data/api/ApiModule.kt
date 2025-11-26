@@ -16,14 +16,13 @@ object ApiModule {
         .baseUrl("https://api.jikan.moe/v4/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-     val animeService: AnimeService = retroFit.create(AnimeService::class.java)
+    val animeService: AnimeService = retroFit.create(AnimeService::class.java)
     suspend fun searchAnimeById(id: Int): Anime? {
         return try {
             val response = animeService.getAnimeByID(id)
             if (response.isSuccessful) {
                 val apiResponse = response.body()?.data
                 if (apiResponse != null) {
-                    // Proceed with non-null AnimeResponse object
                     apiResponse
                 } else {
                     Log.w("SearchAnimeById", "AnimeResponse object is null")
@@ -52,7 +51,7 @@ object ApiModule {
     suspend fun getAllAnime() : List<Anime> {
         val allAnime = mutableListOf<Anime>()
         try {
-            // We only fetch 2 pages to avoid being limited by API
+            // Vi henter bare 2 sider for å unngå rate-limiting fra API
             val responsePage1 = animeService.getAnimeByPage(1)
             if (responsePage1.isSuccessful) {
                 responsePage1.body()?.data?.let { allAnime.addAll(it) }

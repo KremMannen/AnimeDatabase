@@ -24,10 +24,10 @@ object UserIdeaDbRepository {
          try {
              return _userIdeaDao.getIdeas()
         } catch (e: java.lang.Exception) {
-            Log.d("getUserIdeasCatch", e.toString())
+            Log.d("UserIdeaDbRepository getUserIdeas", e.toString())
             return emptyList()
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("UserIdeaDbRepository getUserIdeas", e.toString())
             return emptyList()
         }
     }
@@ -36,10 +36,10 @@ object UserIdeaDbRepository {
          try {
              return _userIdeaDao.getIdeaById(id)
         } catch (e: Exception) {
-            Log.d("getUserIdeaByIdCatch", e.toString())
+            Log.d("UserIdeaDbRepository getUserIdeaById", e.toString())
             return null
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("UserIdeaDbRepository getUserIdeaById", e.toString())
             return null
         }
     }
@@ -54,10 +54,10 @@ object UserIdeaDbRepository {
              }
              return null
         } catch (e: Exception) {
-            Log.d("getAnimeByTitleCatch", e.toString())
+            Log.d("UserIdeaDbRepository getUserIdeaByTitle", e.toString())
             return null
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved henting av data ${e.message}")
+            Log.e("UserIdeaDbRepository getUserIdeaByTitle", e.toString())
             return null
         }
     }
@@ -72,10 +72,10 @@ object UserIdeaDbRepository {
             }
             return null
         } catch (e: Exception) {
-            Log.d("deleteUserIdeaByIdCatch", e.toString())
+            Log.d("UserIdeaDbRepository deleteUserIdeaById", e.toString())
             return null
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved sletting av data ${e.message}")
+            Log.e("UserIdeaDbRepository deleteUserIdeaById", e.toString())
             return null
         }
     }
@@ -84,10 +84,10 @@ object UserIdeaDbRepository {
          try {
            return _userIdeaDao.updateIdea(userIdeaEntity)
         } catch (e: Exception) {
-            Log.d("updateUserIdeaCatch", e.toString())
+            Log.d("UserIdeaDbRepository updateUserIdea", e.toString())
             return -1
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppdatering av data ${e.message}")
+            Log.e("UserIdeaDbRepository updateUserIdea", e.toString())
             return -1
         }
     }
@@ -97,10 +97,10 @@ object UserIdeaDbRepository {
              return _userIdeaDao.insertIdea(userIdeaEntity)
 
         } catch (e: Exception) {
-            Log.d("insertUserIdeaCatch", e.toString())
+            Log.d("UserIdeaDbRepository insertUserIdea", e.toString())
             return -1L
         } catch (e: SQLException) {
-            Log.e("SQLException", "SQLEx ved oppretting av data ${e.message}")
+            Log.e("UserIdeaDbRepository insertUserIdea", e.toString())
             return -1L
         }
     }
