@@ -20,7 +20,6 @@ sealed class NavigationRoutes {
     object Watched : NavigationRoutes()
     @Serializable
     data class AnimeDetailsRoute(val id: Int) : NavigationRoutes()
-
     @Serializable
     data class EditIdea (val id: Int) : NavigationRoutes()
 

@@ -95,7 +95,9 @@ fun AppNavigation(
         val hiddenRoutes = listOf(
             "com.example.eksamensapp.navigation.NavigationRoutes.AnimeDetailsRoute",
             "com.example.eksamensapp.navigation.NavigationRoutes.AddIdea",
-            "com.example.eksamensapp.navigation.NavigationRoutes.DeleteIdea"
+            "com.example.eksamensapp.navigation.NavigationRoutes.DeleteIdea",
+            "com.example.eksamensapp.navigation.NavigationRoutes.UpdateIdea",
+            "com.example.eksamensapp.navigation.NavigationRoutes.EditIdea"
         )
 
         if (currentRoute == null) return true
