@@ -3,6 +3,7 @@ package com.example.eksamensapp.screens.useridea.updateidea.editidea
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -198,24 +199,28 @@ fun EditIdeaScreen(
                 modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
             )
 
-            Button(
-                onClick = {
-                    handleUpdateIdea()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = DarkerRed
-                ),
-                shape = RoundedCornerShape(10.dp),
-                border = BorderStroke(1.dp, SelectedBorderColor),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(76.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(bottom = 16.dp)
+            Box(
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text(
-                    text = "Oppdater Idè",
-                    fontSize = 20.sp)
+
+                Button(
+                    onClick = { handleUpdateIdea() },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = DarkerRed
+                    ),
+                    shape = RoundedCornerShape(10.dp),
+                    border = BorderStroke(1.dp, SelectedBorderColor),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(76.dp)
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 16.dp)
+                ) {
+                    Text(
+                        text = "Oppdater Idè",
+                        fontSize = 20.sp
+                    )
+                }
             }
         }
     }
