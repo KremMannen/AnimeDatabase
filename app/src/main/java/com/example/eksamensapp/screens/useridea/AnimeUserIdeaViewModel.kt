@@ -52,10 +52,7 @@ class AnimeUserIdeaViewModel : ViewModel() {
     }
 
     init {
-
             populateDatabase()
-
-
     }
 }
 

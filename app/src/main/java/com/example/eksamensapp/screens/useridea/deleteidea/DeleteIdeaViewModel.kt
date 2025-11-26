@@ -33,6 +33,7 @@ class DeleteIdeaViewModel : ViewModel() {
         }
 
         val id = input.toIntOrNull()
+
         // Om input er et tall, søk på id
         if (id != null) {
             viewModelScope.launch(Dispatchers.IO) {

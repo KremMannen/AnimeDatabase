@@ -134,7 +134,6 @@ fun EditIdeaScreen(
                     titleError ?: "Tittel...",
                     color = if (titleError != null) Color.Red else Color.DarkGray
                 )  },
-                textStyle = TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -157,7 +156,6 @@ fun EditIdeaScreen(
                     synopsisError ?: "Synopsis...",
                     color = if (synopsisError != null) Color.Red else Color.DarkGray
                 )  },
-                textStyle = TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -183,9 +181,9 @@ fun EditIdeaScreen(
                     }
                 )
 
-                if (genresError != null) {
+                genresError?.let { error ->
                     Text(
-                        text = genresError!!,
+                        text = error,
                         color = Color.Red,
                         fontSize = 14.sp,
                         modifier = Modifier.padding(start = 4.dp, top = 4.dp)

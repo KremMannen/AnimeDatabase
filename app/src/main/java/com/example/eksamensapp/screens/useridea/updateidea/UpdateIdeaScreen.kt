@@ -35,7 +35,7 @@ fun UpdateIdeaScreen(
 ) {
     val results = updateIdeaViewModel.searchedIdea.collectAsState()
 
-// Landingsside for å oppdatere idéer. Viser alle tilgjengelige objekter, blir sendt til edit-screen ved å trykke på knappen i boksen til ønsket item
+    // Landingsside for å oppdatere idéer. Viser alle tilgjengelige objekter, blir sendt til edit-screen ved å trykke på knappen i boksen til ønsket item
 
     LaunchedEffect(Unit) {
         updateIdeaViewModel.showAll()
