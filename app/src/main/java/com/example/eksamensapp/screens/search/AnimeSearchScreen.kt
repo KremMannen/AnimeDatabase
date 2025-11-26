@@ -128,7 +128,7 @@ fun AnimeSearchScreen(
                         Text(
                             text = "Ingen resultater funnet.",
                             color = Color.White,
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            textAlign = TextAlign.Center
                         )
                         Text(
                             text = if (sqlError.value != null) {

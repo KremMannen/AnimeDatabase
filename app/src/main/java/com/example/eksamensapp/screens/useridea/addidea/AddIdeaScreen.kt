@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -57,8 +58,6 @@ fun AddIdeaScreen(
     var pageTitle by remember { mutableStateOf<String>("Opprett anime-konsept") }
     var pageText by remember { mutableStateOf<String>("Her kan du opprette egne anime konsepter, og lagre dem til en lokal database.") }
 
-
-
     fun validateFields(): Boolean {
         var isValid = true
 
@@ -82,7 +81,6 @@ fun AddIdeaScreen(
         } else {
             genresError = null
         }
-
         return isValid
     }
 
@@ -90,21 +88,17 @@ fun AddIdeaScreen(
         if (!validateFields()) {
             return
         }
-
         val idea = UserIdeaEntity(
             title = title,
             synopsis = synopsis,
             genres = selectedGenres.joinToString(", ")
         )
-
         addIdeaViewModel.handleAddIdea(idea)
-
         title = ""
         synopsis = ""
         selectedGenres = emptySet()
         pageTitle = "Idea successfully added!"
         pageText = ""
-
     }
 
     Column(
@@ -165,7 +159,6 @@ fun AddIdeaScreen(
                     titleError ?: "Tittel...",
                     color = if (titleError != null) Color.Red else Color.DarkGray
                 )  },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.Black),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -188,7 +181,6 @@ fun AddIdeaScreen(
                     synopsisError ?: "Synopsis...",
                     color = if (synopsisError != null) Color.Red else Color.DarkGray
                 )  },
-                textStyle = androidx.compose.ui.text.TextStyle(color = Color.DarkGray),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.LightGray,
@@ -214,9 +206,9 @@ fun AddIdeaScreen(
                     }
                 )
 
-                if (genresError != null) {
+                genresError?.let { error ->
                     Text(
-                        text = genresError!!,
+                        text = error,
                         color = Color.Red,
                         fontSize = 14.sp,
                         modifier = Modifier.padding(start = 4.dp, top = 4.dp)
