@@ -22,8 +22,7 @@ import com.example.eksamensapp.ui.theme.DarkGrayCardColor
 
 @Composable
 fun UserIdeaItem(
-    userIdea: UserIdeaEntity,
-    onClick: (() -> Unit)? = null
+    userIdea: UserIdeaEntity
 ) {
     Card(
         modifier = Modifier
@@ -33,10 +32,7 @@ fun UserIdeaItem(
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         colors = CardDefaults.cardColors(
             containerColor = DarkGrayCardColor
-        ),
-        onClick = {
-            onClick?.invoke()
-        }
+        )
     ) {
         Column(
             modifier = Modifier
@@ -74,9 +70,7 @@ fun UserIdeaItem(
             Text(
                 text = userIdea.synopsis,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.White,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis
+                color = Color.White
             )
         }
     }
