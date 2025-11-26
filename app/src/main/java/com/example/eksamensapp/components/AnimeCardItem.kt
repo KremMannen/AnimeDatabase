@@ -46,7 +46,6 @@ fun AnimeCardItem(
                 .fillMaxWidth()
                 .height(150.dp)
         ) {
-            // Background image
             AsyncImage(
                 model = anime.imageUrl,
                 contentDescription = anime.title,
@@ -63,7 +62,6 @@ fun AnimeCardItem(
                     .background(Color.Black.copy(alpha = 0.5f))
             )
 
-            // Content
             Column(
                 modifier = Modifier
                     .fillMaxSize()

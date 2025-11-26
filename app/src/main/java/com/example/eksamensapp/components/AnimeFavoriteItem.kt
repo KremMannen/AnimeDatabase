@@ -56,7 +56,6 @@ fun AnimeFavoriteItem(
                 .fillMaxWidth()
                 .height(150.dp)
         ) {
-            // Background image
             AsyncImage(
                 model = animeEntity.imageUrl,
                 contentDescription = animeEntity.title,
@@ -66,19 +65,13 @@ fun AnimeFavoriteItem(
                 contentScale = ContentScale.Crop
             )
 
-            // Gradient overlay for better text readability
+            // Gjennomsiktig overlay for å gjøre titler enklere å lese
             Box(
                 modifier = Modifier
                     .matchParentSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black.copy(alpha = 0.7f)
-                            )
-                        )
-                    )
+                    .background(Color.Black.copy(alpha = 0.5f))
             )
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -93,6 +86,7 @@ fun AnimeFavoriteItem(
                     modifier = Modifier.align(Alignment.CenterStart)
                 )
 
+                // Alternativ til vanlig Button med onclick da vi kun skal vise icon, ikke tekst. Setter isFavorite-verdi.
                 IconButton(
                     onClick = {
                         animeWatchedViewModel.toggleFavorite(animeEntity)

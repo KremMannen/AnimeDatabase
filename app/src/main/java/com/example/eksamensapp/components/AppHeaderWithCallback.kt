@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.eksamensapp.ui.theme.DarkRed
 
-
+// Header-komponent for alle screens som ikke har bottom bar for å navigere (detail screen osv)
 @Composable
 fun AppHeaderWithCallback(
     title: String,
@@ -44,7 +44,7 @@ fun AppHeaderWithCallback(
                 .padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Tilbakeknapp. Enklere kode enn å bake inn Icon i en Button slik vi gjør i "AnimeDetailsItem"
+            // Tilbakeknapp. Bruker IconButton fremfor Button da vi kun skal vise icon, ikke text.
             IconButton(onClick = onBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,

@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.example.eksamensapp.screens.animedetails.AnimeDetailsViewModel
 import com.example.eksamensapp.ui.theme.DarkGrayCardColor
@@ -62,8 +63,8 @@ fun AnimeDetailsItem(
                 .background(TransparentRedBackgroundColor, shape = RoundedCornerShape(16.dp))
                 .padding(12.dp)
         ) {
-            Image(
-                painter = rememberAsyncImagePainter(model = currentAnime.imageUrl),
+            AsyncImage(
+                model = currentAnime.imageUrl,
                 contentDescription = currentAnime.title,
                 modifier = Modifier
                     .height(200.dp)
@@ -80,12 +81,15 @@ fun AnimeDetailsItem(
             ) {
                 Text(text = "Year: ${currentAnime.aired}", color = Color.White)
                 Text(text = "Type: ${currentAnime.type}", color = Color.White)
+
+                // Viser kun antall episoder dersom anime er en TV-serie
                 if (currentAnime.type == "TV") {
                     Text(text = "Episodes: ${currentAnime.episodes}", color = Color.White)
                 }
                 Text(text = "Genres: ${currentAnime.genres}", color = Color.White)
                 Text(text = "Rating: ${currentAnime.score}", color = Color.White)
 
+                // Viser kun aktiv knapp for titler som er utgitt før 2026
                 if (currentAnime.aired < 2026) {
                     Button(
                         modifier = Modifier

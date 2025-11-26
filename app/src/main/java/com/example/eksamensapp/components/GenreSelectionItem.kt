@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.eksamensapp.ui.theme.SelectedButtonColor
 import com.example.eksamensapp.ui.theme.TransparentRedBackgroundColor
 
+// Komponent som holder en liste med sjangere som bruker kan velge i AddIdeaScreen og EditIdeaScreen.
 @Composable
 fun GenreSelectionItem(
     selectedGenres: Set<String>,
